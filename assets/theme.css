@@ -237,32 +237,57 @@ body {
   border: 2px solid var(--color-border-cartoon);
 }
 
-/* Trust / Reviews Bar Near Top (Client Requirement) */
+/* Trust / Reviews Bar Near Top (Continuous Single-Line Infinite Marquee) */
 .trust-top-bar {
   background: linear-gradient(135deg, #ffeef5 0%, #eefbf9 100%);
   border-bottom: 2px dashed rgba(35, 31, 50, 0.2);
-  padding: 10px 16px;
+  padding: 10px 0;
   overflow: hidden;
+  position: relative;
+  width: 100%;
+  white-space: nowrap;
 }
 
-.trust-ticker-container {
-  max-width: 1360px;
-  margin: 0 auto;
-  display: flex;
+.trust-ticker-track {
+  display: inline-flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: trustTickerScroll 28s linear infinite;
+  will-change: transform;
+}
+
+.trust-top-bar:hover .trust-ticker-track {
+  animation-play-state: paused;
+}
+
+.trust-ticker-group {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 16px;
+  gap: 36px;
+  padding-right: 36px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Fallback for legacy container */
+.trust-ticker-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+  white-space: nowrap;
+  flex-wrap: nowrap;
 }
 
 .trust-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   font-family: var(--font-fun);
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--color-purple-deep);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .stars-rating {
@@ -279,6 +304,17 @@ body {
   box-shadow: var(--shadow-cartoon-sm);
   font-size: 0.85rem;
   font-weight: 800;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@keyframes trustTickerScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 /* ==========================================================================
