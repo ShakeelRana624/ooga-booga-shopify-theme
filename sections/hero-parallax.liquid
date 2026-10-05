@@ -1,0 +1,82 @@
+<section class="hero-parallax-section" id="story">
+  <!-- Sky / Cosmic Twilight Parallax Background -->
+  <div class="parallax-sky-bg"></div>
+  <div class="stars-layer"></div>
+
+  <!-- Deep Forest Silhouette Midground -->
+  <div class="parallax-forest-bg"></div>
+
+  <!-- Hero Content / Vintage Cartoon Title Card -->
+  <div class="hero-content-container">
+    <div class="vintage-comic-tag">★ An Unforgettable Bedtime Adventure ★</div>
+    <h1 class="hero-main-title">{{ section.settings.heading | default: 'OOGA BOOGA!' }}</h1>
+    <p class="hero-subheadline">
+      {{ section.settings.subheading | default: 'Last night an OOGA was spotted in Suburbia! He is wild! He is dangerous! And his favourite food is... SUBURBIANS!' }}
+    </p>
+
+    <div class="hero-cta-group">
+      <a href="#book-3d" class="btn-cartoon btn-cartoon-primary">
+        📖 Explore The 3D Book
+      </a>
+      <a href="#cinema" class="btn-cartoon btn-cartoon-pink">
+        🎬 Watch Cartoon Film
+      </a>
+      <a href="#village-shops" class="btn-cartoon btn-cartoon-teal">
+        🏬 Village Shops
+      </a>
+    </div>
+  </div>
+
+  <!-- Layered Parallax Characters Stage (From Place Into scene.psd & Separated Layers) -->
+  <div class="parallax-stage-container">
+    <!-- Boy Character running & reaching -->
+    <img 
+      src="{{ 'char_boy.png' | asset_url }}" 
+      alt="Boy running from Ooga Booga" 
+      class="parallax-char char-boy" 
+      loading="eager"
+    >
+
+    <!-- Green Monster Ooga laughing & leaping with arms up -->
+    <img 
+      src="{{ 'char_creature.png' | asset_url }}" 
+      alt="Ooga Booga Monster laughing" 
+      class="parallax-char char-creature" 
+      loading="eager"
+    >
+
+    <!-- Flying Red-Green Apple spinning in air -->
+    <img 
+      src="{{ 'item_apple.png' | asset_url }}" 
+      alt="Flying Apple in Ooga Booga adventure" 
+      class="parallax-char item-apple" 
+      loading="eager"
+    >
+  </div>
+
+  <!-- Scroll Cue Indicator -->
+  <div class="hero-scroll-cue" onclick="document.getElementById('book-3d').scrollIntoView({behavior: 'smooth'})">
+    <span>Scroll to Discover the Book</span>
+    <div class="scroll-bounce-arrow">↓</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Parallax World",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "OOGA BOOGA!"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Last night an OOGA was spotted in Suburbia! He is wild! He is dangerous! And his favourite food is... SUBURBIANS!"
+    }
+  ]
+}
+{% endschema %}

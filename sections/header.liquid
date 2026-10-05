@@ -1,0 +1,44 @@
+<header class="site-header" id="SiteHeader">
+  <div class="header-container">
+    <!-- Brand Logo (Temporary Ooga Booga! as requested) -->
+    <a href="/" class="logo-wrapper">
+      <span class="brand-logo-text">{{ section.settings.brand_title | default: 'Ooga Booga!' }}</span>
+    </a>
+
+    <!-- Navigation Links -->
+    <nav class="main-nav-wrapper">
+      <ul class="main-nav">
+        <li><a href="#story" class="nav-link">The Story</a></li>
+        <li><a href="#book-3d" class="nav-link">3D Book</a></li>
+        <li><a href="#cinema" class="nav-link">Jungle Cinema</a></li>
+        <li><a href="#village-shops" class="nav-link">Village Shops</a></li>
+        <li><a href="#reviews" class="nav-link">Reviews</a></li>
+        <li><a href="/products/ooga-booga-hardcover" class="nav-link nav-link-product" style="color: var(--color-pink-primary); font-weight: 800;">📖 Product Page</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <a href="/products/ooga-booga-hardcover" class="btn-cartoon btn-cartoon-primary" style="padding: 8px 18px; font-size: 0.9rem;">
+        Order Book
+      </a>
+      <button type="button" class="btn-cartoon btn-cartoon-pink" id="openCartBtn" style="padding: 8px 16px; font-size: 0.9rem;">
+        🛒 Cart <span class="cart-btn-badge" id="cartCountBadge">1</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Brand Title",
+      "default": "Ooga Booga!"
+    }
+  ]
+}
+{% endschema %}

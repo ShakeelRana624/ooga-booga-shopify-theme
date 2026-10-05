@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ooga Booga! — Collector's Hardcover Edition</title>
+    <meta name="description" content="Official Ooga Booga! Hardcover & Softcover book editions. Featuring rotating 3D preview, spread previews, and customer reviews.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Fredoka:wght@400;600;700&family=Luckiest+Guy&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Shrikhand&display=swap" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/theme.css">
+
+    <!-- Three.js + GLTFLoader for 3D Book Experience -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  </head>
+
+  <body class="template-product">
+    <div class="vintage-grain-overlay"></div>
+
+    <!-- SITE HEADER -->
+    <header class="site-header" id="SiteHeader">
+      <div class="header-container">
+        <a href="index.html" class="logo-wrapper">
+          <span class="brand-logo-text">Ooga Booga!</span>
+        </a>
+
+        <nav class="main-nav-wrapper">
+          <ul class="main-nav">
+            <li><a href="index.html#story" class="nav-link">The Story</a></li>
+            <li><a href="index.html#book-3d" class="nav-link">3D Book</a></li>
+            <li><a href="index.html#cinema" class="nav-link">Jungle Cinema</a></li>
+            <li><a href="index.html#village-shops" class="nav-link">Village Shops</a></li>
+            <li><a href="index.html#reviews" class="nav-link">Reviews</a></li>
+            <li><a href="product.html" class="nav-link nav-link-product active" style="color: var(--color-pink-primary); font-weight: 800; border-bottom: 2px solid var(--color-pink-primary);">📖 Product Page</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <a href="#product-main" class="btn-cartoon btn-cartoon-primary" style="padding: 8px 18px; font-size: 0.9rem;">
+            Order Book
+          </a>
+          <button type="button" class="btn-cartoon btn-cartoon-pink" id="openCartBtn" style="padding: 8px 16px; font-size: 0.9rem;">
+            🛒 Cart <span class="cart-btn-badge" id="cartCountBadge">1</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- PRODUCT DETAIL MAIN CONTAINER (With blurred homepage background as requested) -->
+    <div class="product-page-main">
+      <div class="product-page-inner">
+        <!-- Back Navigation -->
+        <div style="margin-bottom: 24px;">
+          <a href="index.html" class="btn-cartoon btn-cartoon-yellow" style="padding: 8px 18px; font-size: 0.9rem; background-color: var(--color-yellow-accent); color: var(--color-purple-deep);">
+            ← Back to Ooga Booga World
+          </a>
+        </div>
+
+        <!-- Product Hero Box (3D Rotating Model + Buy Box) -->
+        <div class="product-hero-box">
+          <!-- 3D Interactive Stage -->
+          <div class="book-3d-stage-wrapper">
+            <div class="interaction-hint-badge">
+              <span>🔄 Drag to Rotate 360° | Scroll to Zoom</span>
+            </div>
+            <div class="canvas-3d-container" id="book3dContainer" data-model-url="assets/Ooga_Booga_Hardcover_Render.glb" style="height: 480px;"></div>
+            
+            <div class="book-3d-controls">
+              <button type="button" class="btn-3d-ctrl" id="btn-view-cover">Front Cover</button>
+              <button type="button" class="btn-3d-ctrl" id="btn-view-spine">Spine</button>
+              <button type="button" class="btn-3d-ctrl" id="btn-view-back">Back Cover</button>
+              <button type="button" class="btn-3d-ctrl" id="btn-view-reset">Reset View</button>
+            </div>
+          </div>
+
+          <!-- Product Buy Box -->
+          <div>
+            <div class="book-author-tag">Official Book Release • Gianni Dolce Vita</div>
+            <h1 class="book-title" style="font-size: 3.2rem;">Ooga Booga!</h1>
+            <div class="book-subtitle" style="margin-bottom: 12px;">Collector's First Edition</div>
+            
+            <div class="stars-rating" style="margin-bottom: 16px;">★★★★★ <span style="font-family: var(--font-fun); font-size: 0.95rem; color: var(--color-purple-deep); font-weight: 700;">(4.9 / 5 from 148 reviews)</span></div>
+
+            <p class="book-description">
+              Step into the wild vintage cartoon world! When an unruly monster escapes his wooden crate, Suburbia is thrown into joyful chaos. Featuring stunning hand-illustrated art, humorous storytelling, and a timeless 1950s animation feel.
+            </p>
+
+            <!-- Variants: Hardcover & Softcover -->
+            <div class="variant-selector-group">
+              <label class="variant-label">Choose Edition:</label>
+              <div class="variant-options-grid">
+                <div class="variant-card selected" data-variant="hardcover">
+                  <span class="variant-title">Hardcover Edition</span>
+                  <span class="variant-price">$24.99</span>
+                  <span class="variant-subtext">Gold Foil Embossed Stamped Cover</span>
+                </div>
+
+                <div class="variant-card" data-variant="softcover">
+                  <span class="variant-title">Softcover Edition</span>
+                  <span class="variant-price">$16.99</span>
+                  <span class="variant-subtext">Flexible Lightweight Paperback</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add to cart -->
+            <div class="purchase-action-box">
+              <div class="quantity-stepper">
+                <button type="button" class="stepper-btn" id="qtyMinusBtn">-</button>
+                <input type="number" id="productQtyInput" class="stepper-value" value="1" min="1" max="10" readonly>
+                <button type="button" class="stepper-btn" id="qtyPlusBtn">+</button>
+              </div>
+
+              <button type="button" class="btn-cartoon btn-cartoon-pink" id="btnAddToCart" style="flex: 1; font-size: 1.15rem;">
+                🛒 Add to Cart — <span id="bookPriceDisplay">$24.99</span>
+              </button>
+            </div>
+
+            <div class="features-list">
+              <div class="feature-bullet">📖 Format: 8.5" x 11" Hardcover</div>
+              <div class="feature-bullet">🎨 48 Full Color Archival Spreads</div>
+              <div class="feature-bullet">👶 Ages: 4 to 10+ (Family Favorite)</div>
+              <div class="feature-bullet">🚚 Free Tracked Shipping Over $40</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Images / Photo Grid Section (Client Requirement) -->
+        <div style="background: rgba(255, 255, 255, 0.95); border-radius: var(--border-radius-lg); border: var(--border-width-cartoon) solid var(--color-border-cartoon); padding: 40px; box-shadow: var(--shadow-cartoon-lg); margin-bottom: 60px;">
+          <h3 style="font-family: var(--font-display); font-size: 2.2rem; color: var(--color-purple-deep); margin-bottom: 24px; text-shadow: 2px 2px 0 var(--color-yellow-accent);">
+            Book Artwork & Spread Previews
+          </h3>
+
+          <div class="spread-gallery-grid">
+            <div class="gallery-thumbnail-card">
+              <img src="assets/book_cover_spread.png" alt="Full Cover & Back Spread Artwork" loading="lazy">
+              <div style="padding: 14px; font-family: var(--font-fun); font-weight: 700; color: var(--color-purple-deep);">Full Dustjacket & Spine Spread</div>
+            </div>
+
+            <div class="gallery-thumbnail-card">
+              <img src="assets/tree_scene.png" alt="Enchanted Forest Scene Spread" loading="lazy">
+              <div style="padding: 14px; font-family: var(--font-fun); font-weight: 700; color: var(--color-purple-deep);">Forest River Scene Spread</div>
+            </div>
+
+            <div class="gallery-thumbnail-card">
+              <img src="assets/shops_scene.png" alt="Village Main Street Scene Spread" loading="lazy">
+              <div style="padding: 14px; font-family: var(--font-fun); font-weight: 700; color: var(--color-purple-deep);">Suburbia Town Scene Spread</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Product Reviews Section Underneath (Client Requirement) -->
+        <div style="background: rgba(255, 255, 255, 0.95); border-radius: var(--border-radius-lg); border: var(--border-width-cartoon) solid var(--color-border-cartoon); padding: 40px; box-shadow: var(--shadow-cartoon-lg);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
+            <div>
+              <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--color-purple-deep);">Customer Reviews</h3>
+              <div style="color: #ff9800; font-size: 1.3rem;">★★★★★ <span style="font-family: var(--font-fun); font-size: 1rem; color: var(--color-purple-deep); font-weight: 700;">Based on 148 verified reviews</span></div>
+            </div>
+            <button type="button" class="btn-cartoon btn-cartoon-primary">✍️ Write a Review</button>
+          </div>
+
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <p class="review-quote">“Magnificent printing quality. The colors pop right off the page and the story has become an instant classic in our house.”</p>
+              <div class="reviewer-footer">
+                <div class="reviewer-avatar">JL</div>
+                <div class="reviewer-meta">
+                  <span class="reviewer-name">Jessica L.</span>
+                  <span class="reviewer-verified">✓ Verified Hardcover Purchaser</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-stars">★★★★★</div>
+              <p class="review-quote">“My students were captivated by the 3D world and the illustrations. A masterclass in vintage children's book design.”</p>
+              <div class="reviewer-footer">
+                <div class="reviewer-avatar">TR</div>
+                <div class="reviewer-meta">
+                  <span class="reviewer-name">Thomas R.</span>
+                  <span class="reviewer-verified">✓ Verified Teacher Purchaser</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div>
+          <div class="footer-brand-title">Ooga Booga!</div>
+          <p class="footer-copy">
+            An eccentric, joyous, and untamed vintage cartoon world created by author Gianni Dolce Vita and brought to life with classic mid-century animation art and modern interactive web craft.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-yellow-accent); margin-bottom: 16px;">
+            Quick Links
+          </h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-family: var(--font-fun); font-weight: 600;">
+            <li><a href="index.html#story" style="color: #d8cde9; text-decoration: none;">★ The Story & Legend</a></li>
+            <li><a href="index.html#book-3d" style="color: #d8cde9; text-decoration: none;">★ Interactive 3D Book</a></li>
+            <li><a href="index.html#cinema" style="color: #d8cde9; text-decoration: none;">★ Jungle Cartoon Cinema</a></li>
+            <li><a href="index.html#village-shops" style="color: #d8cde9; text-decoration: none;">★ Village Merch Shops</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-yellow-accent); margin-bottom: 16px;">
+            Collector Service
+          </h4>
+          <p style="font-family: var(--font-body); font-size: 0.95rem; color: #d8cde9;">
+            Questions regarding signed author editions or institutional orders? Contact support@oogabooga.com.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Ooga Booga! All rights reserved. Written by Gianni Dolce Vita.
+        </div>
+        <div>
+          Product Detail Page • Custom Shopify Theme Milestone 1
+        </div>
+      </div>
+    </footer>
+
+    <!-- CART DRAWER -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+
+    <div class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping Cart">
+      <div class="cart-drawer-header">
+        <div class="cart-drawer-title">🛒 Your Cart</div>
+        <button type="button" class="cart-close-btn" id="closeCartBtn" aria-label="Close cart">✕</button>
+      </div>
+
+      <div class="cart-drawer-body" id="cartDrawerItems"></div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-subtotal-row">
+          <span>Subtotal:</span>
+          <span id="cartSubtotalAmount">$24.99</span>
+        </div>
+
+        <button type="button" class="btn-cartoon btn-cartoon-pink" style="width: 100%; font-size: 1.15rem;" onclick="alert('Proceeding to Checkout!')">
+          🔒 Secure Checkout
+        </button>
+      </div>
+    </div>
+
+    <!-- THEME SCRIPT -->
+    <script src="assets/theme.js"></script>
+  </body>
+</html>

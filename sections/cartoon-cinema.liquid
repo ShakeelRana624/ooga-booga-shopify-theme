@@ -1,0 +1,62 @@
+<section class="cinema-section" id="cinema">
+  <div class="cinema-header">
+    <div class="vintage-comic-tag" style="background-color: var(--color-pink-primary); color: #fff;">
+      ★ NOW SHOWING IN TECHNICOLOR ★
+    </div>
+    <h2 class="cinema-title">Suburban Jungle Cinema</h2>
+    <p class="cinema-subtitle">
+      Take a seat in the jungle theater! Watch the wild animated introduction to Ooga Booga as the pineapple projectionist rolls the film.
+    </p>
+  </div>
+
+  <div class="cinema-stage-wrapper">
+    <!-- The Actual Client Video (Embedded directly behind the artwork frame) -->
+    <video 
+      id="cinemaVideo" 
+      class="cinema-video-player"
+      src="{{ 'LANDSCAPE.mp4' | asset_url }}"
+      data-portrait-src="{{ 'PORTRAIT.mp4' | asset_url }}"
+      loop 
+      playsinline 
+      muted 
+      preload="metadata"
+    >
+      Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Projector Beam Glowing Effect -->
+    <div class="projector-beam-effect"></div>
+
+    <!-- Hand-Drawn Jungle Cinema Frame Cutout Overlay -->
+    <img 
+      src="{{ 'cinema_frame_cutout.png' | asset_url }}" 
+      alt="Vintage Jungle Cinema Bamboo Frame with Audience and Projector" 
+      class="cinema-frame-overlay"
+      loading="lazy"
+    >
+  </div>
+
+  <!-- Cinema Projection Controls -->
+  <div class="cinema-controls-bar">
+    <button type="button" class="btn-cartoon btn-cartoon-yellow" id="btnPlayVideo" style="background-color: var(--color-yellow-accent); color: var(--color-purple-deep);">
+      ▶ PLAY FILM
+    </button>
+    <button type="button" class="btn-cartoon btn-cartoon-teal" id="btnMuteVideo">
+      🔇 UNMUTE
+    </button>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cartoon Cinema",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Suburban Jungle Cinema"
+    }
+  ]
+}
+{% endschema %}

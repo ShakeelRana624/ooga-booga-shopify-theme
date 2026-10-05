@@ -1,0 +1,73 @@
+<section class="shopfront-section" id="village-shops">
+  <div class="shopfront-header">
+    <div class="vintage-comic-tag">★ SNEAK PEEK MERCHANDISE ★</div>
+    <h2 class="shopfront-title">The Village Shopfront</h2>
+    <p class="shopfront-subtitle">
+      Take a stroll down Main Street! Peer through the vintage boutique shop windows to preview the upcoming Ooga Booga merchandise collection.
+    </p>
+  </div>
+
+  <div class="village-street-wrapper">
+    <!-- Hand-Drawn 3-Shop Scene Artwork -->
+    <img 
+      src="{{ 'shops_scene.png' | asset_url }}" 
+      alt="Village Shopfronts with Awnings and Characters" 
+      class="shopfront-canvas-background"
+      loading="lazy"
+    >
+
+    <div class="shopfront-interactive-overlay">
+      <!-- Shop 1: Rotating 3D T-Shirt Display in Window 1 (Wild Ooga) -->
+      <div class="window-tshirt-display window-1-tshirt btn-notify" role="button" tabindex="0" title="Wild Ooga Classic Tee — Click to Pre-order" aria-label="Wild Ooga Classic Tee - Click to Pre-order">
+        <span class="window-tshirt-badge">COMING SOON</span>
+        <div class="tshirt-3d-scene">
+          <div class="tshirt-3d-flipper">
+            <div class="tshirt-face tshirt-front">
+              <img src="{{ 'tshirt_mockup_ooga.png' | asset_url }}" alt="Wild Ooga Vintage Tee" class="tshirt-render-img">
+            </div>
+            <div class="tshirt-face tshirt-back">
+              <img src="{{ 'tshirt_mockup_ooga_back.png' | asset_url }}" alt="Wild Ooga Vintage Tee Back" class="tshirt-render-img">
+            </div>
+          </div>
+        </div>
+        <div class="plushie-bubble-tooltip">👕 Wild Ooga Tee — Click Me!</div>
+      </div>
+
+      <!-- Shop 2: Rotating 3D T-Shirt Display in Window 2 (Suburbia Run) -->
+      <div class="window-tshirt-display window-2-tshirt btn-notify" role="button" tabindex="0" title="Suburbia Run Adventure Tee — Click to Pre-order" aria-label="Suburbia Run Adventure Tee - Click to Pre-order">
+        <span class="window-tshirt-badge">COMING SOON</span>
+        <div class="tshirt-3d-scene">
+          <div class="tshirt-3d-flipper reverse">
+            <div class="tshirt-face tshirt-front">
+              <img src="{{ 'tshirt_mockup_boy.png' | asset_url }}" alt="Suburbia Run Adventure Tee" class="tshirt-render-img">
+            </div>
+            <div class="tshirt-face tshirt-back">
+              <img src="{{ 'tshirt_mockup_boy_back.png' | asset_url }}" alt="Suburbia Run Adventure Tee Back" class="tshirt-render-img">
+            </div>
+          </div>
+        </div>
+        <div class="plushie-bubble-tooltip">👕 Suburbia Run Tee — Click Me!</div>
+      </div>
+
+      <!-- Shop 3: Interactive Clickable Toy on Pedestal (Direct Hotspot over illustrated toy) -->
+      <div class="plushie-zone" id="plushieShopZone" role="button" tabindex="0" aria-label="Collectible Ooga Booga Plushie Toy - Click to Pre-order" title="Click to view the Ooga Booga Plushie!">
+        <div class="plushie-bubble-tooltip">🧸 Official Plushie — Click to View!</div>
+        <div class="plushie-glow-ring"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shopfront & Plushie",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Village Shopfront"
+    }
+  ]
+}
+{% endschema %}

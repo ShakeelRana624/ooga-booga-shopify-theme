@@ -1,0 +1,94 @@
+<section class="book-showcase-section" id="book-3d">
+  <!-- Illustrated Forest Backdrop -->
+  <div class="book-scene-backdrop"></div>
+
+  <div class="book-showcase-grid">
+    <!-- Left Column: 3D Interactive WebGL Book Stage -->
+    <div class="book-3d-stage-wrapper">
+      <div class="interaction-hint-badge">
+        <span>🔄 Drag to Rotate 360° | Scroll to Zoom</span>
+      </div>
+
+      <!-- Canvas for Three.js -->
+      <div class="canvas-3d-container" id="book3dContainer" data-model-url="{{ 'Ooga_Booga_Hardcover_Render.glb' | asset_url }}"></div>
+
+      <!-- Preset Angle Quick Views -->
+      <div class="book-3d-controls">
+        <button type="button" class="btn-3d-ctrl" id="btn-view-cover">Front Cover</button>
+        <button type="button" class="btn-3d-ctrl" id="btn-view-spine">Spine</button>
+        <button type="button" class="btn-3d-ctrl" id="btn-view-back">Back Cover</button>
+        <button type="button" class="btn-3d-ctrl" id="btn-view-reset">Reset View</button>
+      </div>
+    </div>
+
+    <!-- Right Column: Product Info & Variant Selector & Cart Action -->
+    <div class="book-details-card">
+      <div class="book-author-tag">Written by Gianni Dolce Vita • Illustrated by Chiara Mendicino</div>
+      <h2 class="book-title">Ooga Booga!</h2>
+      <div class="book-subtitle">A Hilarious Suburban Monster Legend</div>
+      
+      <p class="book-description">
+        When an untamed creature from the wild turns suburban life upside down, one fearless boy discovers the secret behind the mysterious crate labeled <em>"DO NOT OPEN!"</em>. Packed with vintage Technicolor magic, vibrant full-spread artwork, and laugh-out-loud moments for children and parents alike.
+      </p>
+
+      <!-- Variants: Hardcover & Softcover as requested -->
+      <div class="variant-selector-group">
+        <label class="variant-label">Select Book Edition:</label>
+        <div class="variant-options-grid">
+          <div class="variant-card selected" data-variant="hardcover">
+            <span class="variant-title">Hardcover Edition</span>
+            <span class="variant-price" id="hardcoverPrice">$24.99</span>
+            <span class="variant-subtext">Collector's Embossed Foil Cover</span>
+          </div>
+
+          <div class="variant-card" data-variant="softcover">
+            <span class="variant-title">Softcover Edition</span>
+            <span class="variant-price" id="softcoverPrice">$16.99</span>
+            <span class="variant-subtext">Everyday Bedtime Paperback</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Purchase Actions -->
+      <div class="purchase-action-box">
+        <div class="quantity-stepper">
+          <button type="button" class="stepper-btn" id="qtyMinusBtn">-</button>
+          <input type="number" id="productQtyInput" class="stepper-value" value="1" min="1" max="10" readonly>
+          <button type="button" class="stepper-btn" id="qtyPlusBtn">+</button>
+        </div>
+
+        <button type="button" class="btn-cartoon btn-cartoon-pink" id="btnAddToCart" style="flex: 1; font-size: 1.1rem;">
+          🛒 Add to Cart — <span id="bookPriceDisplay">$24.99</span>
+        </button>
+      </div>
+
+      <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+        <a href="product.html" class="btn-cartoon btn-cartoon-teal" style="width: 100%; font-size: 0.95rem;">
+          🔍 View Full Product Page & Book Spreads
+        </a>
+      </div>
+
+      <!-- Feature Bullets -->
+      <div class="features-list">
+        <div class="feature-bullet">✨ 48 Full-Color Illustrated Pages</div>
+        <div class="feature-bullet">👶 Recommended Ages 4 to 10+</div>
+        <div class="feature-bullet">🛡️ Premium Heavyweight Archival Paper</div>
+        <div class="feature-bullet">📦 Fast Tracked Shipping Worldwide</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "3D Book Showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ooga Booga!"
+    }
+  ]
+}
+{% endschema %}
