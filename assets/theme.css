@@ -339,7 +339,7 @@ body {
   left: 0;
   width: 100%;
   height: 60%;
-  background-image: url('tree_scene.png');
+  background-image: url('images/product/tree_scene.png');
   background-size: cover;
   background-position: center bottom;
   opacity: 0.35;
@@ -525,7 +525,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('tree_scene.png');
+  background-image: url('images/product/tree_scene.png');
   background-size: cover;
   background-position: center;
   opacity: 0.45;
@@ -1235,7 +1235,7 @@ body {
   position: relative;
   min-height: 100vh;
   padding: 60px 24px 100px 24px;
-  background-image: url('product_page_bg.png');
+  background-image: url('images/product/tree_scene.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

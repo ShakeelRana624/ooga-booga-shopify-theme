@@ -14,7 +14,7 @@
         title: 'Ooga Booga! (Collector Hardcover)',
         price: 24.99,
         quantity: 1,
-        image: 'book_cover_spread.png'
+        image: 'assets/images/product/book_cover_spread.png'
       }
     ],
     selectedVariant: 'hardcover',
@@ -160,7 +160,7 @@
     let prevMouseX = 0;
     let prevMouseY = 0;
 
-    const modelUrl = container.dataset.modelUrl || glbPath || 'assets/Ooga_Booga_Hardcover_Render.glb';
+    const modelUrl = container.dataset.modelUrl || glbPath || 'assets/models/Ooga_Booga_Hardcover_Render.glb';
 
     // Load actual GLB model
     const loader = new THREE.GLTFLoader();
@@ -564,7 +564,7 @@
             title: `Ooga Booga! - ${variantTitle}`,
             price: variantPrice,
             quantity: qty,
-            image: 'book_cover_spread.png'
+            image: 'assets/images/product/book_cover_spread.png'
           });
         }
 
