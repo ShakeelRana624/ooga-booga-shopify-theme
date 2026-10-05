@@ -1122,39 +1122,44 @@ body {
   transition: all var(--transition-bounce);
 }
 
-.plushie-zone:hover {
-  transform: scale(1.05);
-}
-
-.plushie-zone:hover .window-tshirt-badge {
-  transform: translateY(-4px) scale(1.05);
-}
-
-/* Borderless soft yellow fade glow on hover (matching t-shirt effect) */
-.plushie-yellow-fade,
 .plushie-glow-ring {
   position: absolute;
   inset: 0;
-  border: none !important;
-  outline: none !important;
-  border-radius: 50%;
-  background: transparent;
+  border-radius: 50% 50% 35% 35%;
+  border: 3px dashed transparent;
   pointer-events: none;
-  opacity: 0;
   transition: all var(--transition-bounce);
 }
 
-.plushie-zone:hover .plushie-yellow-fade,
 .plushie-zone:hover .plushie-glow-ring {
-  opacity: 1;
-  border: none !important;
-  outline: none !important;
-  background: radial-gradient(circle at center, rgba(255, 222, 89, 0.45) 0%, rgba(255, 222, 89, 0.2) 48%, rgba(255, 222, 89, 0) 74%);
-  filter: drop-shadow(0 0 20px var(--color-yellow-accent));
+  border-color: var(--color-yellow-accent);
+  background: radial-gradient(circle, rgba(255, 222, 89, 0.22) 0%, rgba(255, 222, 89, 0) 75%);
+  box-shadow: 0 0 30px rgba(255, 222, 89, 0.65);
+  transform: scale(1.06);
 }
 
-.plushie-zone .plushie-bubble-tooltip {
-  display: none !important;
+.plushie-bubble-tooltip {
+  position: absolute;
+  top: -46px;
+  background: var(--color-yellow-accent);
+  color: var(--color-purple-deep);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-pill);
+  border: 2px solid var(--color-border-cartoon);
+  box-shadow: var(--shadow-cartoon-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px) scale(0.85);
+  transition: all var(--transition-bounce);
+  z-index: 20;
+}
+
+.plushie-zone:hover .plushie-bubble-tooltip {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* ==========================================================================
