@@ -652,7 +652,8 @@ body {
 
 /* ── LAYER 1: Background (sky gradient) – slowest ── */
 #l-bg {
-  bottom: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 61.17vw;  /* 1835/3000*100 */
   z-index: 1;
@@ -678,7 +679,8 @@ body {
 
 /* ── LAYER 2: Frame (pink wooden frame with embedded video) ── */
 #l-frame {
-  bottom: 0;
+  top: -1.0vw;
+  left: 0;
   width: 100vw;
   height: 53.57vw;  /* 1607/3000*100 */
   z-index: 3;
@@ -720,6 +722,7 @@ body {
 /* ── LAYER 3: Palm trees ── */
 #l-palms {
   bottom: 0;
+  left: 0;
   width: 100vw;
   height: 45.60vw;  /* 1368/3000*100 */
   z-index: 4;
@@ -733,7 +736,7 @@ body {
 
 /* ── LAYER 4: Stones (centered, 1676px wide) ── */
 #l-stones {
-  bottom: 8.2vw;
+  bottom: 8.7vw;
   left: 50%;
   transform: translateX(-50%);
   width: 55.87vw;   /* 1676/3000*100 */
@@ -750,6 +753,7 @@ body {
 /* ── LAYER 5: Projector + Stage ── */
 #l-projector {
   bottom: 0;
+  left: 0;
   width: 100vw;
   height: 33.40vw;  /* 1002/3000*100 */
   z-index: 6;
@@ -761,9 +765,9 @@ body {
   display: block;
 }
 
-/* ── LAYER 6: Pineapple Character (centered, 504px wide) – fastest ── */
+/* ── LAYER 6: Pineapple Character (centered, standing on stage) ── */
 #l-character {
-  bottom: 3.9vw;
+  bottom: 5.0vw;
   left: 50%;
   transform: translateX(-50%);
   width: 16.80vw;   /* 504/3000*100 */
