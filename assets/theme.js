@@ -47,45 +47,160 @@
     }
   }
 
-  // 2. PARALLAX SCROLLING ENGINE
+  // 2. MULTI-PLANE PARALLAX SCROLLING ENGINE (Inspired by Stepout Dribbble Reference)
   function initParallax() {
-    const heroSection = document.querySelector('.hero-parallax-section');
-    if (!heroSection) return;
+    const hero = document.getElementById('story');
+    const s1 = document.getElementById('cinema-hero');
+    const s2 = document.getElementById('enchanted-forest');
+    const s3 = document.getElementById('village-shopfront');
 
-    const skyLayer = document.querySelector('.parallax-sky-bg');
-    const boyChar = document.querySelector('.char-boy');
-    const creatureChar = document.querySelector('.char-creature');
-    const appleItem = document.querySelector('.item-apple');
+    const heroSky = document.getElementById('heroSkyBg');
+    const heroForest = document.getElementById('heroForestBg');
+    const heroContent = document.getElementById('heroContentBox');
+    const heroBoy = document.getElementById('heroCharBoy');
+    const heroCreature = document.getElementById('heroCharCreature');
+    const heroApple = document.getElementById('heroItemApple');
 
-    // Desktop Mouse Move Subtle Parallax
-    if (window.innerWidth > 768) {
-      heroSection.addEventListener('mousemove', function (e) {
-        const rect = heroSection.getBoundingClientRect();
-        const relX = (e.clientX - rect.left) / rect.width - 0.5;
-        const relY = (e.clientY - rect.top) / rect.height - 0.5;
+    const s1Bg = document.getElementById('s1LayerBg');
+    const s1Fg = document.getElementById('s1LayerFg');
 
-        if (boyChar) boyChar.style.transform = `translate(${relX * -25}px, ${relY * -15}px)`;
-        if (creatureChar) creatureChar.style.transform = `translate(${relX * 35}px, ${relY * 20}px)`;
-        if (appleItem) appleItem.style.transform = `translate(${relX * -50}px, ${relY * -35}px)`;
-      });
+    const s2Bg = document.getElementById('s2LayerBg');
+    const s2Trees = document.getElementById('s2LayerTrees');
+    const s2Chars = document.getElementById('s2LayerChars');
 
-      heroSection.addEventListener('mouseleave', function () {
-        if (boyChar) boyChar.style.transform = '';
-        if (creatureChar) creatureChar.style.transform = '';
-        if (appleItem) appleItem.style.transform = '';
-      });
+    const s3Fg = document.getElementById('s3LayerFg');
+
+    let ticking = false;
+
+    function applyScroll(el, sy) {
+      if (!el) return;
+      el._scrollY = sy;
+      const mx = el._mouseX || 0;
+      const my = el._mouseY || 0;
+      el.style.transform = `translate3d(${mx}px, ${my + sy}px, 0)`;
     }
 
-    // Scroll Parallax
-    window.addEventListener('scroll', function () {
-      const scrollY = window.pageYOffset;
-      if (scrollY < window.innerHeight * 1.5) {
-        if (skyLayer) skyLayer.style.transform = `translateY(${scrollY * 0.25}px)`;
-        if (boyChar) boyChar.style.transform = `translateY(${scrollY * 0.15}px)`;
-        if (creatureChar) creatureChar.style.transform = `translateY(${scrollY * 0.08}px)`;
-        if (appleItem) appleItem.style.transform = `translateY(${scrollY * 0.35}px)`;
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateParallax();
+          ticking = false;
+        });
+        ticking = true;
       }
-    }, { passive: true });
+    }
+
+    function updateParallax() {
+      const vh = window.innerHeight;
+
+      // Hero Parallax Section (Top Bedtime Adventure)
+      if (hero) {
+        const rectHero = hero.getBoundingClientRect();
+        if (rectHero.bottom > 0 && rectHero.top < vh) {
+          const progressHero = -rectHero.top / rectHero.height;
+          applyScroll(heroSky, progressHero * 35);
+          applyScroll(heroForest, progressHero * 60);
+          applyScroll(heroBoy, progressHero * 85);
+          applyScroll(heroCreature, progressHero * 50);
+          applyScroll(heroApple, progressHero * 115);
+          if (heroContent) {
+            heroContent.style.opacity = Math.max(0, 1 - progressHero * 0.9);
+            applyScroll(heroContent, progressHero * 30);
+          }
+        }
+      }
+
+      // Section 1 Parallax (Outdoor Cinema)
+      if (s1) {
+        const rect1 = s1.getBoundingClientRect();
+        if (rect1.bottom > 0 && rect1.top < vh) {
+          const progress1 = -rect1.top / rect1.height;
+          applyScroll(s1Bg, progress1 * 40);
+          applyScroll(s1Fg, progress1 * -25);
+        }
+      }
+
+      // Section 2 Parallax (Enchanted Pink Forest)
+      if (s2) {
+        const rect2 = s2.getBoundingClientRect();
+        if (rect2.bottom > 0 && rect2.top < vh) {
+          const s2Center = (rect2.top + rect2.height / 2) - (vh / 2);
+          const normalized = s2Center / (vh / 2);
+          applyScroll(s2Bg, normalized * -32);
+          applyScroll(s2Trees, normalized * -14);
+          applyScroll(s2Chars, normalized * 22);
+        }
+      }
+
+      // Section 3 Parallax (Village Storefront)
+      if (s3) {
+        const rect3 = s3.getBoundingClientRect();
+        if (rect3.bottom > 0 && rect3.top < vh) {
+          const s3Center = (rect3.top + rect3.height / 2) - (vh / 2);
+          const normalized3 = s3Center / (vh / 2);
+          applyScroll(s3Fg, normalized3 * 20);
+        }
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateParallax();
+
+    // Desktop Mouse Move Dynamic 3D Depth
+    if (window.innerWidth > 992) {
+      function attachMouseParallax(section, layers) {
+        if (!section) return;
+        section.addEventListener('mousemove', function (e) {
+          const rect = section.getBoundingClientRect();
+          const relX = (e.clientX - rect.left) / rect.width - 0.5;
+          const relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+          layers.forEach(function (layer) {
+            if (layer.el) {
+              layer.el._mouseX = relX * layer.xFactor;
+              layer.el._mouseY = relY * layer.yFactor;
+              const sy = layer.el._scrollY || 0;
+              layer.el.style.transform = `translate3d(${layer.el._mouseX}px, ${layer.el._mouseY + sy}px, 0)`;
+            }
+          });
+        });
+
+        section.addEventListener('mouseleave', function () {
+          layers.forEach(function (layer) {
+            if (layer.el) {
+              layer.el._mouseX = 0;
+              layer.el._mouseY = 0;
+              const sy = layer.el._scrollY || 0;
+              layer.el.style.transform = `translate3d(0, ${sy}px, 0)`;
+            }
+          });
+        });
+      }
+
+      attachMouseParallax(hero, [
+        { el: heroSky, xFactor: -12, yFactor: -8 },
+        { el: heroForest, xFactor: -22, yFactor: -14 },
+        { el: heroContent, xFactor: 12, yFactor: 8 },
+        { el: heroBoy, xFactor: -35, yFactor: -24 },
+        { el: heroCreature, xFactor: 28, yFactor: 18 },
+        { el: heroApple, xFactor: -54, yFactor: -38 }
+      ]);
+
+      attachMouseParallax(s1, [
+        { el: s1Bg, xFactor: -15, yFactor: -10 },
+        { el: s1Fg, xFactor: 20, yFactor: 14 }
+      ]);
+
+      attachMouseParallax(s2, [
+        { el: s2Bg, xFactor: -16, yFactor: -12 },
+        { el: s2Trees, xFactor: -8, yFactor: -5 },
+        { el: s2Chars, xFactor: 24, yFactor: 16 }
+      ]);
+
+      attachMouseParallax(s3, [
+        { el: s3Fg, xFactor: 22, yFactor: 14 }
+      ]);
+    }
   }
 
   // 3. THREE.JS 3D BOOK VIEWER (PRIMARY PRODUCT)
@@ -189,11 +304,8 @@
         pivotGroup.add(uprightGroup);
 
         // Initial Hero Pose: Standing upright, front cover facing user at slight dynamic 3D angle
-        // With uprightGroup.rotation.x = Math.PI / 2:
-        // pivotGroup.rotation.y = Math.PI is Front Cover upright
-        // pivotGroup.rotation.y = 0 is Back Cover upright
-        pivotGroup.rotation.set(THREE.MathUtils.degToRad(8), THREE.MathUtils.degToRad(155), 0);
-        targetRotation = { x: THREE.MathUtils.degToRad(8), y: THREE.MathUtils.degToRad(155), z: 0 };
+        pivotGroup.rotation.set(THREE.MathUtils.degToRad(8), THREE.MathUtils.degToRad(-25), 0);
+        targetRotation = { x: THREE.MathUtils.degToRad(8), y: THREE.MathUtils.degToRad(-25), z: 0 };
 
         bookModel.traverse(function (child) {
           if (child.isMesh) {
@@ -309,7 +421,7 @@
       btnCover.addEventListener('click', () => {
         playCartoonPop(520);
         // Front Cover: Standing upright vertically ("khari"), facing directly to camera
-        animateToRotation(0, Math.PI, 0);
+        animateToRotation(0, 0, 0);
       });
     }
 
@@ -317,7 +429,7 @@
       btnBack.addEventListener('click', () => {
         playCartoonPop(640);
         // Back Cover: Standing upright vertically ("khari"), back side facing directly to camera
-        animateToRotation(0, 0, 0);
+        animateToRotation(0, Math.PI, 0);
       });
     }
 
@@ -333,7 +445,7 @@
       btnReset.addEventListener('click', () => {
         playCartoonPop(480);
         // Reset View: Standing upright at dynamic 3D angle + resume auto-rotation
-        animateToRotation(THREE.MathUtils.degToRad(8), THREE.MathUtils.degToRad(155), 0, true);
+        animateToRotation(THREE.MathUtils.degToRad(8), THREE.MathUtils.degToRad(-25), 0, true);
       });
     }
 
@@ -666,7 +778,7 @@
   // DOM READY INITIALIZATION
   document.addEventListener('DOMContentLoaded', function () {
     initParallax();
-    initThreeJsBookViewer('book3dContainer', 'Ooga_Booga_Hardcover_Render.glb');
+    initThreeJsBookViewer('book3dContainer', 'assets/models/Ooga_Booga_Hardcover_Render.glb');
     initShopfrontCarousel();
     initPlushieInteraction();
     initVideoCinema();

@@ -1,13 +1,13 @@
-<section class="hero-parallax-section" id="story">
-  <!-- Sky / Cosmic Twilight Parallax Background -->
-  <div class="parallax-sky-bg"></div>
-  <div class="stars-layer"></div>
+<section class="hero-parallax-section" id="story" aria-label="Ooga Booga Bedtime Adventure">
+  <!-- Celestial Twilight Sky -->
+  <div class="hero-sky-bg" id="heroSkyBg"></div>
+  <!-- Twinkling Starlight Field -->
+  <div class="stars-layer" id="heroStarsBg"></div>
+  <!-- Enchanted Woodland Forest Backdrop -->
+  <div class="hero-forest-bg" id="heroForestBg"></div>
 
-  <!-- Deep Forest Silhouette Midground -->
-  <div class="parallax-forest-bg"></div>
-
-  <!-- Hero Content / Vintage Cartoon Title Card -->
-  <div class="hero-content-container">
+  <!-- Hero Content / Typography & CTAs -->
+  <div class="hero-content-container" id="heroContentBox">
     <div class="vintage-comic-tag">★ An Unforgettable Bedtime Adventure ★</div>
     <h1 class="hero-main-title">{{ section.settings.heading | default: 'OOGA BOOGA!' }}</h1>
     <p class="hero-subheadline">
@@ -15,47 +15,53 @@
     </p>
 
     <div class="hero-cta-group">
-      <a href="#book-3d" class="btn-cartoon btn-cartoon-primary">
+      <a href="#enchanted-forest" class="btn-cartoon btn-cartoon-yellow hero-btn">
         📖 Explore The 3D Book
       </a>
-      <a href="#cinema" class="btn-cartoon btn-cartoon-pink">
+      <a href="#cinema-hero" class="btn-cartoon btn-cartoon-pink hero-btn">
         🎬 Watch Cartoon Film
       </a>
-      <a href="#village-shops" class="btn-cartoon btn-cartoon-teal">
+      <a href="#village-shopfront" class="btn-cartoon btn-cartoon-teal hero-btn">
         🏬 Village Shops
       </a>
     </div>
   </div>
 
-  <!-- Layered Parallax Characters Stage (From Place Into scene.psd & Separated Layers) -->
-  <div class="parallax-stage-container">
-    <!-- Boy Character running & reaching -->
-    <img 
-      src="{{ 'images/hero/char_boy.png' | asset_url }}" 
-      alt="Boy running from Ooga Booga" 
-      class="parallax-char char-boy" 
-      loading="eager"
-    >
+  <!-- Multi-Plane Interactive Parallax Characters Stage -->
+  <div class="hero-stage-container" id="heroStageBox">
+    <!-- Boy Character Running -->
+    <div class="hero-char-wrapper char-boy-wrapper" id="heroCharBoy">
+      <img 
+        src="{{ 'images/hero/char_boy.png' | asset_url }}" 
+        alt="Boy running in Ooga Booga adventure" 
+        class="hero-char char-boy" 
+        loading="eager"
+      >
+    </div>
 
-    <!-- Green Monster Ooga laughing & leaping with arms up -->
-    <img 
-      src="{{ 'images/hero/char_creature.png' | asset_url }}" 
-      alt="Ooga Booga Monster laughing" 
-      class="parallax-char char-creature" 
-      loading="eager"
-    >
+    <!-- Ooga Booga Monster Laughing & Sitting -->
+    <div class="hero-char-wrapper char-creature-wrapper" id="heroCharCreature">
+      <img 
+        src="{{ 'images/hero/char_creature.png' | asset_url }}" 
+        alt="Ooga Booga Monster leaping and laughing" 
+        class="hero-char char-creature" 
+        loading="eager"
+      >
+    </div>
 
-    <!-- Flying Red-Green Apple spinning in air -->
-    <img 
-      src="{{ 'images/hero/item_apple.png' | asset_url }}" 
-      alt="Flying Apple in Ooga Booga adventure" 
-      class="parallax-char item-apple" 
-      loading="eager"
-    >
+    <!-- Flying Apple Floating & Hovering -->
+    <div class="hero-char-wrapper item-apple-wrapper" id="heroItemApple">
+      <img 
+        src="{{ 'images/hero/item_apple.png' | asset_url }}" 
+        alt="Floating Apple" 
+        class="hero-char item-apple" 
+        loading="eager"
+      >
+    </div>
   </div>
 
-  <!-- Scroll Cue Indicator -->
-  <div class="hero-scroll-cue" onclick="document.getElementById('book-3d').scrollIntoView({behavior: 'smooth'})">
+  <!-- Scroll Indicator Cue -->
+  <div class="hero-scroll-cue" onclick="document.getElementById('cinema-hero').scrollIntoView({behavior: 'smooth'})" role="button" tabindex="0" aria-label="Scroll down to Outdoor Jungle Cinema">
     <span>Scroll to Discover the Book</span>
     <div class="scroll-bounce-arrow">↓</div>
   </div>

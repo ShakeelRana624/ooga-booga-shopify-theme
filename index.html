@@ -28,10 +28,9 @@
         <a href="index.html" class="logo-wrapper">
           <span class="brand-logo-text">Ooga Booga!</span>
         </a>
-
         <nav class="main-nav-wrapper">
           <ul class="main-nav">
-            <li><a href="#story" class="nav-link">The Story</a></li>
+            <li><a href="#story" class="nav-link">Story</a></li>
             <li><a href="#reviews" class="nav-link">Reviews</a></li>
             <li><a href="product.html" class="nav-link nav-link-product" style="color: var(--color-pink-primary); font-weight: 800;">Products</a></li>
           </ul>
@@ -91,13 +90,19 @@
     </div>
 
     <main id="MainContent">
-      <!-- SECTION 1: HERO PARALLAX WORLD -->
-      <section class="hero-parallax-section" id="story">
-        <div class="parallax-sky-bg"></div>
-        <div class="stars-layer"></div>
-        <div class="parallax-forest-bg"></div>
+      <!-- ======================================================================
+           HERO PARALLAX SECTION: AN UNFORGETTABLE BEDTIME ADVENTURE
+           ====================================================================== -->
+      <section class="hero-parallax-section" id="story" aria-label="Ooga Booga Bedtime Adventure">
+        <!-- Celestial Twilight Sky -->
+        <div class="hero-sky-bg" id="heroSkyBg"></div>
+        <!-- Twinkling Starlight Field -->
+        <div class="stars-layer" id="heroStarsBg"></div>
+        <!-- Enchanted Woodland Forest Backdrop -->
+        <div class="hero-forest-bg" id="heroForestBg"></div>
 
-        <div class="hero-content-container">
+        <!-- Hero Content / Typography & CTAs -->
+        <div class="hero-content-container" id="heroContentBox">
           <div class="vintage-comic-tag">★ An Unforgettable Bedtime Adventure ★</div>
           <h1 class="hero-main-title">OOGA BOOGA!</h1>
           <p class="hero-subheadline">
@@ -105,231 +110,240 @@
           </p>
 
           <div class="hero-cta-group">
-            <a href="#book-3d" class="btn-cartoon btn-cartoon-primary">
+            <a href="#enchanted-forest" class="btn-cartoon btn-cartoon-yellow hero-btn">
               📖 Explore The 3D Book
             </a>
-            <a href="#cinema" class="btn-cartoon btn-cartoon-pink">
+            <a href="#cinema-hero" class="btn-cartoon btn-cartoon-pink hero-btn">
               🎬 Watch Cartoon Film
             </a>
-            <a href="#village-shops" class="btn-cartoon btn-cartoon-teal">
+            <a href="#village-shopfront" class="btn-cartoon btn-cartoon-teal hero-btn">
               🏬 Village Shops
             </a>
           </div>
         </div>
 
-        <!-- Layered Parallax Characters (Extracted from client's Place Into scene.psd) -->
-        <div class="parallax-stage-container">
-          <!-- Boy Character running with shadow -->
-          <img 
-            src="assets/images/hero/char_boy.png" 
-            alt="Boy running in Ooga Booga adventure" 
-            class="parallax-char char-boy"
-          >
+        <!-- Multi-Plane Interactive Parallax Characters Stage -->
+        <div class="hero-stage-container" id="heroStageBox">
+          <!-- Boy Character Running -->
+          <div class="hero-char-wrapper char-boy-wrapper" id="heroCharBoy">
+            <img 
+              src="assets/images/hero/char_boy.png" 
+              alt="Boy running in Ooga Booga adventure" 
+              class="hero-char char-boy"
+            >
+          </div>
 
-          <!-- Green Monster Ooga laughing & leaping -->
-          <img 
-            src="assets/images/hero/char_creature.png" 
-            alt="Ooga Booga Monster leaping" 
-            class="parallax-char char-creature"
-          >
+          <!-- Ooga Booga Monster Laughing & Sitting -->
+          <div class="hero-char-wrapper char-creature-wrapper" id="heroCharCreature">
+            <img 
+              src="assets/images/hero/char_creature.png" 
+              alt="Ooga Booga Monster leaping and laughing" 
+              class="hero-char char-creature"
+            >
+          </div>
 
-          <!-- Flying Apple hovering and spinning -->
-          <img 
-            src="assets/images/hero/item_apple.png" 
-            alt="Flying Apple" 
-            class="parallax-char item-apple"
-          >
+          <!-- Flying Apple Floating & Hovering -->
+          <div class="hero-char-wrapper item-apple-wrapper" id="heroItemApple">
+            <img 
+              src="assets/images/hero/item_apple.png" 
+              alt="Floating Apple" 
+              class="hero-char item-apple"
+            >
+          </div>
         </div>
 
-        <div class="hero-scroll-cue" onclick="document.getElementById('book-3d').scrollIntoView({behavior: 'smooth'})">
+        <!-- Scroll Indicator Cue -->
+        <div class="hero-scroll-cue" onclick="document.getElementById('cinema-hero').scrollIntoView({behavior: 'smooth'})" role="button" tabindex="0" aria-label="Scroll down to Outdoor Jungle Cinema">
           <span>Scroll to Discover the Book</span>
           <div class="scroll-bounce-arrow">↓</div>
         </div>
       </section>
 
-      <!-- SECTION 2: 3D INTERACTIVE BOOK (PRIMARY PRODUCT) -->
-      <section class="book-showcase-section" id="book-3d">
-        <div class="book-scene-backdrop"></div>
+      <div class="psd-parallax-world">
+        <!-- ======================================================================
+             SECTION 1: OUTDOOR JUNGLE CINEMA (EMBEDDED VIDEO WITH BAMBOO FRAME)
+             ====================================================================== -->
+        <section class="psd-section psd-section-cinema" id="cinema-hero" aria-label="Suburban Jungle Cinema">
+          <!-- Multi-plane parallax background -->
+          <div class="s1-layer-bg" id="s1LayerBg"></div>
+          <div class="s1-ambient-glow"></div>
 
-        <div class="book-showcase-grid">
-          <!-- 3D Interactive WebGL Stage -->
-          <div class="book-3d-stage-wrapper">
-            <div class="interaction-hint-badge">
+          <!-- Top Announcement Badge -->
+          <div class="s1-overlay-header">
+            <span class="s1-vintage-pill">★ NOW SHOWING IN TECHNICOLOR ★</span>
+          </div>
+
+          <!-- Video Stage (Embedded precisely within carved bamboo frame cutout) -->
+          <div class="s1-video-stage">
+            <video 
+              id="cinemaVideo" 
+              class="s1-video-player"
+              src="assets/videos/LANDSCAPE.mp4"
+              data-portrait-src="assets/videos/PORTRAIT.mp4"
+              loop 
+              playsinline 
+              muted 
+              autoplay
+              preload="metadata"
+            >
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+
+          <!-- Projector Light Beam radiating onto the screen -->
+          <div class="s1-projector-beam"></div>
+
+          <!-- Hand-carved bamboo / wooden screen frame overlay -->
+          <div class="s1-layer-frame"></div>
+
+          <!-- Foreground layer: film projector, pineapple projectionist, marshmallow beanbag seats & palm trees -->
+          <div class="s1-layer-fg" id="s1LayerFg"></div>
+
+          <!-- Interactive Cinema Controls -->
+          <div class="s1-controls-bar">
+            <button type="button" class="btn-cartoon btn-cartoon-yellow" id="btnPlayVideo" style="background-color: var(--color-yellow-accent); color: var(--color-purple-deep); padding: 7px 18px; font-size: 0.92rem;">
+              ⏸ PAUSE FILM
+            </button>
+            <button type="button" class="btn-cartoon btn-cartoon-teal" id="btnMuteVideo" style="padding: 7px 18px; font-size: 0.92rem;">
+              🔇 UNMUTE
+            </button>
+          </div>
+
+          <div class="s1-scroll-cue" onclick="document.getElementById('enchanted-forest').scrollIntoView({behavior: 'smooth'})">
+            <span>Scroll to 3D Book</span>
+            <span>↓</span>
+          </div>
+        </section>
+
+        <!-- ======================================================================
+             SECTION 2: ENCHANTED PINK FOREST (3D ROTATING GLB BOOK & CHARACTERS)
+             ====================================================================== -->
+        <section class="psd-section psd-section-forest" id="enchanted-forest" aria-label="Enchanted Pink Forest and 3D Book">
+          <!-- Background Night Forest & River -->
+          <div class="s2-layer-bg" id="s2LayerBg"></div>
+
+          <!-- Pink Enchanted Trees -->
+          <div class="s2-layer-trees" id="s2LayerTrees"></div>
+
+          <!-- Magic Floating Fireflies -->
+          <div class="s2-magic-particles"></div>
+
+          <!-- Right Side: Characters (Guido & Ooga on Tree Branch, Cat on Ladder into River) -->
+          <div class="s2-layer-chars" id="s2LayerChars"></div>
+
+          <!-- Left Side: 3D Interactive Rotating Book GLB Stage -->
+          <div class="s2-book-stage">
+            <div class="s2-book-badge">
               <span>🔄 Drag to Rotate 360° | Scroll to Zoom</span>
             </div>
 
-            <div class="canvas-3d-container" id="book3dContainer" data-model-url="assets/models/Ooga_Booga_Hardcover_Render.glb"></div>
+            <!-- WebGL Canvas for 3D Book -->
+            <div class="s2-book-canvas-wrapper">
+              <div class="s2-book-canvas-container" id="book3dContainer" data-model-url="assets/models/Ooga_Booga_Hardcover_Render.glb"></div>
+            </div>
 
-            <div class="book-3d-controls">
+            <!-- Quick Angle View Buttons -->
+            <div class="s2-book-controls-row">
               <button type="button" class="btn-3d-ctrl" id="btn-view-cover">Front Cover</button>
               <button type="button" class="btn-3d-ctrl" id="btn-view-spine">Spine</button>
               <button type="button" class="btn-3d-ctrl" id="btn-view-back">Back Cover</button>
               <button type="button" class="btn-3d-ctrl" id="btn-view-reset">Reset View</button>
             </div>
-          </div>
 
-          <!-- Product Details & Buy Box -->
-          <div class="book-details-card">
-            <div class="book-author-tag">Written by Gianni Dolce Vita • Illustrated by Chiara Mendicino</div>
-            <h2 class="book-title">Ooga Booga!</h2>
-            <div class="book-subtitle">A Hilarious Suburban Monster Legend</div>
-            
-            <p class="book-description">
-              When an untamed creature from the wild turns suburban life upside down, one fearless boy discovers the secret behind the mysterious crate labeled <em>"DO NOT OPEN!"</em>. Packed with vintage Technicolor magic, vibrant full-spread artwork, and laugh-out-loud moments for children and parents alike.
-            </p>
-
-            <!-- Variants: Hardcover & Softcover -->
-            <div class="variant-selector-group">
-              <label class="variant-label">Select Book Edition:</label>
-              <div class="variant-options-grid">
-                <div class="variant-card selected" data-variant="hardcover">
-                  <span class="variant-title">Hardcover Edition</span>
-                  <span class="variant-price" id="hardcoverPrice">$24.99</span>
-                  <span class="variant-subtext">Collector's Embossed Foil Cover</span>
+            <!-- Floating Glassmorphic Buy Box -->
+            <div class="s2-book-buy-card">
+              <div class="s2-card-title-row">
+                <div>
+                  <h3 class="s2-card-title">Ooga Booga!</h3>
+                  <div class="s2-card-subtitle">By Gianni Dolce Vita • Illus. by Chiara Mendicino</div>
                 </div>
-
-                <div class="variant-card" data-variant="softcover">
-                  <span class="variant-title">Softcover Edition</span>
-                  <span class="variant-price" id="softcoverPrice">$16.99</span>
-                  <span class="variant-subtext">Everyday Bedtime Paperback</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Actions -->
-            <div class="purchase-action-box">
-              <div class="quantity-stepper">
-                <button type="button" class="stepper-btn" id="qtyMinusBtn">-</button>
-                <input type="number" id="productQtyInput" class="stepper-value" value="1" min="1" max="10" readonly>
-                <button type="button" class="stepper-btn" id="qtyPlusBtn">+</button>
+                <div class="s2-card-price" id="bookPriceDisplay">$24.99</div>
               </div>
 
-              <button type="button" class="btn-cartoon btn-cartoon-pink" id="btnAddToCart" style="flex: 1; font-size: 1.1rem;">
-                🛒 Add to Cart — <span id="bookPriceDisplay">$24.99</span>
-              </button>
-            </div>
+              <!-- Edition Selector -->
+              <div class="s2-variant-selector">
+                <div class="s2-variant-btn variant-card selected" data-variant="hardcover">
+                  <div><strong>Hardcover</strong></div>
+                  <div style="font-size: 0.72rem; color: #666;">Collector Foil Cover</div>
+                </div>
+                <div class="s2-variant-btn variant-card" data-variant="softcover">
+                  <div><strong>Softcover</strong></div>
+                  <div style="font-size: 0.72rem; color: #666;">Bedtime Paperback</div>
+                </div>
+              </div>
 
-            <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-              <a href="product.html" class="btn-cartoon btn-cartoon-teal" style="width: 100%; font-size: 0.95rem;">
-                🔍 View Full Product Page & Book Spreads
-              </a>
-            </div>
+              <div class="s2-card-actions">
+                <div class="quantity-stepper">
+                  <button type="button" class="stepper-btn" id="qtyMinusBtn">-</button>
+                  <input type="number" id="productQtyInput" class="stepper-value" value="1" min="1" max="10" readonly>
+                  <button type="button" class="stepper-btn" id="qtyPlusBtn">+</button>
+                </div>
 
-            <div class="features-list">
-              <div class="feature-bullet">✨ 48 Full-Color Illustrated Pages</div>
-              <div class="feature-bullet">👶 Recommended Ages 4 to 10+</div>
-              <div class="feature-bullet">🛡️ Premium Heavyweight Archival Paper</div>
-              <div class="feature-bullet">📦 Fast Tracked Shipping Worldwide</div>
+                <button type="button" class="btn-cartoon btn-cartoon-pink s2-buy-btn" id="btnAddToCart">
+                  🛒 Add to Cart
+                </button>
+
+                <a href="product.html" class="btn-cartoon btn-cartoon-teal" style="padding: 8px 12px; font-size: 0.88rem;" title="View Full Spreads">
+                  🔍 Look Inside
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- SECTION 3: CARTOON VIDEO CINEMA -->
-      <section class="cinema-section" id="cinema">
-        <div class="cinema-header">
-          <div class="vintage-comic-tag" style="background-color: var(--color-pink-primary); color: #fff;">
-            ★ NOW SHOWING IN TECHNICOLOR ★
-          </div>
-          <h2 class="cinema-title">Suburban Jungle Cinema</h2>
-          <p class="cinema-subtitle">
-            Take a seat in the jungle theater! Watch the wild animated introduction to Ooga Booga as the pineapple projectionist rolls the film.
-          </p>
-        </div>
+        <!-- ======================================================================
+             SECTION 3: VILLAGE STOREFRONT (3D T-SHIRTS & CLICKABLE TOY)
+             ====================================================================== -->
+        <section class="psd-section psd-section-storefront" id="village-shopfront" aria-label="Village Storefront Merchandise">
+          <!-- Storefront Architectural Facade -->
+          <div class="s3-layer-storefront"></div>
 
-        <div class="cinema-stage-wrapper">
-          <!-- The Actual Client Video Embedded Behind Wooden Frame Cutout -->
-          <video 
-            id="cinemaVideo" 
-            class="cinema-video-player"
-            src="assets/videos/LANDSCAPE.mp4"
-            data-portrait-src="assets/videos/PORTRAIT.mp4"
-            loop 
-            playsinline 
-            muted 
-            autoplay
-          >
-            Your browser does not support HTML5 video.
-          </video>
-
-          <div class="projector-beam-effect"></div>
-
-          <!-- Hand-Drawn Frame Cutout Overlay -->
-          <img 
-            src="assets/images/cinema/cinema_frame_cutout.png" 
-            alt="Vintage Jungle Cinema Bamboo Frame with Audience and Projector" 
-            class="cinema-frame-overlay"
-          >
-        </div>
-
-        <div class="cinema-controls-bar">
-          <button type="button" class="btn-cartoon btn-cartoon-yellow" id="btnPlayVideo" style="background-color: var(--color-yellow-accent); color: var(--color-purple-deep);">
-            ⏸ PAUSE FILM
-          </button>
-          <button type="button" class="btn-cartoon btn-cartoon-teal" id="btnMuteVideo">
-            🔇 UNMUTE
-          </button>
-        </div>
-      </section>
-
-      <!-- SECTION 4: SHOPFRONT CAROUSEL & INTERACTIVE PLUSHIE -->
-      <section class="shopfront-section" id="village-shops">
-        <div class="shopfront-header">
-          <div class="vintage-comic-tag">★ SNEAK PEEK MERCHANDISE ★</div>
-          <h2 class="shopfront-title">The Village Shopfront</h2>
-          <p class="shopfront-subtitle">
-            Take a stroll down Main Street! Peer through the vintage boutique shop windows to preview the upcoming Ooga Booga merchandise collection.
-          </p>
-        </div>
-
-        <div class="village-street-wrapper">
-          <img 
-            src="assets/images/shop/shops_scene.png" 
-            alt="Village Shopfronts with Awnings and Characters" 
-            class="shopfront-canvas-background"
-          >
-
-          <div class="shopfront-interactive-overlay">
-            <!-- Shop 1: Rotating 3D T-Shirt Display in Window 1 (Wild Ooga) -->
-            <div class="window-tshirt-display window-1-tshirt btn-notify" role="button" tabindex="0" title="Wild Ooga Classic Tee — Click to Pre-order" aria-label="Wild Ooga Classic Tee - Click to Pre-order">
-              <span class="window-tshirt-badge">COMING SOON</span>
-              <div class="tshirt-3d-scene">
-                <div class="tshirt-3d-flipper">
-                  <div class="tshirt-face tshirt-front">
-                    <img src="assets/images/shop/tshirt_mockup_ooga.png" alt="Wild Ooga Vintage Tee" class="tshirt-render-img">
+          <!-- Interactive Window Displays (Windows 1, 2, 3) -->
+          <div class="s3-windows-container">
+            <!-- Window 1: Wild Ooga Classic Tee (Rotating 3D Display) -->
+            <div class="s3-window-display s3-window-1 btn-notify" role="button" tabindex="0" title="Wild Ooga Classic Tee — Click to Pre-Order" aria-label="Wild Ooga Classic Tee - Click to Pre-Order">
+              <span class="s3-window-badge">COMING SOON</span>
+              <div class="s3-tshirt-scene">
+                <div class="s3-tshirt-flipper">
+                  <div class="s3-tshirt-face s3-tshirt-front">
+                    <img src="assets/images/shop/tshirt_mockup_ooga.png" alt="Wild Ooga Classic Vintage Tee" class="s3-tshirt-img">
                   </div>
-                  <div class="tshirt-face tshirt-back">
-                    <img src="assets/images/shop/tshirt_mockup_ooga_back.png" alt="Wild Ooga Vintage Tee Back" class="tshirt-render-img">
+                  <div class="s3-tshirt-face s3-tshirt-back">
+                    <img src="assets/images/shop/tshirt_mockup_ooga_back.png" alt="Wild Ooga Classic Vintage Tee Back" class="s3-tshirt-img">
                   </div>
                 </div>
               </div>
-              <div class="plushie-bubble-tooltip">👕 Wild Ooga Tee — Click Me!</div>
+              <div class="s3-bubble-tooltip">👕 Wild Ooga Tee — Pre-Order!</div>
             </div>
 
-            <!-- Shop 2: Rotating 3D T-Shirt Display in Window 2 (Suburbia Run) -->
-            <div class="window-tshirt-display window-2-tshirt btn-notify" role="button" tabindex="0" title="Suburbia Run Adventure Tee — Click to Pre-order" aria-label="Suburbia Run Adventure Tee - Click to Pre-order">
-              <span class="window-tshirt-badge">COMING SOON</span>
-              <div class="tshirt-3d-scene">
-                <div class="tshirt-3d-flipper reverse">
-                  <div class="tshirt-face tshirt-front">
-                    <img src="assets/images/shop/tshirt_mockup_boy.png" alt="Suburbia Run Adventure Tee" class="tshirt-render-img">
+            <!-- Window 2: Suburbia Run Adventure Tee (Rotating 3D Display) -->
+            <div class="s3-window-display s3-window-2 btn-notify" role="button" tabindex="0" title="Suburbia Run Adventure Tee — Click to Pre-Order" aria-label="Suburbia Run Adventure Tee - Click to Pre-Order">
+              <span class="s3-window-badge">COMING SOON</span>
+              <div class="s3-tshirt-scene">
+                <div class="s3-tshirt-flipper reverse">
+                  <div class="s3-tshirt-face s3-tshirt-front">
+                    <img src="assets/images/shop/tshirt_mockup_boy.png" alt="Suburbia Run Adventure Tee" class="s3-tshirt-img">
                   </div>
-                  <div class="tshirt-face tshirt-back">
-                    <img src="assets/images/shop/tshirt_mockup_boy_back.png" alt="Suburbia Run Adventure Tee Back" class="tshirt-render-img">
+                  <div class="s3-tshirt-face s3-tshirt-back">
+                    <img src="assets/images/shop/tshirt_mockup_boy_back.png" alt="Suburbia Run Adventure Tee Back" class="s3-tshirt-img">
                   </div>
                 </div>
               </div>
-              <div class="plushie-bubble-tooltip">👕 Suburbia Run Tee — Click Me!</div>
+              <div class="s3-bubble-tooltip">👕 Suburbia Run Tee — Pre-Order!</div>
             </div>
 
-            <!-- Shop 3: Interactive Clickable Toy on Pedestal (Direct Hotspot over illustrated toy) -->
-            <div class="plushie-zone" id="plushieShopZone" role="button" tabindex="0" aria-label="Collectible Ooga Booga Plushie Toy - Click to Pre-order" title="Click to view the Ooga Booga Plushie!">
-              <div class="plushie-bubble-tooltip">🧸 Official Plushie — Click to View!</div>
-              <div class="plushie-glow-ring"></div>
+            <!-- Window 3: Clickable Plushie Toy on Pedestal -->
+            <div class="s3-window-display s3-window-3" id="plushieShopZone" role="button" tabindex="0" title="Official Ooga Booga Plushie Toy — Click to View!" aria-label="Official Ooga Booga Plushie Toy - Click to View!">
+              <span class="s3-window-badge s3-plushie-badge">Plushie</span>
+              <div class="s3-toy-hotspot"></div>
+              <div class="s3-bubble-tooltip">🧸 Official Plushie Toy — Click Me!</div>
             </div>
           </div>
-        </div>
-      </section>
+
+          <!-- Foreground Layer: Girl walking dog, Boy with toy, Giant Green Monster waving, Sidewalk, Lawn -->
+          <div class="s3-layer-fg" id="s3LayerFg"></div>
+        </section>
+      </div>
 
       <!-- SECTION 5: PRAISE & REVIEWS -->
       <section class="reviews-section" id="reviews">
@@ -485,44 +499,50 @@
       <div class="modal-cartoon-dialog">
         <button type="button" class="modal-close-icon" aria-label="Close modal">✕</button>
         
-        <div class="vintage-comic-tag" style="background-color: var(--color-yellow-accent); margin-bottom: 12px;">
+        <div class="vintage-comic-tag" style="background-color: var(--color-yellow-accent); margin-bottom: 6px; font-size: 0.78rem; padding: 4px 14px;">
           ★ OFFICIAL COLLECTIBLE TOY ★
         </div>
 
-        <h3 style="font-family: var(--font-display); font-size: 2.2rem; color: var(--color-purple-deep); margin-bottom: 8px;">
+        <h3 style="font-family: var(--font-display); font-size: clamp(1.5rem, 2.6vw, 1.85rem); color: var(--color-purple-deep); margin-bottom: 2px; line-height: 1.15;">
           Ooga Monster Plushie
         </h3>
-        <div style="font-family: var(--font-fun); font-weight: 700; color: var(--color-pink-primary); font-size: 1.1rem; margin-bottom: 16px;">
+        <div style="font-family: var(--font-fun); font-weight: 700; color: var(--color-pink-primary); font-size: 0.88rem; margin-bottom: 10px;">
           LIMITED PRODUCTION RUN — COMING SOON!
         </div>
 
-        <div style="background: #fff; border: 2px solid var(--color-border-cartoon); border-radius: var(--border-radius-md); padding: 18px; margin-bottom: 20px; box-shadow: var(--shadow-cartoon-sm);">
+        <div style="background: #fff; border: 2px solid var(--color-border-cartoon); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 12px; box-shadow: var(--shadow-cartoon-sm);">
           <img 
             src="assets/images/shop/plushie_window.png" 
             alt="Ooga Booga Plushie Toy" 
-            style="width: 140px; height: 140px; object-fit: contain; margin: 0 auto; display: block;"
+            style="width: 88px; height: 88px; object-fit: contain; margin: 0 auto; display: block;"
           >
-          <p style="font-family: var(--font-body); font-size: 0.95rem; color: #433d59; line-height: 1.5; margin-top: 12px;">
+          <p style="font-family: var(--font-body); font-size: 0.85rem; color: #433d59; line-height: 1.35; margin-top: 6px;">
             Featuring ultra-soft hypoallergenic emerald plush fur, striped arms, signature cartoon fangs, and floppy ears. Crafted with love for hugs and adventures!
           </p>
         </div>
 
         <form onsubmit="event.preventDefault(); alert('🎉 You are subscribed for priority Plushie reservation!'); document.getElementById('plushieModal').classList.remove('active');">
-          <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <div style="display: flex; gap: 8px; margin-bottom: 6px;">
             <input 
               type="email" 
               placeholder="Enter your email to reserve..." 
               required 
-              style="flex: 1; padding: 12px 16px; border-radius: var(--border-radius-pill); border: 2px solid var(--color-border-cartoon); font-family: var(--font-body); outline: none;"
+              style="flex: 1; padding: 10px 14px; border-radius: var(--border-radius-pill); border: 2px solid var(--color-border-cartoon); font-family: var(--font-body); font-size: 0.88rem; outline: none;"
             >
-            <button type="submit" class="btn-cartoon btn-cartoon-yellow" style="background: var(--color-yellow-accent); color: var(--color-purple-deep); white-space: nowrap;">
+            <button type="submit" class="btn-cartoon btn-cartoon-yellow" style="background: var(--color-yellow-accent); color: var(--color-purple-deep); white-space: nowrap; padding: 10px 16px; font-size: 0.85rem;">
               Reserve VIP Spot
             </button>
           </div>
-          <div style="font-size: 0.78rem; color: var(--color-text-muted); font-weight: 600;">
+          <div style="font-size: 0.72rem; color: var(--color-text-muted); font-weight: 600; margin-bottom: 8px;">
             No spam ever. You will receive an exclusive early purchase link 24 hours before public drop.
           </div>
         </form>
+
+        <div style="text-align: center;">
+          <a href="product.html" class="btn-cartoon btn-cartoon-teal" style="display: inline-block; padding: 7px 16px; font-size: 0.82rem; text-decoration: none;">
+            🔍 View Full Book & Official Merchandise Page ➔
+          </a>
+        </div>
       </div>
     </div>
 

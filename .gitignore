@@ -6,3 +6,4 @@ desktop.ini
 # Scratch temporary testing files
 scratch/
 assests/extracted_layers/
+*.psd

@@ -318,37 +318,36 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 1: HERO PARALLAX WORLD
+   HERO PARALLAX SECTION (STORY INTRODUCTION)
    ========================================================================== */
 .hero-parallax-section {
   position: relative;
-  min-height: 92vh;
+  min-height: 95vh;
   overflow: hidden;
   background: radial-gradient(circle at 50% 30%, #59318a 0%, #20133b 70%, #120924 100%);
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
-.parallax-sky-bg {
+.hero-sky-bg {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: -10% 0 -10% 0;
   width: 100%;
   height: 120%;
   background: radial-gradient(circle at 50% 20%, #873678 0%, #442261 50%, #1e1338 100%);
   z-index: 1;
   pointer-events: none;
-  transform: translateY(0);
-  transition: transform 0.1s linear;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 /* Starfield / Twinkles */
 .stars-layer {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: 2;
@@ -360,7 +359,7 @@ body {
     radial-gradient(3px 3px at 70% 10%, #ff75a0 100%, transparent),
     radial-gradient(2px 2px at 85% 35%, #fff 100%, transparent),
     radial-gradient(4px 4px at 92% 15%, #2ee6d6 100%, transparent);
-  opacity: 0.8;
+  opacity: 0.85;
   animation: starTwinkle 4s ease-in-out infinite alternate;
 }
 
@@ -369,19 +368,24 @@ body {
   100% { opacity: 1; }
 }
 
-.parallax-forest-bg {
+/* Whimsical Forest Landscape Layer (tree_scene.png) */
+.hero-forest-bg {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60%;
+  height: 65%;
   background-image: url('images/product/tree_scene.png');
   background-size: cover;
   background-position: center bottom;
-  opacity: 0.35;
-  filter: blur(4px) brightness(0.6);
+  opacity: 0.55;
+  filter: saturate(1.2) brightness(0.85);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 100%);
   z-index: 3;
   pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .hero-content-container {
@@ -389,48 +393,52 @@ body {
   z-index: 10;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 60px 24px 20px 24px;
+  padding: 48px 24px 10px 24px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  will-change: transform, opacity;
 }
 
 .vintage-comic-tag {
   display: inline-block;
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
   background-color: var(--color-yellow-accent);
   color: var(--color-purple-deep);
-  padding: 6px 18px;
+  padding: 6px 20px;
   border-radius: var(--border-radius-pill);
   border: var(--border-width-cartoon) solid var(--color-border-cartoon);
   box-shadow: var(--shadow-cartoon-sm);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .hero-main-title {
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  font-size: clamp(3rem, 7vw, 6.2rem);
   line-height: 0.95;
   color: #fff;
   text-shadow: 
-    4px 4px 0 var(--color-pink-primary),
-    8px 8px 0 var(--color-teal-primary),
-    12px 12px 0 var(--color-border-cartoon);
-  margin-bottom: 16px;
+    3px 3px 0 var(--color-teal-primary),
+    6px 6px 0 var(--color-teal-dark),
+    9px 9px 0 var(--color-border-cartoon),
+    12px 14px 22px rgba(0, 0, 0, 0.65);
+  margin-bottom: 14px;
   transform: rotate(-1.5deg);
+  letter-spacing: 1px;
 }
 
 .hero-subheadline {
   font-family: var(--font-fun);
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
   font-weight: 700;
   color: #ffd8ec;
   max-width: 820px;
-  margin: 0 auto 28px auto;
+  margin: 0 auto 24px auto;
+  line-height: 1.45;
   text-shadow: 2px 2px 0 var(--color-border-cartoon);
 }
 
@@ -438,326 +446,618 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  z-index: 12;
+}
+
+.hero-btn {
+  font-size: clamp(0.88rem, 1.1vw, 1.02rem);
+  padding: 12px 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 5px 0 var(--color-border-cartoon);
+  font-weight: 800;
+}
+
+.btn-cartoon-yellow {
+  background-color: var(--color-yellow-accent);
+  color: var(--color-purple-deep);
+  box-shadow: var(--shadow-cartoon-md);
+}
+
+.btn-cartoon-yellow:hover {
+  background-color: var(--color-yellow-light);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-cartoon-lg);
+}
+
+.btn-cartoon-yellow:active {
+  transform: translateY(2px);
+  box-shadow: var(--shadow-cartoon-press);
 }
 
 /* Layered Parallax Characters Stage */
-.parallax-stage-container {
+.hero-stage-container {
   position: relative;
   width: 100%;
-  height: 480px;
-  z-index: 8;
-  max-width: 1400px;
+  max-width: 1280px;
+  height: 440px;
   margin: 0 auto;
+  z-index: 8;
+  pointer-events: none;
 }
 
-.parallax-char {
+.hero-char-wrapper {
   position: absolute;
-  pointer-events: auto;
-  user-select: none;
-  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.45));
   will-change: transform;
+  pointer-events: auto;
 }
 
-.char-boy {
-  left: 6%;
-  bottom: 15px;
-  width: clamp(220px, 22vw, 360px);
-  z-index: 12;
+/* Even balanced spacing between boy, creature, and apple */
+.char-boy-wrapper {
+  left: 17%;
+  bottom: 20px;
+  z-index: 9;
+}
+
+.char-creature-wrapper {
+  left: 45%;
+  bottom: 25px;
+  z-index: 10;
+}
+
+.item-apple-wrapper {
+  left: 74%;
+  top: 30%;
+  z-index: 11;
+}
+
+.hero-char {
+  display: block;
+  object-fit: contain;
+  user-select: none;
+}
+
+/* Character Placement with even spacing */
+.hero-char.char-boy {
+  width: clamp(170px, 18vw, 270px);
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.65));
   animation: boyRunBob 3.5s ease-in-out infinite alternate;
 }
 
-.char-creature {
-  left: 38%;
-  bottom: 0px;
-  width: clamp(280px, 32vw, 480px);
-  z-index: 14;
-  animation: creatureLaughWobble 4s ease-in-out infinite alternate;
+.hero-char.char-creature {
+  width: clamp(200px, 22vw, 320px);
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.7));
+  animation: creatureLeap 4s ease-in-out infinite alternate;
 }
 
-.item-apple {
-  right: 12%;
-  top: 15%;
-  width: clamp(80px, 9vw, 140px);
-  z-index: 15;
+.hero-char.item-apple {
+  width: clamp(60px, 6.5vw, 90px);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55));
   animation: appleSpinFloat 5s ease-in-out infinite;
 }
 
 @keyframes boyRunBob {
-  0% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-12px) rotate(1deg); }
-  100% { transform: translateY(-4px) rotate(-1deg); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(-1.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
-@keyframes creatureLaughWobble {
-  0% { transform: scale(1) rotate(-1deg); }
-  50% { transform: scale(1.04) rotate(2deg) translateY(-10px); }
-  100% { transform: scale(0.98) rotate(-2deg) translateY(-2px); }
+@keyframes creatureLeap {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-16px) rotate(2deg) scale(1.02); }
+  100% { transform: translateY(0px) rotate(0deg) scale(1); }
 }
 
 @keyframes appleSpinFloat {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-24px) rotate(180deg) scale(1.08); }
-  100% { transform: translateY(0) rotate(360deg); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(180deg) scale(1.08); }
+  100% { transform: translateY(0px) rotate(360deg); }
 }
 
 .hero-scroll-cue {
   position: relative;
-  z-index: 20;
-  padding: 16px;
+  z-index: 14;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: #fff;
+  gap: 6px;
   font-family: var(--font-fun);
+  font-size: 0.88rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  text-shadow: 1px 1px 0 var(--color-border-cartoon);
+  color: #ffd8ec;
+  padding-bottom: 20px;
   cursor: pointer;
-  transition: transform var(--transition-bounce);
+  text-shadow: 1px 1px 0 var(--color-border-cartoon);
+  transition: transform var(--transition-bounce), color 0.2s;
 }
 
 .hero-scroll-cue:hover {
   transform: translateY(-4px);
+  color: #fff;
 }
 
 .scroll-bounce-arrow {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   background-color: var(--color-yellow-accent);
   color: var(--color-purple-deep);
-  border-radius: 50%;
+  border: 2px solid var(--color-border-cartoon);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  box-shadow: var(--shadow-cartoon-sm);
-  animation: bounceDown 1.8s infinite;
+  font-size: 0.95rem;
+  font-weight: 900;
+  box-shadow: 0 3px 0 var(--color-border-cartoon);
+  animation: arrowBounce 1.8s infinite;
 }
 
-@keyframes bounceDown {
+@keyframes arrowBounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(8px); }
   60% { transform: translateY(4px); }
 }
 
 /* ==========================================================================
-   SECTION 2: INTERACTIVE 3D BOOK (PRIMARY PRODUCT)
+   PSD CONTINUOUS 3-SECTION PARALLAX WORLD
+   Section 1: Outdoor Jungle Cinema (Embedded Video behind carved bamboo frame)
+   Section 2: Enchanted Pink Forest (3D Rotating GLB Book & Characters)
+   Section 3: Village Storefront (3D Rotating T-Shirts & Clickable Toy)
    ========================================================================== */
-.book-showcase-section {
+
+.psd-parallax-world {
   position: relative;
-  padding: 100px 24px;
-  background: #191c30;
-  color: #fff;
+  width: 100%;
   overflow: hidden;
+  background-color: #120924;
 }
 
-.book-scene-backdrop {
+/* Base section wrapper for seamless vertical stacking */
+.psd-section {
+  position: relative;
+  width: 100%;
+  max-width: 2560px;
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   SECTION 1: OUTDOOR JUNGLE CINEMA (EMBEDDED VIDEO WITH BAMBOO FRAME)
+   ========================================================================== */
+.psd-section-cinema {
+  aspect-ratio: 3000 / 1860;
+  min-height: 520px;
+  background: #1e1338;
+}
+
+/* Layer 1: Background Sky, Distant Jungle Canopy & Sunset Glow */
+.s1-layer-bg {
+  position: absolute;
+  inset: -6% 0 -6% 0;
+  width: 100%;
+  height: 112%;
+  background-image: url('images/parallax/s1_bg_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 1;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Ambient Top Fog/Mist Glow */
+.s1-ambient-glow {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-image: url('images/product/tree_scene.png');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.45;
-  filter: contrast(1.1) brightness(0.7);
+  height: 35%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(242, 82, 135, 0.3) 0%, transparent 70%);
+  z-index: 2;
   pointer-events: none;
 }
 
-.book-showcase-grid {
-  position: relative;
-  z-index: 10;
-  max-width: 1360px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 48px;
-  align-items: center;
-}
-
-.book-3d-stage-wrapper {
-  position: relative;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 117, 160, 0.15) 0%, rgba(30, 19, 56, 0.8) 75%);
-  border-radius: var(--border-radius-lg);
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  box-shadow: var(--shadow-cartoon-lg);
-  padding: 24px;
+/* Layer 2: Video Stage (Embedded precisely inside carved bamboo frame cutout)
+   Exact canvas coordinates: left 20.67%, top 6.18%, width 58.83%, height 53.28% */
+.s1-video-stage {
+  position: absolute;
+  left: 20.67%;
+  top: 6.18%;
+  width: 58.83%;
+  height: 53.28%;
+  z-index: 4;
   overflow: hidden;
+  background: #000;
+  border-radius: 6px;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.85);
 }
 
-.canvas-3d-container {
+.s1-video-player {
   width: 100%;
-  height: 520px;
-  position: relative;
-  cursor: grab;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.canvas-3d-container:active {
-  cursor: grabbing;
+/* Projector Beam Effect - Light radiating from projector platform up to screen */
+.s1-projector-beam {
+  position: absolute;
+  bottom: 24%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 54%;
+  height: 48%;
+  background: radial-gradient(ellipse at bottom, rgba(255, 255, 200, 0.28) 0%, rgba(255, 220, 130, 0.09) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 5;
+  animation: projectorFlicker 0.16s infinite alternate;
 }
 
-.interaction-hint-badge {
+@keyframes projectorFlicker {
+  0% { opacity: 0.65; transform: translateX(-50%) scaleX(0.98); }
+  100% { opacity: 1; transform: translateX(-50%) scaleX(1.02); }
+}
+
+/* Layer 3: Bamboo / Carved Wood Screen Frame Overlay */
+.s1-layer-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/parallax/s1_screen_frame_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Layer 4: Foreground (Platform, Film Projector, Pineapple Projectionist, Audience Beanbags, Palm Fronds) */
+.s1-layer-fg {
+  position: absolute;
+  inset: -4% 0 -4% 0;
+  width: 100%;
+  height: 108%;
+  background-image: url('images/parallax/s1_fg_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 8;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Cinema Overlay UI: Top Header Pill & Bottom Controls */
+.s1-overlay-header {
   position: absolute;
   top: 20px;
-  left: 20px;
-  background: rgba(26, 23, 39, 0.85);
-  border: 2px solid var(--color-yellow-accent);
-  color: var(--color-yellow-accent);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  text-align: center;
+  pointer-events: none;
+}
+
+.s1-vintage-pill {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  background-color: var(--color-pink-primary);
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: var(--border-radius-pill);
+  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
+  box-shadow: var(--shadow-cartoon-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.s1-controls-bar {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(18, 9, 36, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 8px 20px;
+  border-radius: var(--border-radius-pill);
+  border: 3px solid var(--color-border-cartoon);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), var(--shadow-cartoon-sm);
+}
+
+.s1-scroll-cue {
+  position: absolute;
+  bottom: 12px;
+  right: 28px;
+  z-index: 25;
   font-family: var(--font-fun);
   font-size: 0.85rem;
   font-weight: 700;
-  padding: 6px 14px;
-  border-radius: var(--border-radius-pill);
-  pointer-events: none;
+  color: #ffc4e1;
   display: flex;
   align-items: center;
-  gap: 8px;
-  backdrop-filter: blur(4px);
-  z-index: 5;
+  gap: 6px;
+  cursor: pointer;
+  background: rgba(18, 9, 36, 0.75);
+  padding: 5px 16px;
+  border-radius: var(--border-radius-pill);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-bounce);
 }
 
-.book-3d-controls {
+.s1-scroll-cue:hover {
+  background: var(--color-pink-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   SECTION 2: ENCHANTED PINK FOREST (3D ROTATING GLB BOOK & CHARACTERS)
+   ========================================================================== */
+.psd-section-forest {
+  aspect-ratio: 3000 / 1887;
+  min-height: 560px;
+  background: #150921;
+}
+
+/* Layer 1: Forest Night Backdrop & Turquoise River Silhouettes */
+.s2-layer-bg {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
+  inset: -6% 0 -6% 0;
+  width: 100%;
+  height: 112%;
+  background-image: url('images/parallax/s2_bg_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 1;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Layer 2: Pink Whimsical Trees */
+.s2-layer-trees {
+  position: absolute;
+  inset: -3% 0 -3% 0;
+  width: 100%;
+  height: 106%;
+  background-image: url('images/parallax/s2_trees_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 3;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Layer 3: Characters (Guido & Ooga on Tree Branch, Cat on Ladder into River) */
+.s2-layer-chars {
+  position: absolute;
+  inset: -2% 0 -2% 0;
+  width: 100%;
+  height: 104%;
+  background-image: url('images/parallax/s2_characters_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
   z-index: 5;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  animation: gentleCharSway 6s ease-in-out infinite alternate;
+}
+
+@keyframes gentleCharSway {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  100% { transform: translate3d(0, -6px, 0) rotate(0.4deg); }
+}
+
+/* Floating Magic Sparkles / Fireflies in Forest */
+.s2-magic-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background-image:
+    radial-gradient(3px 3px at 20% 40%, rgba(255, 230, 110, 0.9) 0%, transparent 100%),
+    radial-gradient(4px 4px at 35% 25%, rgba(0, 216, 193, 0.8) 0%, transparent 100%),
+    radial-gradient(3px 3px at 50% 60%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(4px 4px at 70% 35%, rgba(242, 82, 135, 0.9) 0%, transparent 100%),
+    radial-gradient(5px 5px at 85% 55%, rgba(255, 222, 89, 0.85) 0%, transparent 100%),
+    radial-gradient(3px 3px at 42% 75%, rgba(0, 216, 193, 0.8) 0%, transparent 100%);
+  animation: firefliesDrift 8s ease-in-out infinite alternate;
+}
+
+@keyframes firefliesDrift {
+  0% { transform: translateY(0px) scale(0.96); opacity: 0.6; }
+  50% { transform: translateY(-12px) scale(1.04); opacity: 0.95; }
+  100% { transform: translateY(-24px) scale(0.98); opacity: 0.7; }
+}
+
+/* LEFT SIDE: 3D Interactive Rotating Book GLB Stage
+   Occupies the forest clearing on the left side (from 3% to 48% width) */
+.s2-book-stage {
+  position: absolute;
+  left: 4.5%;
+  top: 5%;
+  width: 44%;
+  height: 90%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.s2-book-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-yellow-accent);
+  color: var(--color-purple-deep);
+  font-family: var(--font-heading);
+  font-size: clamp(0.72rem, 1vw, 0.88rem);
+  padding: 5px 16px;
+  border-radius: var(--border-radius-pill);
+  border: 2px solid var(--color-border-cartoon);
+  box-shadow: var(--shadow-cartoon-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+/* 3D WebGL Canvas Container */
+.s2-book-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.s2-book-canvas-container {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.s2-book-canvas-container:active {
+  cursor: grabbing;
+}
+
+/* 3D Camera Preset View Controls */
+.s2-book-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  z-index: 22;
 }
 
 .btn-3d-ctrl {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--color-purple-deep);
-  border: 2px solid var(--color-border-cartoon);
   font-family: var(--font-fun);
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 6px 12px;
+  font-size: clamp(0.75rem, 0.95vw, 0.85rem);
+  font-weight: 800;
+  padding: 5px 12px;
   border-radius: var(--border-radius-pill);
+  border: 2px solid var(--color-border-cartoon);
+  box-shadow: 2px 2px 0 var(--color-border-cartoon);
   cursor: pointer;
   transition: all var(--transition-bounce);
-  box-shadow: var(--shadow-cartoon-sm);
 }
 
 .btn-3d-ctrl:hover {
   background: var(--color-yellow-accent);
   transform: translateY(-2px);
+  box-shadow: 3px 3px 0 var(--color-border-cartoon);
 }
 
-/* Book Details Column */
-.book-details-card {
-  background: rgba(255, 255, 255, 0.96);
-  color: var(--color-ink-black);
-  border-radius: var(--border-radius-lg);
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  box-shadow: var(--shadow-cartoon-lg);
-  padding: 40px;
+.btn-3d-ctrl:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0 var(--color-border-cartoon);
 }
 
-.book-author-tag {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  color: var(--color-pink-primary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.book-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  color: var(--color-purple-deep);
-  line-height: 1.05;
-  margin-bottom: 12px;
-  text-shadow: 2px 2px 0 var(--color-yellow-accent);
-}
-
-.book-subtitle {
-  font-family: var(--font-script);
-  font-size: 1.3rem;
-  color: var(--color-teal-dark);
-  margin-bottom: 18px;
-}
-
-.book-description {
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  color: #3f3b52;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-/* Variant Selector */
-.variant-selector-group {
-  margin-bottom: 24px;
-}
-
-.variant-label {
-  font-family: var(--font-fun);
-  font-weight: 800;
-  font-size: 0.95rem;
-  color: var(--color-purple-deep);
-  margin-bottom: 10px;
-  display: block;
-}
-
-.variant-options-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.variant-card {
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
+/* Floating Glassmorphic Buy Card on bottom of 3D Book Stage */
+.s2-book-buy-card {
+  width: 100%;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 3px solid var(--color-border-cartoon);
   border-radius: var(--border-radius-md);
-  padding: 14px 16px;
-  cursor: pointer;
-  background: #fff;
-  transition: all var(--transition-bounce);
-  box-shadow: var(--shadow-cartoon-sm);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), var(--shadow-cartoon-sm);
+  padding: 12px 18px;
+  color: var(--color-purple-deep);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  z-index: 22;
 }
 
-.variant-card.selected {
-  background: #fff7fa;
-  border-color: var(--color-pink-primary);
-  box-shadow: 0 4px 0 var(--color-pink-primary), 0 0 15px rgba(242, 82, 135, 0.25);
-  transform: translateY(-2px);
+.s2-card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.variant-title {
+.s2-card-title {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  color: var(--color-purple-deep);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.s2-card-price {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  color: var(--color-pink-primary);
+  margin: 0;
+}
+
+.s2-card-subtitle {
+  font-family: var(--font-fun);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Compact Variant selector pills */
+.s2-variant-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.s2-variant-btn {
+  background: #f8f6fc;
+  border: 2px solid var(--color-border-cartoon);
+  border-radius: var(--border-radius-sm);
+  padding: 5px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-bounce);
+  font-family: var(--font-fun);
+  font-size: 0.8rem;
+  font-weight: 700;
   color: var(--color-purple-deep);
 }
 
-.variant-price {
-  font-family: var(--font-heading);
-  font-size: 1.35rem;
-  color: var(--color-pink-primary);
+.s2-variant-btn.selected {
+  background: var(--color-yellow-accent);
+  box-shadow: 2px 2px 0 var(--color-border-cartoon);
+  transform: translateY(-1px);
 }
 
-.variant-subtext {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  font-weight: 600;
-}
-
-/* Buy Action Box */
-.purchase-action-box {
+.s2-card-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .quantity-stepper {
@@ -766,229 +1066,89 @@ body {
   border: var(--border-width-cartoon) solid var(--color-border-cartoon);
   border-radius: var(--border-radius-pill);
   background: #fff;
-  box-shadow: var(--shadow-cartoon-sm);
   overflow: hidden;
+  box-shadow: var(--shadow-cartoon-sm);
 }
 
 .stepper-btn {
-  width: 42px;
-  height: 48px;
   background: none;
   border: none;
-  font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-family: var(--font-fun);
+  font-size: 1.1rem;
+  font-weight: 800;
+  width: 36px;
+  height: 38px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-purple-deep);
-  transition: background 0.2s;
+  transition: background 0.15s ease;
 }
 
 .stepper-btn:hover {
-  background: var(--color-yellow-light);
+  background: #f2eef8;
 }
 
 .stepper-value {
-  width: 44px;
+  width: 36px;
   text-align: center;
-  font-family: var(--font-fun);
-  font-weight: 800;
-  font-size: 1.1rem;
   border: none;
-  color: var(--color-purple-deep);
-}
-
-.features-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 20px;
-  border-top: 2px dashed #ddd8e6;
-  padding-top: 20px;
-}
-
-.feature-bullet {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   font-family: var(--font-fun);
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 800;
   color: var(--color-purple-deep);
+  pointer-events: none;
+}
+
+.s2-buy-btn {
+  flex: 1;
+  padding: 8px 14px;
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
 }
 
 /* ==========================================================================
-   SECTION 3: CARTOON VIDEO CINEMA
+   SECTION 3: VILLAGE STOREFRONT (3D T-SHIRTS & CLICKABLE TOY)
    ========================================================================== */
-.cinema-section {
-  position: relative;
-  padding: 100px 24px 120px 24px;
-  background: linear-gradient(180deg, #191c30 0%, #29103c 50%, #150921 100%);
-  color: #fff;
-  text-align: center;
-  overflow: hidden;
-}
-
-.cinema-header {
-  max-width: 800px;
-  margin: 0 auto 40px auto;
-  position: relative;
-  z-index: 10;
-}
-
-.cinema-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4.2rem);
-  color: var(--color-yellow-accent);
-  text-shadow: 
-    3px 3px 0 var(--color-pink-primary),
-    6px 6px 0 var(--color-border-cartoon);
-  margin-bottom: 12px;
-}
-
-.cinema-subtitle {
-  font-family: var(--font-fun);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #ffdcf0;
-}
-
-.cinema-stage-wrapper {
-  position: relative;
-  max-width: 1080px;
-  margin: 0 auto;
-  aspect-ratio: 16 / 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* The actual HTML5 video element positioned right behind the wooden frame cutout */
-.cinema-video-player {
-  position: absolute;
-  top: 7.8%;
-  left: 21.4%;
-  width: 57.5%;
-  height: 50.5%;
-  object-fit: cover;
-  border-radius: 4px;
-  z-index: 2;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
-  background: #000;
-}
-
-/* Frame Cutout Overlay: Palm trees, wooden frame border, audience marshmallow seats, pineapple projector */
-.cinema-frame-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 5;
-  object-fit: contain;
-}
-
-/* Projector Beam Animation Effect */
-.projector-beam-effect {
-  position: absolute;
-  bottom: 18%;
-  left: 50%;
-  width: 56%;
-  height: 48%;
-  transform: translateX(-50%);
-  background: radial-gradient(ellipse at bottom, rgba(255, 255, 200, 0.22) 0%, rgba(255, 255, 255, 0.05) 50%, transparent 80%);
-  pointer-events: none;
-  z-index: 3;
-  animation: projectorFlicker 0.15s infinite alternate;
-}
-
-@keyframes projectorFlicker {
-  0% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-.cinema-controls-bar {
-  position: relative;
-  z-index: 10;
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-/* ==========================================================================
-   SECTION 4: SHOPFRONT CAROUSEL & PLUSHIE
-   ========================================================================== */
-.shopfront-section {
-  position: relative;
-  padding: 100px 24px 120px 24px;
+.psd-section-storefront {
+  aspect-ratio: 3000 / 1878;
+  min-height: 560px;
   background: #eef7f8;
-  overflow: hidden;
 }
 
-.shopfront-header {
-  text-align: center;
-  max-width: 850px;
-  margin: 0 auto 50px auto;
-}
-
-.shopfront-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  color: var(--color-purple-deep);
-  text-shadow: 
-    3px 3px 0 var(--color-yellow-accent),
-    6px 6px 0 var(--color-border-cartoon);
-  margin-bottom: 12px;
-}
-
-.shopfront-subtitle {
-  font-family: var(--font-fun);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-}
-
-.village-street-wrapper {
-  position: relative;
-  max-width: 1280px;
-  margin: 0 auto;
-  border-radius: var(--border-radius-lg);
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  background: #fff;
-  box-shadow: var(--shadow-cartoon-lg);
-  overflow: hidden;
-}
-
-/* Background Scene containing the 3 shops */
-.shopfront-canvas-background {
-  width: 100%;
-  display: block;
-  user-select: none;
-}
-
-/* Interactive Overlay Zones on Top of Shop Windows */
-.shopfront-interactive-overlay {
+/* Layer 1: Boutique Storefront Facade (Candy Awnings, Columns, Lamps, Windows) */
+.s3-layer-storefront {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
+  background-image: url('images/parallax/s3_storefront_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* Windows 1 & 2: Rotating 3D T-Shirt Displays in Shop Windows */
-.window-tshirt-display {
+/* Interactive Windows Overlay (Positioned right over the 3 display windows)
+   Window 1 center: 17.7%, Window 2 center: 50.0%, Window 3 center: 82.3% */
+.s3-windows-container {
   position: absolute;
-  top: 43%;
-  transform: translate(-50%, -50%);
-  width: 145px;
-  height: 180px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Windows 1 & 2: Rotating 3D T-Shirt Display */
+.s3-window-display {
+  pointer-events: auto;
   cursor: pointer;
-  z-index: 15;
+  position: absolute;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 17%;
+  height: 33%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -996,21 +1156,25 @@ body {
   transition: transform var(--transition-bounce);
 }
 
-.window-1-tshirt {
-  left: 18.5%;
+.s3-window-1 {
+  left: 17.7%;
 }
 
-.window-2-tshirt {
-  left: 50.5%;
+.s3-window-2 {
+  left: 50.0%;
 }
 
-.window-tshirt-badge {
+.s3-window-3 {
+  left: 82.3%;
+}
+
+.s3-window-badge {
   position: absolute;
-  top: -16px;
+  top: -14px;
   background: var(--color-yellow-accent);
   color: var(--color-purple-deep);
   font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-size: clamp(0.65rem, 0.85vw, 0.78rem);
   letter-spacing: 0.04em;
   padding: 3px 12px;
   border-radius: var(--border-radius-pill);
@@ -1018,11 +1182,12 @@ body {
   box-shadow: var(--shadow-cartoon-sm);
   white-space: nowrap;
   pointer-events: none;
-  z-index: 10;
+  z-index: 15;
   transition: transform var(--transition-bounce);
 }
 
-.tshirt-3d-scene {
+/* 3D T-Shirt Flipper Scene inside Windows 1 & 2 */
+.s3-tshirt-scene {
   width: 100%;
   height: 100%;
   perspective: 900px;
@@ -1031,7 +1196,7 @@ body {
   justify-content: center;
 }
 
-.tshirt-3d-flipper {
+.s3-tshirt-flipper {
   width: 100%;
   height: 100%;
   position: relative;
@@ -1039,42 +1204,32 @@ body {
   animation: rotate3dTee 8s linear infinite;
 }
 
-.tshirt-3d-flipper.reverse {
+.s3-tshirt-flipper.reverse {
   animation: rotate3dTee 8s linear infinite;
-  animation-delay: -4s; /* Phase offset between window 1 and window 2 */
+  animation-delay: -4s;
 }
 
 @keyframes rotate3dTee {
-  0% {
-    transform: rotateY(0deg) translateY(0px);
-  }
-  25% {
-    transform: rotateY(90deg) translateY(-4px);
-  }
-  50% {
-    transform: rotateY(180deg) translateY(0px);
-  }
-  75% {
-    transform: rotateY(270deg) translateY(-4px);
-  }
-  100% {
-    transform: rotateY(360deg) translateY(0px);
-  }
+  0% { transform: rotateY(0deg) translateY(0px); }
+  25% { transform: rotateY(90deg) translateY(-4px); }
+  50% { transform: rotateY(180deg) translateY(0px); }
+  75% { transform: rotateY(270deg) translateY(-4px); }
+  100% { transform: rotateY(360deg) translateY(0px); }
 }
 
-.window-tshirt-display:hover {
-  transform: translate(-50%, -50%) scale(1.1);
+.s3-window-display:hover {
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
-.window-tshirt-display:hover .tshirt-3d-flipper {
+.s3-window-display:hover .s3-tshirt-flipper {
   animation-play-state: paused;
 }
 
-.window-tshirt-display:hover .window-tshirt-badge {
+.s3-window-display:hover .s3-window-badge {
   transform: translateY(-4px) scale(1.05);
 }
 
-.tshirt-face {
+.s3-tshirt-face {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
@@ -1084,68 +1239,86 @@ body {
   justify-content: center;
 }
 
-.tshirt-back {
+.s3-tshirt-back {
   transform: rotateY(180deg);
 }
 
-.tshirt-render-img {
-  width: 100%;
-  height: 100%;
+.s3-tshirt-img {
+  width: 90%;
+  height: 90%;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
   transition: filter var(--transition-bounce);
 }
 
-.window-tshirt-display:hover .tshirt-render-img {
+.s3-window-display:hover .s3-tshirt-img {
   filter: drop-shadow(0 0 20px var(--color-yellow-accent)) drop-shadow(0 12px 20px rgba(0, 0, 0, 0.45));
 }
 
-.window-tshirt-display:hover .plushie-bubble-tooltip {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+/* Window 3: Clickable Plushie Toy on Pedestal */
+.s3-plushie-badge {
+  background: linear-gradient(135deg, #ff4081 0%, #ff1493 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 0 var(--color-border-cartoon), 0 0 16px rgba(255, 20, 147, 0.65) !important;
+  border: 2px solid var(--color-border-cartoon) !important;
+  letter-spacing: 0.06em;
+  font-weight: 900;
+  animation: plushieBadgePulse 2.5s ease-in-out infinite alternate;
 }
 
-/* Shop 3: Interactive Clickable Plushie in window (Direct Hotspot over illustrated toy) */
-.plushie-zone {
-  position: absolute;
-  top: 36%;
-  left: 73.5%;
-  width: 17%;
-  height: 32%;
-  z-index: 15;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50% 50% 30% 30%;
-  transition: all var(--transition-bounce);
+@keyframes plushieBadgePulse {
+  0% { transform: scale(1); box-shadow: 0 3px 0 var(--color-border-cartoon), 0 0 10px rgba(255, 20, 147, 0.4); }
+  100% { transform: scale(1.06); box-shadow: 0 3px 0 var(--color-border-cartoon), 0 0 20px rgba(255, 20, 147, 0.85); }
 }
 
-.plushie-glow-ring {
+.s3-window-display:hover .s3-plushie-badge {
+  transform: translateY(-4px) scale(1.1) !important;
+  box-shadow: 0 5px 0 var(--color-border-cartoon), 0 0 24px rgba(255, 20, 147, 0.95) !important;
+}
+
+.s3-window-3 {
+  left: 82.3%;
+  transition: transform var(--transition-bounce), filter 0.3s ease;
+}
+
+/* Hover Glow on Window 3 (Plushie Toy) */
+.s3-window-3:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  filter: drop-shadow(0 0 25px rgba(255, 222, 89, 0.95)) drop-shadow(0 0 45px rgba(255, 64, 129, 0.7));
+}
+
+.s3-window-3:hover .s3-toy-hotspot {
+  background: radial-gradient(circle at 50% 65%, rgba(255, 230, 80, 0.45) 0%, rgba(255, 64, 129, 0.25) 50%, transparent 75%) !important;
+  filter: drop-shadow(0 0 30px rgba(255, 222, 89, 1));
+}
+
+.s3-toy-hotspot {
   position: absolute;
   inset: 0;
-  border-radius: 50% 50% 35% 35%;
-  border: 3px dashed transparent;
-  pointer-events: none;
-  transition: all var(--transition-bounce);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  outline: none !important;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
-.plushie-zone:hover .plushie-glow-ring {
-  border-color: var(--color-yellow-accent);
-  background: radial-gradient(circle, rgba(255, 222, 89, 0.22) 0%, rgba(255, 222, 89, 0) 75%);
-  box-shadow: 0 0 30px rgba(255, 222, 89, 0.65);
-  transform: scale(1.06);
+.s3-toy-glow-ring {
+  display: none !important;
 }
 
-.plushie-bubble-tooltip {
+.s3-bubble-tooltip {
   position: absolute;
-  top: -46px;
+  top: -42px;
   background: var(--color-yellow-accent);
   color: var(--color-purple-deep);
   font-family: var(--font-display);
-  font-size: 0.85rem;
-  padding: 6px 14px;
+  font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+  padding: 5px 14px;
   border-radius: var(--border-radius-pill);
   border: 2px solid var(--color-border-cartoon);
   box-shadow: var(--shadow-cartoon-sm);
@@ -1154,12 +1327,106 @@ body {
   opacity: 0;
   transform: translateY(8px) scale(0.85);
   transition: all var(--transition-bounce);
-  z-index: 20;
+  z-index: 25;
 }
 
-.plushie-zone:hover .plushie-bubble-tooltip {
+.s3-window-display:hover .s3-bubble-tooltip,
+.s3-toy-hotspot:hover + .s3-bubble-tooltip,
+.s3-toy-hotspot:hover .s3-bubble-tooltip {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* Layer 2: Foreground Characters (Girl with puppy, Boy with toy, Giant Smiling Green Monster, Sidewalk & Lawn) */
+.s3-layer-fg {
+  position: absolute;
+  inset: -2% 0 -2% 0;
+  width: 100%;
+  height: 104%;
+  background-image: url('images/parallax/s3_foreground_chars_2k.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 15;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN FOR PSD PARALLAX WORLD
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .s2-book-stage {
+    width: 48%;
+    left: 3%;
+  }
+  
+  .s2-book-buy-card {
+    padding: 10px 14px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  .psd-section-cinema {
+    aspect-ratio: auto;
+    min-height: 520px;
+    padding-bottom: 40px;
+  }
+  
+  .s1-video-stage {
+    left: 14%;
+    top: 10%;
+    width: 72%;
+    height: 50%;
+  }
+
+  .psd-section-forest {
+    aspect-ratio: auto;
+    min-height: 720px;
+    padding: 20px 0;
+  }
+
+  .s2-book-stage {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 92%;
+    max-width: 520px;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .s2-book-canvas-wrapper {
+    min-height: 340px;
+  }
+
+  .psd-section-storefront {
+    aspect-ratio: auto;
+    min-height: 520px;
+  }
+  
+  .s3-window-display {
+    width: 22%;
+    height: 30%;
+  }
+}
+
+@media (max-width: 600px) {
+  .s1-controls-bar {
+    bottom: 12px;
+    padding: 6px 14px;
+    gap: 8px;
+  }
+  
+  .s1-scroll-cue {
+    display: none;
+  }
+
+  .s2-book-canvas-wrapper {
+    min-height: 280px;
+  }
 }
 
 /* ==========================================================================
@@ -1455,16 +1722,18 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(26, 23, 39, 0.7);
+  background: rgba(20, 10, 36, 0.78);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 9998;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 16px;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-smooth);
+  overflow-y: auto;
 }
 
 .modal-overlay.active {
@@ -1476,14 +1745,29 @@ body {
   background: var(--color-cream-bg);
   border: var(--border-width-cartoon) solid var(--color-border-cartoon);
   border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-cartoon-lg);
-  max-width: 520px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), var(--shadow-cartoon-lg);
+  max-width: 480px;
   width: 100%;
-  padding: 40px;
+  max-height: calc(100vh - 36px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 24px 26px 20px 26px;
   text-align: center;
   position: relative;
-  transform: scale(0.9) translateY(20px);
+  transform: scale(0.92) translateY(15px);
   transition: transform var(--transition-bounce);
+  margin: auto;
+}
+
+.modal-cartoon-dialog::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-cartoon-dialog::-webkit-scrollbar-thumb {
+  background: var(--color-pink-primary);
+  border-radius: 9999px;
+}
+.modal-cartoon-dialog::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .modal-overlay.active .modal-cartoon-dialog {
@@ -1492,20 +1776,22 @@ body {
 
 .modal-close-icon {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  background: none;
+  top: 12px;
+  right: 12px;
+  background: #fff;
   border: 2px solid var(--color-border-cartoon);
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-bounce);
+  z-index: 10;
+  box-shadow: var(--shadow-cartoon-sm);
 }
 
 .modal-close-icon:hover {
@@ -1589,6 +1875,46 @@ body {
 
   .brand-logo-text {
     font-size: 1.8rem;
+  }
+
+  .hero-parallax-section {
+    min-height: auto;
+    padding-bottom: 24px;
+  }
+
+  .hero-content-container {
+    padding: 32px 16px 12px 16px;
+  }
+
+  .hero-stage-container {
+    height: 320px;
+  }
+
+  .char-boy-wrapper {
+    left: 6%;
+    bottom: 10px;
+  }
+
+  .hero-char.char-boy {
+    width: 135px;
+  }
+
+  .char-creature-wrapper {
+    left: 38%;
+    bottom: 10px;
+  }
+
+  .hero-char.char-creature {
+    width: 170px;
+  }
+
+  .item-apple-wrapper {
+    left: 76%;
+    top: 22%;
+  }
+
+  .hero-char.item-apple {
+    width: 52px;
   }
 
   .parallax-stage-container {

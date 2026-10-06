@@ -1,49 +1,52 @@
-<section class="cinema-section" id="cinema">
-  <div class="cinema-header">
-    <div class="vintage-comic-tag" style="background-color: var(--color-pink-primary); color: #fff;">
-      ★ NOW SHOWING IN TECHNICOLOR ★
-    </div>
-    <h2 class="cinema-title">Suburban Jungle Cinema</h2>
-    <p class="cinema-subtitle">
-      Take a seat in the jungle theater! Watch the wild animated introduction to Ooga Booga as the pineapple projectionist rolls the film.
-    </p>
+<section class="psd-section psd-section-cinema" id="cinema-hero" aria-label="{{ section.settings.title | default: 'Suburban Jungle Cinema' }}">
+  <!-- Multi-plane parallax background -->
+  <div class="s1-layer-bg" id="s1LayerBg"></div>
+  <div class="s1-ambient-glow"></div>
+
+  <!-- Top Announcement Badge -->
+  <div class="s1-overlay-header">
+    <span class="s1-vintage-pill">★ NOW SHOWING IN TECHNICOLOR ★</span>
   </div>
 
-  <div class="cinema-stage-wrapper">
-    <!-- The Actual Client Video (Embedded directly behind the artwork frame) -->
+  <!-- Video Stage (Embedded precisely within carved bamboo frame cutout) -->
+  <div class="s1-video-stage">
     <video 
       id="cinemaVideo" 
-      class="cinema-video-player"
+      class="s1-video-player"
       src="{{ 'videos/LANDSCAPE.mp4' | asset_url }}"
       data-portrait-src="{{ 'videos/PORTRAIT.mp4' | asset_url }}"
       loop 
       playsinline 
       muted 
+      autoplay
       preload="metadata"
     >
       Your browser does not support HTML5 video.
     </video>
-
-    <!-- Projector Beam Glowing Effect -->
-    <div class="projector-beam-effect"></div>
-
-    <!-- Hand-Drawn Jungle Cinema Frame Cutout Overlay -->
-    <img 
-      src="{{ 'images/cinema/cinema_frame_cutout.png' | asset_url }}" 
-      alt="Vintage Jungle Cinema Bamboo Frame with Audience and Projector" 
-      class="cinema-frame-overlay"
-      loading="lazy"
-    >
   </div>
 
-  <!-- Cinema Projection Controls -->
-  <div class="cinema-controls-bar">
-    <button type="button" class="btn-cartoon btn-cartoon-yellow" id="btnPlayVideo" style="background-color: var(--color-yellow-accent); color: var(--color-purple-deep);">
-      ▶ PLAY FILM
+  <!-- Projector Light Beam radiating onto the screen -->
+  <div class="s1-projector-beam"></div>
+
+  <!-- Hand-carved bamboo / wooden screen frame overlay -->
+  <div class="s1-layer-frame"></div>
+
+  <!-- Foreground layer: film projector, pineapple projectionist, marshmallow beanbag seats & palm trees -->
+  <div class="s1-layer-fg" id="s1LayerFg"></div>
+
+  <!-- Interactive Cinema Controls -->
+  <div class="s1-controls-bar">
+    <button type="button" class="btn-cartoon btn-cartoon-yellow" id="btnPlayVideo" style="background-color: var(--color-yellow-accent); color: var(--color-purple-deep); padding: 7px 18px; font-size: 0.92rem;">
+      ⏸ PAUSE FILM
     </button>
-    <button type="button" class="btn-cartoon btn-cartoon-teal" id="btnMuteVideo">
+    <button type="button" class="btn-cartoon btn-cartoon-teal" id="btnMuteVideo" style="padding: 7px 18px; font-size: 0.92rem;">
       🔇 UNMUTE
     </button>
+  </div>
+
+  <div class="s1-scroll-cue" onclick="document.getElementById('enchanted-forest').scrollIntoView({behavior: 'smooth'})">
+    <span>Scroll to 3D Book</span>
+    <span>↓</span>
   </div>
 </section>
 
