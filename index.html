@@ -90,82 +90,17 @@
     </div>
 
     <main id="MainContent">
-      <!-- ======================================================================
-           HERO PARALLAX SECTION: AN UNFORGETTABLE BEDTIME ADVENTURE
-           ====================================================================== -->
-      <section class="hero-parallax-section" id="story" aria-label="Ooga Booga Bedtime Adventure">
-        <!-- Celestial Twilight Sky -->
-        <div class="hero-sky-bg" id="heroSkyBg"></div>
-        <!-- Twinkling Starlight Field -->
-        <div class="stars-layer" id="heroStarsBg"></div>
-        <!-- Enchanted Woodland Forest Backdrop -->
-        <div class="hero-forest-bg" id="heroForestBg"></div>
-
-        <!-- Hero Content / Typography & CTAs -->
-        <div class="hero-content-container" id="heroContentBox">
-          <div class="vintage-comic-tag">★ An Unforgettable Bedtime Adventure ★</div>
-          <h1 class="hero-main-title">OOGA BOOGA!</h1>
-          <p class="hero-subheadline">
-            Last night an OOGA was spotted in Suburbia! He is wild! He is dangerous! And his favourite food is... SUBURBIANS!
-          </p>
-
-          <div class="hero-cta-group">
-            <a href="#enchanted-forest" class="btn-cartoon btn-cartoon-yellow hero-btn">
-              📖 Explore The 3D Book
-            </a>
-            <a href="#cinema-hero" class="btn-cartoon btn-cartoon-pink hero-btn">
-              🎬 Watch Cartoon Film
-            </a>
-            <a href="#village-shopfront" class="btn-cartoon btn-cartoon-teal hero-btn">
-              🏬 Village Shops
-            </a>
-          </div>
-        </div>
-
-        <!-- Multi-Plane Interactive Parallax Characters Stage -->
-        <div class="hero-stage-container" id="heroStageBox">
-          <!-- Boy Character Running -->
-          <div class="hero-char-wrapper char-boy-wrapper" id="heroCharBoy">
-            <img 
-              src="assets/images/hero/char_boy.png" 
-              alt="Boy running in Ooga Booga adventure" 
-              class="hero-char char-boy"
-            >
-          </div>
-
-          <!-- Ooga Booga Monster Laughing & Sitting -->
-          <div class="hero-char-wrapper char-creature-wrapper" id="heroCharCreature">
-            <img 
-              src="assets/images/hero/char_creature.png" 
-              alt="Ooga Booga Monster leaping and laughing" 
-              class="hero-char char-creature"
-            >
-          </div>
-
-          <!-- Flying Apple Floating & Hovering -->
-          <div class="hero-char-wrapper item-apple-wrapper" id="heroItemApple">
-            <img 
-              src="assets/images/hero/item_apple.png" 
-              alt="Floating Apple" 
-              class="hero-char item-apple"
-            >
-          </div>
-        </div>
-
-        <!-- Scroll Indicator Cue -->
-        <div class="hero-scroll-cue" onclick="document.getElementById('cinema-hero').scrollIntoView({behavior: 'smooth'})" role="button" tabindex="0" aria-label="Scroll down to Outdoor Jungle Cinema">
-          <span>Scroll to Discover the Book</span>
-          <div class="scroll-bounce-arrow">↓</div>
-        </div>
-      </section>
-
       <div class="psd-parallax-world">
         <!-- ======================================================================
-             SECTION 1: OUTDOOR JUNGLE CINEMA (EMBEDDED VIDEO WITH BAMBOO FRAME)
+             SECTION 1: OUTDOOR JUNGLE CINEMA (FRAME-BY-FRAME PARALLAX SYSTEM)
              ====================================================================== -->
-        <section class="psd-section psd-section-cinema" id="cinema-hero" aria-label="Suburban Jungle Cinema">
-          <!-- Multi-plane parallax background -->
-          <div class="s1-layer-bg" id="s1LayerBg"></div>
+        <section class="psd-section psd-section-cinema hero" id="cinema-hero" aria-label="Suburban Jungle Cinema">
+          <!-- Layer 1: Background sky -->
+          <div class="layer" id="l-bg">
+            <img src="assets/images/parallax/section 1/Ooga.Booga.Website.Homepag (4).png" alt="Cinema Sky Backdrop">
+          </div>
+
+          <!-- Ambient Glow -->
           <div class="s1-ambient-glow"></div>
 
           <!-- Top Announcement Badge -->
@@ -173,31 +108,45 @@
             <span class="s1-vintage-pill">★ NOW SHOWING IN TECHNICOLOR ★</span>
           </div>
 
-          <!-- Video Stage (Embedded precisely within carved bamboo frame cutout) -->
-          <div class="s1-video-stage">
-            <video 
-              id="cinemaVideo" 
-              class="s1-video-player"
-              src="assets/videos/LANDSCAPE.mp4"
-              data-portrait-src="assets/videos/PORTRAIT.mp4"
-              loop 
-              playsinline 
-              muted 
-              autoplay
-              preload="metadata"
-            >
-              Your browser does not support HTML5 video.
-            </video>
+          <!-- Layer 2: Wooden frame with embedded video -->
+          <div class="layer" id="l-frame">
+            <div class="s1-video-stage">
+              <video 
+                id="cinemaVideo" 
+                class="s1-video-player"
+                src="assets/videos/LANDSCAPE.mp4"
+                data-portrait-src="assets/videos/PORTRAIT.mp4"
+                loop 
+                playsinline 
+                muted 
+                autoplay
+                preload="metadata"
+              >
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+            <img src="assets/images/parallax/section 1/Ooga.Booga.Website.Homepag.png" alt="Wooden Screen Frame" class="s1-frame-img">
           </div>
 
-          <!-- Projector Light Beam radiating onto the screen -->
-          <div class="s1-projector-beam"></div>
+          <!-- Layer 3: Palm trees -->
+          <div class="layer" id="l-palms">
+            <img src="assets/images/parallax/section 1/Ooga.Booga.Website.Homepag (1).png" alt="Palm Trees">
+          </div>
 
-          <!-- Hand-carved bamboo / wooden screen frame overlay -->
-          <div class="s1-layer-frame"></div>
+          <!-- Layer 4: Stones / Audience seats -->
+          <div class="layer" id="l-stones">
+            <img src="assets/images/parallax/section 1/Ooga.Booga.Website.Homepag (3).png" alt="Audience Seats">
+          </div>
 
-          <!-- Foreground layer: film projector, pineapple projectionist, marshmallow beanbag seats & palm trees -->
-          <div class="s1-layer-fg" id="s1LayerFg"></div>
+          <!-- Layer 5: Projector + Stage -->
+          <div class="layer" id="l-projector">
+            <img src="assets/images/parallax/section 1/Ooga.Booga.Website.Homepag (2).png" alt="Film Projector Platform">
+          </div>
+
+          <!-- Layer 6: Pineapple Character -->
+          <div class="layer" id="l-character">
+            <img src="assets/images/parallax/section 1/Ooga.Booga.Website.Homepag (5).png" alt="Pineapple Projectionist">
+          </div>
 
           <!-- Interactive Cinema Controls -->
           <div class="s1-controls-bar">

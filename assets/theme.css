@@ -628,28 +628,40 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 1: OUTDOOR JUNGLE CINEMA (EMBEDDED VIDEO WITH BAMBOO FRAME)
+   SECTION 1: OUTDOOR JUNGLE CINEMA (FRAME-BY-FRAME PARALLAX SYSTEM)
    ========================================================================== */
 .psd-section-cinema {
-  aspect-ratio: 3000 / 1860;
-  min-height: 520px;
-  background: #1e1338;
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  height: 61.78vw;   /* exact aspect from reference 934:577 / 3000:1853 */
+  min-height: 540px;
+  overflow: hidden;
+  background: #0d0a1e;
+  z-index: 5;
 }
 
-/* Layer 1: Background Sky, Distant Jungle Canopy & Sunset Glow */
-.s1-layer-bg {
+/* All layers share these base rules */
+.psd-section-cinema .layer {
   position: absolute;
-  inset: -6% 0 -6% 0;
+  left: 0;
   width: 100%;
-  height: 112%;
-  background-image: url('images/parallax/s1_bg_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
   pointer-events: none;
-  transform: translate3d(0, 0, 0);
   will-change: transform;
+}
+
+/* ── LAYER 1: Background (sky gradient) – slowest ── */
+#l-bg {
+  bottom: 0;
+  width: 100vw;
+  height: 61.17vw;  /* 1835/3000*100 */
+  z-index: 1;
+}
+#l-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Ambient Top Fog/Mist Glow */
@@ -664,19 +676,38 @@ body {
   pointer-events: none;
 }
 
-/* Layer 2: Video Stage (Embedded precisely inside carved bamboo frame cutout)
-   Exact canvas coordinates: left 20.67%, top 6.18%, width 58.83%, height 53.28% */
+/* ── LAYER 2: Frame (pink wooden frame with embedded video) ── */
+#l-frame {
+  bottom: 0;
+  width: 100vw;
+  height: 53.57vw;  /* 1607/3000*100 */
+  z-index: 3;
+}
+#l-frame .s1-frame-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Video Stage (Embedded precisely inside wooden frame cutout) */
 .s1-video-stage {
   position: absolute;
-  left: 20.67%;
-  top: 6.18%;
-  width: 58.83%;
-  height: 53.28%;
-  z-index: 4;
+  left: 20.73%;
+  top: 7.16%;
+  width: 58.53%;
+  height: 60.92%;
+  z-index: 1;
   overflow: hidden;
   background: #000;
   border-radius: 6px;
   box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.85);
+  pointer-events: auto;
 }
 
 .s1-video-player {
@@ -686,53 +717,64 @@ body {
   display: block;
 }
 
-/* Projector Beam Effect - Light radiating from projector platform up to screen */
-.s1-projector-beam {
-  position: absolute;
-  bottom: 24%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 54%;
-  height: 48%;
-  background: radial-gradient(ellipse at bottom, rgba(255, 255, 200, 0.28) 0%, rgba(255, 220, 130, 0.09) 45%, transparent 75%);
-  pointer-events: none;
-  z-index: 5;
-  animation: projectorFlicker 0.16s infinite alternate;
+/* ── LAYER 3: Palm trees ── */
+#l-palms {
+  bottom: 0;
+  width: 100vw;
+  height: 45.60vw;  /* 1368/3000*100 */
+  z-index: 4;
 }
-
-@keyframes projectorFlicker {
-  0% { opacity: 0.65; transform: translateX(-50%) scaleX(0.98); }
-  100% { opacity: 1; transform: translateX(-50%) scaleX(1.02); }
-}
-
-/* Layer 3: Bamboo / Carved Wood Screen Frame Overlay */
-.s1-layer-frame {
-  position: absolute;
-  inset: 0;
+#l-palms img {
   width: 100%;
   height: 100%;
-  background-image: url('images/parallax/s1_screen_frame_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 6;
-  pointer-events: none;
+  object-fit: fill;
+  display: block;
 }
 
-/* Layer 4: Foreground (Platform, Film Projector, Pineapple Projectionist, Audience Beanbags, Palm Fronds) */
-.s1-layer-fg {
-  position: absolute;
-  inset: -4% 0 -4% 0;
+/* ── LAYER 4: Stones (centered, 1676px wide) ── */
+#l-stones {
+  bottom: 8.2vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55.87vw;   /* 1676/3000*100 */
+  height: 20.57vw;  /* 617/3000*100 */
+  z-index: 5;
+}
+#l-stones img {
   width: 100%;
-  height: 108%;
-  background-image: url('images/parallax/s1_fg_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 8;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* ── LAYER 5: Projector + Stage ── */
+#l-projector {
+  bottom: 0;
+  width: 100vw;
+  height: 33.40vw;  /* 1002/3000*100 */
+  z-index: 6;
+}
+#l-projector img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* ── LAYER 6: Pineapple Character (centered, 504px wide) – fastest ── */
+#l-character {
+  bottom: 3.9vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16.80vw;   /* 504/3000*100 */
+  height: 19.40vw;  /* 582/3000*100 */
+  z-index: 7;
+}
+#l-character img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
 }
 
 /* Cinema Overlay UI: Top Header Pill & Bottom Controls */
@@ -808,17 +850,20 @@ body {
    SECTION 2: ENCHANTED PINK FOREST (3D ROTATING GLB BOOK & CHARACTERS)
    ========================================================================== */
 .psd-section-forest {
+  position: relative;
   aspect-ratio: 3000 / 1887;
   min-height: 560px;
   background: #150921;
+  overflow: hidden;
+  z-index: 2;
 }
 
 /* Layer 1: Forest Night Backdrop & Turquoise River Silhouettes */
 .s2-layer-bg {
   position: absolute;
-  inset: -6% 0 -6% 0;
+  inset: 0;
   width: 100%;
-  height: 112%;
+  height: 100%;
   background-image: url('images/parallax/s2_bg_2k.webp');
   background-position: center top;
   background-size: cover;

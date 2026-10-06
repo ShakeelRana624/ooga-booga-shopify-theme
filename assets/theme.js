@@ -49,20 +49,19 @@
 
   // 2. MULTI-PLANE PARALLAX SCROLLING ENGINE (Inspired by Stepout Dribbble Reference)
   function initParallax() {
-    const hero = document.getElementById('story');
     const s1 = document.getElementById('cinema-hero');
     const s2 = document.getElementById('enchanted-forest');
     const s3 = document.getElementById('village-shopfront');
 
-    const heroSky = document.getElementById('heroSkyBg');
-    const heroForest = document.getElementById('heroForestBg');
-    const heroContent = document.getElementById('heroContentBox');
-    const heroBoy = document.getElementById('heroCharBoy');
-    const heroCreature = document.getElementById('heroCharCreature');
-    const heroApple = document.getElementById('heroItemApple');
-
-    const s1Bg = document.getElementById('s1LayerBg');
-    const s1Fg = document.getElementById('s1LayerFg');
+    const s1Layers = [
+      { el: document.getElementById('l-bg'),         speed: 0.06  },
+      { el: document.getElementById('l-frame'),      speed: 0.14  },
+      { el: document.getElementById('l-palms'),      speed: 0.22  },
+      { el: document.getElementById('l-stones'),     speed: 0.32  },
+      { el: document.getElementById('l-projector'),  speed: 0.40  },
+      { el: document.getElementById('l-character'),  speed: 0.50  },
+    ];
+    const s1Centered = ['l-stones', 'l-character'];
 
     const s2Bg = document.getElementById('s2LayerBg');
     const s2Trees = document.getElementById('s2LayerTrees');
@@ -93,30 +92,22 @@
     function updateParallax() {
       const vh = window.innerHeight;
 
-      // Hero Parallax Section (Top Bedtime Adventure)
-      if (hero) {
-        const rectHero = hero.getBoundingClientRect();
-        if (rectHero.bottom > 0 && rectHero.top < vh) {
-          const progressHero = -rectHero.top / rectHero.height;
-          applyScroll(heroSky, progressHero * 35);
-          applyScroll(heroForest, progressHero * 60);
-          applyScroll(heroBoy, progressHero * 85);
-          applyScroll(heroCreature, progressHero * 50);
-          applyScroll(heroApple, progressHero * 115);
-          if (heroContent) {
-            heroContent.style.opacity = Math.max(0, 1 - progressHero * 0.9);
-            applyScroll(heroContent, progressHero * 30);
-          }
-        }
-      }
-
-      // Section 1 Parallax (Outdoor Cinema)
+      // Section 1 Parallax (Outdoor Jungle Cinema - Frame-by-Frame System)
       if (s1) {
         const rect1 = s1.getBoundingClientRect();
         if (rect1.bottom > 0 && rect1.top < vh) {
-          const progress1 = -rect1.top / rect1.height;
-          applyScroll(s1Bg, progress1 * 40);
-          applyScroll(s1Fg, progress1 * -25);
+          // As user scrolls down towards section 3, sy increases smoothly like the sample
+          const sy = Math.max(0, -rect1.top);
+          s1Layers.forEach(({ el, speed }) => {
+            if (!el) return;
+            const isCentered = s1Centered.includes(el.id);
+            const ty = sy * speed;
+            if (isCentered) {
+              el.style.transform = `translateX(-50%) translateY(${ty}px)`;
+            } else {
+              el.style.transform = `translateY(${ty}px)`;
+            }
+          });
         }
       }
 
@@ -176,20 +167,6 @@
           });
         });
       }
-
-      attachMouseParallax(hero, [
-        { el: heroSky, xFactor: -12, yFactor: -8 },
-        { el: heroForest, xFactor: -22, yFactor: -14 },
-        { el: heroContent, xFactor: 12, yFactor: 8 },
-        { el: heroBoy, xFactor: -35, yFactor: -24 },
-        { el: heroCreature, xFactor: 28, yFactor: 18 },
-        { el: heroApple, xFactor: -54, yFactor: -38 }
-      ]);
-
-      attachMouseParallax(s1, [
-        { el: s1Bg, xFactor: -15, yFactor: -10 },
-        { el: s1Fg, xFactor: 20, yFactor: 14 }
-      ]);
 
       attachMouseParallax(s2, [
         { el: s2Bg, xFactor: -16, yFactor: -12 },

@@ -1,6 +1,10 @@
 <section class="psd-section psd-section-cinema" id="cinema-hero" aria-label="{{ section.settings.title | default: 'Suburban Jungle Cinema' }}">
-  <!-- Multi-plane parallax background -->
-  <div class="s1-layer-bg" id="s1LayerBg"></div>
+  <!-- Layer 1: Background sky -->
+  <div class="layer" id="l-bg">
+    <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag (4).png' | asset_url }}" alt="Cinema Sky Backdrop">
+  </div>
+
+  <!-- Ambient Glow -->
   <div class="s1-ambient-glow"></div>
 
   <!-- Top Announcement Badge -->
@@ -8,31 +12,45 @@
     <span class="s1-vintage-pill">★ NOW SHOWING IN TECHNICOLOR ★</span>
   </div>
 
-  <!-- Video Stage (Embedded precisely within carved bamboo frame cutout) -->
-  <div class="s1-video-stage">
-    <video 
-      id="cinemaVideo" 
-      class="s1-video-player"
-      src="{{ 'videos/LANDSCAPE.mp4' | asset_url }}"
-      data-portrait-src="{{ 'videos/PORTRAIT.mp4' | asset_url }}"
-      loop 
-      playsinline 
-      muted 
-      autoplay
-      preload="metadata"
-    >
-      Your browser does not support HTML5 video.
-    </video>
+  <!-- Layer 2: Wooden frame with embedded video -->
+  <div class="layer" id="l-frame">
+    <div class="s1-video-stage">
+      <video 
+        id="cinemaVideo" 
+        class="s1-video-player"
+        src="{{ 'videos/LANDSCAPE.mp4' | asset_url }}"
+        data-portrait-src="{{ 'videos/PORTRAIT.mp4' | asset_url }}"
+        loop 
+        playsinline 
+        muted 
+        autoplay
+        preload="metadata"
+      >
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+    <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag.png' | asset_url }}" alt="Wooden Screen Frame" class="s1-frame-img">
   </div>
 
-  <!-- Projector Light Beam radiating onto the screen -->
-  <div class="s1-projector-beam"></div>
+  <!-- Layer 3: Palm trees -->
+  <div class="layer" id="l-palms">
+    <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag (1).png' | asset_url }}" alt="Palm Trees">
+  </div>
 
-  <!-- Hand-carved bamboo / wooden screen frame overlay -->
-  <div class="s1-layer-frame"></div>
+  <!-- Layer 4: Stones / Audience beanbags -->
+  <div class="layer" id="l-stones">
+    <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag (3).png' | asset_url }}" alt="Audience Seats">
+  </div>
 
-  <!-- Foreground layer: film projector, pineapple projectionist, marshmallow beanbag seats & palm trees -->
-  <div class="s1-layer-fg" id="s1LayerFg"></div>
+  <!-- Layer 5: Projector + Stage -->
+  <div class="layer" id="l-projector">
+    <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag (2).png' | asset_url }}" alt="Film Projector Platform">
+  </div>
+
+  <!-- Layer 6: Pineapple Character -->
+  <div class="layer" id="l-character">
+    <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag (5).png' | asset_url }}" alt="Pineapple Projectionist">
+  </div>
 
   <!-- Interactive Cinema Controls -->
   <div class="s1-controls-bar">
