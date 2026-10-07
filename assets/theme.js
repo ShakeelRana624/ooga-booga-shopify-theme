@@ -96,12 +96,19 @@
       // Section 1 Parallax (Outdoor Jungle Cinema - Frame-by-Frame System)
       if (s1) {
         const rect1 = s1.getBoundingClientRect();
-        if (rect1.bottom > 0 && rect1.top < vh) {
-          const sy = Math.max(0, -rect1.top);
+        const s1Height = s1.offsetHeight;
+        const sy = Math.max(0, -rect1.top);
+
+        // Connect Section 2 top to Section 1 bottom where parallax ends
+        const layerSy = Math.min(sy, s1Height);
+        const s1BottomShift = layerSy * 0.40;
+        s1.style.marginBottom = `${s1BottomShift}px`;
+
+        if (rect1.top < vh) {
           s1Layers.forEach(({ el, speed }) => {
             if (!el) return;
             const isCentered = s1Centered.includes(el.id);
-            const ty = sy * speed;
+            const ty = layerSy * speed;
             if (isCentered) {
               el.style.transform = `translateX(-50%) translateY(${ty}px)`;
             } else {
