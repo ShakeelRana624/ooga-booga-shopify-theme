@@ -851,77 +851,65 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 2: ENCHANTED PINK FOREST (3D ROTATING GLB BOOK & CHARACTERS)
+   SECTION 2: ENCHANTED PINK FOREST — CINEMATIC 4-LAYER PARALLAX & 3D BOOK
+   PSD Base: 3000 × 1868px canvas (PSD Y: 1879 to 3747). Exact PSD layout.
    ========================================================================== */
 .psd-section-forest {
   position: relative;
-  aspect-ratio: 3000 / 1887;
-  min-height: 560px;
-  background: #150921;
-  overflow: hidden;
+  width: 100vw;
+  max-width: 100%;
+  height: 62.27vw;              /* 1868 / 3000 × 100vw exact PSD ratio */
+  background: #1a0d38;          /* Deep purple forest night */
+  overflow: visible;            /* Allows Layer 2 canopy to bleed into Section 1 */
+  margin-top: 0;                /* Seamlessly meets Section 1 bottom */
+  z-index: 6;                   /* Above Section 1 (z-index 5) so canopy overlaps seamlessly */
+}
+
+/* ── Base: all parallax layers share these rules ── */
+.psd-section-forest .s2-layer {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.psd-section-forest .s2-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── LAYER 1: Background & River (full-width fill, slowest depth 0.05–0.10x) ──
+   PSD Y: 1879 to 3747 (height 1868px). Full turquoise river at bottom meets Section 3. */
+#s2-l-bg {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 62.27vw;
+  z-index: 1;
+}
+
+/* ── LAYER 2: Pink Trees & Canopy (Ooga.Booga.Website.Homepag (2).png) ──
+   Positioned upwards so canopy frames top and roots sit on the bank above the river */
+#s2-l-trees {
+  top: -4.50vw;
+  left: 0;
+  width: 100vw;
+  height: 57.70vw;              /* 1731 / 3000 × 100 natural aspect ratio */
   z-index: 2;
 }
 
-/* Layer 1: Forest Night Backdrop & Turquoise River Silhouettes */
-.s2-layer-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('images/parallax/s2_bg_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 1;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-}
-
-/* Layer 2: Pink Whimsical Trees */
-.s2-layer-trees {
-  position: absolute;
-  inset: -3% 0 -3% 0;
-  width: 100%;
-  height: 106%;
-  background-image: url('images/parallax/s2_trees_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 3;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-}
-
-/* Layer 3: Characters (Guido & Ooga on Tree Branch, Cat on Ladder into River) */
-.s2-layer-chars {
-  position: absolute;
-  inset: -2% 0 -2% 0;
-  width: 100%;
-  height: 104%;
-  background-image: url('images/parallax/s2_characters_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 5;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-  animation: gentleCharSway 6s ease-in-out infinite alternate;
-}
-
-@keyframes gentleCharSway {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  100% { transform: translate3d(0, -6px, 0) rotate(0.4deg); }
-}
-
-/* Floating Magic Sparkles / Fireflies in Forest */
+/* Floating Magic Fireflies / Sparkles in Forest */
 .s2-magic-particles {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   pointer-events: none;
-  z-index: 4;
+  z-index: 3;
   background-image:
     radial-gradient(3px 3px at 20% 40%, rgba(255, 230, 110, 0.9) 0%, transparent 100%),
     radial-gradient(4px 4px at 35% 25%, rgba(0, 216, 193, 0.8) 0%, transparent 100%),
@@ -932,26 +920,49 @@ body {
   animation: firefliesDrift 8s ease-in-out infinite alternate;
 }
 
-@keyframes firefliesDrift {
-  0% { transform: translateY(0px) scale(0.96); opacity: 0.6; }
-  50% { transform: translateY(-12px) scale(1.04); opacity: 0.95; }
-  100% { transform: translateY(-24px) scale(0.98); opacity: 0.7; }
+/* ── LAYER 3: Characters — Boy, Green Mascot, Flying Apple (right-center, 0.45x) ──
+   PSD bbox: (1453, 2084, 2819, 2576). S2 start y=1879.
+   File padding: top pad 38px, left pad 0px. */
+#s2-l-chars {
+  top: 1.10vw;
+  left: 49.60vw;
+  width: 44.93vw;               /* 1348 / 3000 × 100 */
+  height: 19.17vw;              /* 575  / 3000 × 100 */
+  z-index: 4;
+}
+#s2-l-chars img {
+  object-fit: contain;
+}
+
+/* ── LAYER 4: Pink Ladder, Cat & River Splash (Ooga.Booga.Website.Homepag 4.png) ──
+   Locked at exact layout position: ladder rests on tree, bottom splash in river */
+#s2-l-cat {
+  top: 7.20vw;
+  left: 57.50vw;
+  width: 41.03vw;               /* 1231 / 3000 × 100 */
+  height: 58.47vw;              /* 1754 / 3000 × 100 */
+  z-index: 5;
+}
+#s2-l-cat img {
+  object-fit: contain;
 }
 
 /* LEFT SIDE: 3D Interactive Rotating Book GLB Stage
-   Occupies the forest clearing on the left side (from 3% to 48% width) */
+   Positioned in the open clearing on the left (x: 0 → 46vw).
+   pointer-events: auto ensures ALL 3D drag / button / zoom interactions work freely. */
 .s2-book-stage {
   position: absolute;
-  left: 4.5%;
-  top: 5%;
-  width: 44%;
-  height: 90%;
-  z-index: 20;
+  left: 4.5vw;
+  top: 2vw;
+  bottom: 2.5vw;
+  width: 40vw;
+  max-width: 480px;
+  z-index: 25;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 4px;
 }
 
 .s2-book-badge {
@@ -961,8 +972,8 @@ body {
   background: var(--color-yellow-accent);
   color: var(--color-purple-deep);
   font-family: var(--font-heading);
-  font-size: clamp(0.72rem, 1vw, 0.88rem);
-  padding: 5px 16px;
+  font-size: clamp(0.68rem, 0.85vw, 0.80rem);
+  padding: 3px 12px;
   border-radius: var(--border-radius-pill);
   border: 2px solid var(--color-border-cartoon);
   box-shadow: var(--shadow-cartoon-sm);
@@ -976,7 +987,7 @@ body {
   position: relative;
   width: 100%;
   flex: 1;
-  min-height: 280px;
+  min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -998,9 +1009,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   z-index: 22;
 }
 
@@ -1008,9 +1019,9 @@ body {
   background: rgba(255, 255, 255, 0.92);
   color: var(--color-purple-deep);
   font-family: var(--font-fun);
-  font-size: clamp(0.75rem, 0.95vw, 0.85rem);
+  font-size: clamp(0.70rem, 0.82vw, 0.78rem);
   font-weight: 800;
-  padding: 5px 12px;
+  padding: 3px 9px;
   border-radius: var(--border-radius-pill);
   border: 2px solid var(--color-border-cartoon);
   box-shadow: 2px 2px 0 var(--color-border-cartoon);
@@ -1032,18 +1043,18 @@ body {
 /* Floating Glassmorphic Buy Card on bottom of 3D Book Stage */
 .s2-book-buy-card {
   width: 100%;
-  max-width: 460px;
+  max-width: 440px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 3px solid var(--color-border-cartoon);
   border-radius: var(--border-radius-md);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), var(--shadow-cartoon-sm);
-  padding: 12px 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3), var(--shadow-cartoon-sm);
+  padding: 8px 12px;
   color: var(--color-purple-deep);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   z-index: 22;
 }
 
@@ -1056,7 +1067,7 @@ body {
 
 .s2-card-title {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
   color: var(--color-purple-deep);
   line-height: 1.1;
   margin: 0;
@@ -1064,14 +1075,14 @@ body {
 
 .s2-card-price {
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
   color: var(--color-pink-primary);
   margin: 0;
 }
 
 .s2-card-subtitle {
   font-family: var(--font-fun);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--color-text-muted);
 }
@@ -1080,19 +1091,19 @@ body {
 .s2-variant-selector {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
 }
 
 .s2-variant-btn {
   background: #f8f6fc;
   border: 2px solid var(--color-border-cartoon);
   border-radius: var(--border-radius-sm);
-  padding: 5px 8px;
+  padding: 4px 6px;
   text-align: center;
   cursor: pointer;
   transition: all var(--transition-bounce);
   font-family: var(--font-fun);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-purple-deep);
 }
@@ -1106,7 +1117,7 @@ body {
 .s2-card-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .quantity-stepper {
@@ -1123,10 +1134,10 @@ body {
   background: none;
   border: none;
   font-family: var(--font-fun);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
-  width: 36px;
-  height: 38px;
+  width: 30px;
+  height: 32px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1139,11 +1150,11 @@ body {
 }
 
 .stepper-value {
-  width: 36px;
+  width: 30px;
   text-align: center;
   border: none;
   font-family: var(--font-fun);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 800;
   color: var(--color-purple-deep);
   pointer-events: none;
@@ -1151,31 +1162,135 @@ body {
 
 .s2-buy-btn {
   flex: 1;
-  padding: 8px 14px;
-  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  padding: 6px 12px;
+  font-size: clamp(0.80rem, 1vw, 0.92rem);
 }
 
-/* ==========================================================================
-   SECTION 3: VILLAGE STOREFRONT (3D T-SHIRTS & CLICKABLE TOY)
-   ========================================================================== */
 .psd-section-storefront {
-  aspect-ratio: 3000 / 1878;
-  min-height: 560px;
-  background: #eef7f8;
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  aspect-ratio: 3000 / 1848;
+  height: 61.60vw;
+  background: transparent;
+  overflow: hidden;
+  margin-top: -3.20vw; /* Seamless overlap: connects Section 3 roof trim directly with Section 2 river with no gap */
+  z-index: 3;
 }
 
-/* Layer 1: Boutique Storefront Facade (Candy Awnings, Columns, Lamps, Windows) */
-.s3-layer-storefront {
+/* Base layer positioning for Section 3 (8 Art Layers) */
+.psd-section-storefront .s3-layer {
   position: absolute;
-  inset: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.psd-section-storefront .s3-layer img {
   width: 100%;
   height: 100%;
-  background-image: url('images/parallax/s3_storefront_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
+  object-fit: fill;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ── LAYER 1: Background Walls (Pink, Teal, Yellow Architectural Panels) ──
+   Top transparent part (rows 0-178) remains visible at top: 0, wall panels start at row 178 */
+#s3-l1-walls {
+  top: 0;
+  height: 60.40vw;
   z-index: 1;
-  pointer-events: none;
+}
+
+/* ── LAYER 2: Scalloped Trim / Awning Edge (Decorative Wavy Top Border) ──
+   Exact layout position at top: 0. Scalloped trim at row 94 sits precisely over wall panels */
+#s3-l2-trim {
+  top: 0;
+  height: 10.37vw;
+  z-index: 2;
+}
+
+/* ── LAYER 3: Storefront Arches & Windows (Striped Awnings, Glass, Curtains) ──
+   Awnings sit right under scalloped trim */
+#s3-l3-windows {
+  top: 2.80vw;
+  height: 46.13vw;
+  z-index: 3;
+}
+
+/* ── LAYER 4: Architectural Columns / Pillars (Vertical Pillars Separating Bays) ──
+   Pillar capitals sit directly under scalloped trim */
+#s3-l4-pillars {
+  top: 1.13vw;
+  height: 57.77vw;
+  z-index: 4;
+}
+
+/* ── LAYER 5: Fixtures & Bollards (Shadows, Floor Bollards, Side Lamps) ── */
+#s3-l5-fixtures {
+  top: 11.46vw;
+  height: 14.43vw;
+  z-index: 5;
+}
+
+/* ── LAYER 6: Hanging Golden Lanterns (Atmospheric Swaying Lanterns) ── */
+#s3-l6-lanterns {
+  top: 10.80vw;
+  height: 13.23vw;
+  z-index: 6;
+}
+
+/* Gentle organic pendulum sway for the hanging lanterns */
+.s3-swaying-lanterns img {
+  transform-origin: 50% 5%;
+  animation: s3LanternSway 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes s3LanternSway {
+  0% {
+    transform: rotate(-0.75deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(0.4deg) translateY(-0.5px);
+  }
+  100% {
+    transform: rotate(0.85deg) translateY(0px);
+  }
+}
+
+/* ── LAYER 7: Sidewalk & Grass Ground (Tiled Pavement & Lower Grass Strip) ── */
+#s3-l7-ground {
+  top: 48.13vw;
+  height: 16.57vw;
+  z-index: 7;
+}
+
+/* ── LAYER 8: Illustrated Characters (Girl with puppy, Boy, Waving Green Monster) ── */
+#s3-l8-characters {
+  top: 10.80vw;
+  height: 54.07vw;
+  z-index: 8;
+}
+
+/* Subtle breathing/idle bounce for the living characters */
+.s3-living-chars img {
+  transform-origin: 50% 90%;
+  animation: s3LivingCharsBreathe 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes s3LivingCharsBreathe {
+  0% {
+    transform: scale(1) translateY(0px);
+  }
+  50% {
+    transform: scale(1.002, 1.004) translateY(-1px);
+  }
+  100% {
+    transform: scale(1.004, 1.008) translateY(-2px);
+  }
 }
 
 /* Interactive Windows Overlay (Positioned right over the 3 display windows)
@@ -1185,7 +1300,7 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 15;
   pointer-events: none;
 }
 
@@ -1386,21 +1501,7 @@ body {
   transform: translateY(0) scale(1);
 }
 
-/* Layer 2: Foreground Characters (Girl with puppy, Boy with toy, Giant Smiling Green Monster, Sidewalk & Lawn) */
-.s3-layer-fg {
-  position: absolute;
-  inset: -2% 0 -2% 0;
-  width: 100%;
-  height: 104%;
-  background-image: url('images/parallax/s3_foreground_chars_2k.webp');
-  background-position: center top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: 15;
-  pointer-events: none;
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-}
+
 
 /* ==========================================================================
    RESPONSIVE DESIGN FOR PSD PARALLAX WORLD
@@ -1451,10 +1552,7 @@ body {
     min-height: 340px;
   }
 
-  .psd-section-storefront {
-    aspect-ratio: auto;
-    min-height: 520px;
-  }
+
   
   .s3-window-display {
     width: 22%;

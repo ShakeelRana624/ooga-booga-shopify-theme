@@ -63,9 +63,10 @@
     ];
     const s1Centered = ['l-stones', 'l-character'];
 
-    const s2Bg = document.getElementById('s2LayerBg');
-    const s2Trees = document.getElementById('s2LayerTrees');
-    const s2Chars = document.getElementById('s2LayerChars');
+    const s2LBg    = document.getElementById('s2-l-bg');
+    const s2LTrees = document.getElementById('s2-l-trees');
+    const s2LChars = document.getElementById('s2-l-chars');
+    const s2LCat   = document.getElementById('s2-l-cat');
 
     const s3Fg = document.getElementById('s3LayerFg');
 
@@ -96,7 +97,6 @@
       if (s1) {
         const rect1 = s1.getBoundingClientRect();
         if (rect1.bottom > 0 && rect1.top < vh) {
-          // As user scrolls down towards section 3, sy increases smoothly like the sample
           const sy = Math.max(0, -rect1.top);
           s1Layers.forEach(({ el, speed }) => {
             if (!el) return;
@@ -111,25 +111,19 @@
         }
       }
 
-      // Section 2 Parallax (Enchanted Pink Forest)
+      // Section 2 Parallax (Enchanted Pink Forest - Multi-Plane Parallax System on all 4 Layers)
       if (s2) {
         const rect2 = s2.getBoundingClientRect();
         if (rect2.bottom > 0 && rect2.top < vh) {
           const s2Center = (rect2.top + rect2.height / 2) - (vh / 2);
           const normalized = s2Center / (vh / 2);
-          applyScroll(s2Bg, normalized * -32);
-          applyScroll(s2Trees, normalized * -14);
-          applyScroll(s2Chars, normalized * 22);
-        }
-      }
-
-      // Section 3 Parallax (Village Storefront)
-      if (s3) {
-        const rect3 = s3.getBoundingClientRect();
-        if (rect3.bottom > 0 && rect3.top < vh) {
-          const s3Center = (rect3.top + rect3.height / 2) - (vh / 2);
-          const normalized3 = s3Center / (vh / 2);
-          applyScroll(s3Fg, normalized3 * 20);
+          // Layers animate smoothly on scroll with progressive depth:
+          applyScroll(s2LBg, normalized * -10);    // Layer 1: Sky & deep forest backdrop (slowest)
+          applyScroll(s2LTrees, normalized * -6);   // Layer 2: Main pink trees (midground)
+          // Layer 3: Characters dynamically move UPWARDS from exact position when scrolling
+          const charsScrollY = normalized > 0 ? (normalized * 12) : (normalized * 42);
+          applyScroll(s2LChars, charsScrollY);
+          // Layer 4 (s2LCat): Locked in exact position, does not move
         }
       }
     }
@@ -137,7 +131,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     updateParallax();
 
-    // Desktop Mouse Move Dynamic 3D Depth
+    // Desktop Mouse Move Dynamic 3D Depth for Section 2
     if (window.innerWidth > 992) {
       function attachMouseParallax(section, layers) {
         if (!section) return;
@@ -169,14 +163,158 @@
       }
 
       attachMouseParallax(s2, [
-        { el: s2Bg, xFactor: -16, yFactor: -12 },
-        { el: s2Trees, xFactor: -8, yFactor: -5 },
-        { el: s2Chars, xFactor: 24, yFactor: 16 }
+        { el: s2LBg, xFactor: -10, yFactor: -6 },
+        { el: s2LTrees, xFactor: -10, yFactor: -6 },
+        { el: s2LChars, xFactor: -6, yFactor: -4 }
+        // Layer 4 (s2LCat): Locked in place, no mouse movement
       ]);
+    }
+  }
 
-      attachMouseParallax(s3, [
-        { el: s3Fg, xFactor: 22, yFactor: 14 }
-      ]);
+  // 2b. GSAP + SCROLLTRIGGER CINEMATIC 8-LAYER PARALLAX ENGINE FOR SECTION 3
+  function initSection3Parallax() {
+    const s3 = document.getElementById('village-shopfront');
+    if (!s3) return;
+
+    const l1 = document.getElementById('s3-l1-walls');
+    const l2 = document.getElementById('s3-l2-trim');
+    const l3 = document.getElementById('s3-l3-windows');
+    const l4 = document.getElementById('s3-l4-pillars');
+    const l5 = document.getElementById('s3-l5-fixtures');
+    const l6 = document.getElementById('s3-l6-lanterns');
+    const l7 = document.getElementById('s3-l7-ground');
+    const l8 = document.getElementById('s3-l8-characters');
+    const winContainer = s3.querySelector('.s3-windows-container');
+
+    // Depth configuration according to Master Prompt specifications:
+    // 1. Background Walls: 0.05x speed
+    // 2. Scalloped Trim / Awning Edge: 0.10x speed
+    // 3. Storefront Arches & Windows: 0.25x speed
+    // 4. Columns & Pillars: 0.35x speed
+    // 5. Fixtures & Side Posts: 0.40x speed
+    // 6. Hanging Golden Lanterns: 0.45x speed
+    // 7. Sidewalk & Lawn Ground: 0.70x speed
+    // 8. Characters (Girl, Boy, Mascot): 0.85x speed
+    // Windows Container: 0.25x speed (locked to Layer 3 arches for 3D T-shirts)
+    const layers = [
+      { el: l1, speed: 0.05, mouseX: -8  },
+      { el: l2, speed: 0.10, mouseX: -12 },
+      { el: l3, speed: 0.25, mouseX: 14  },
+      { el: winContainer, speed: 0.25, mouseX: 14 },
+      { el: l4, speed: 0.35, mouseX: 20  },
+      { el: l5, speed: 0.40, mouseX: 24  },
+      { el: l6, speed: 0.45, mouseX: 28  },
+      { el: l7, speed: 0.70, mouseX: 36  },
+      { el: l8, speed: 0.85, mouseX: 44  },
+    ];
+
+    // Responsive travel displacement: scales down on mobile/tablet to eliminate overflow
+    const getMaxDelta = () => Math.min(window.innerWidth * 0.08, 90);
+
+    // 1. GSAP ScrollTrigger Integration
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: s3,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.6,
+          invalidateOnRefresh: true,
+          onToggle: (self) => {
+            // will-change optimization: active only while Section 3 is in viewport
+            const val = self.isActive ? 'transform' : 'auto';
+            layers.forEach(({ el }) => {
+              if (el) el.style.willChange = val;
+            });
+          }
+        }
+      });
+
+      // Bind scrubbed translates to timeline:
+      // At scroll progress = 0.5 (center of viewport), all layers are exactly at y = 0 (native PSD coords).
+      // Entering from bottom: y = +speed * maxDelta; exiting through top: y = -speed * maxDelta.
+      layers.forEach(({ el, speed }) => {
+        if (!el) return;
+        tl.fromTo(
+          el,
+          {
+            y: () => speed * getMaxDelta(),
+            force3D: true
+          },
+          {
+            y: () => -speed * getMaxDelta(),
+            ease: 'none',
+            force3D: true
+          },
+          0
+        );
+      });
+    } else {
+      // Robust Fallback if GSAP is unavailable
+      let ticking = false;
+      function updateS3Fallback() {
+        const rect = s3.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.bottom > 0 && rect.top < vh) {
+          const s3Center = (rect.top + rect.height / 2) - (vh / 2);
+          const normalized = s3Center / (vh / 2);
+          const maxDelta = getMaxDelta();
+          layers.forEach(({ el, speed }) => {
+            if (!el) return;
+            const sy = normalized * speed * maxDelta;
+            el.style.transform = `translate3d(0, ${sy}px, 0)`;
+          });
+        }
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateS3Fallback();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+      updateS3Fallback();
+    }
+
+    // 2. Desktop Mouse Parallax (Dynamic 3D Depth on Cursor Move)
+    if (window.innerWidth > 992) {
+      s3.addEventListener('mousemove', function (e) {
+        const rect = s3.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / rect.width - 0.5;
+
+        layers.forEach(({ el, mouseX }) => {
+          if (!el) return;
+          if (typeof gsap !== 'undefined') {
+            gsap.to(el, {
+              x: relX * mouseX,
+              duration: 0.8,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          } else {
+            const currentY = el._scrollY || 0;
+            el.style.transform = `translate3d(${relX * mouseX}px, ${currentY}px, 0)`;
+          }
+        });
+      });
+
+      s3.addEventListener('mouseleave', function () {
+        layers.forEach(({ el }) => {
+          if (!el) return;
+          if (typeof gsap !== 'undefined') {
+            gsap.to(el, {
+              x: 0,
+              duration: 0.8,
+              ease: 'power2.out',
+              overwrite: 'auto'
+            });
+          }
+        });
+      });
     }
   }
 
@@ -755,6 +893,7 @@
   // DOM READY INITIALIZATION
   document.addEventListener('DOMContentLoaded', function () {
     initParallax();
+    initSection3Parallax();
     initThreeJsBookViewer('book3dContainer', 'assets/models/Ooga_Booga_Hardcover_Render.glb');
     initShopfrontCarousel();
     initPlushieInteraction();
