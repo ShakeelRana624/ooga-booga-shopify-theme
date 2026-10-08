@@ -722,26 +722,7 @@
     const video = document.getElementById('cinemaVideo');
     const playBtn = document.getElementById('btnPlayVideo');
     const muteBtn = document.getElementById('btnMuteVideo');
-    const controlsBar = document.querySelector('.s1-controls-bar');
     if (!video) return;
-
-    // Dynamically match shift to exact card width
-    if (controlsBar) {
-      const syncControlsOffset = () => {
-        if (window.innerWidth > 600) {
-          const width = controlsBar.offsetWidth;
-          if (width > 0) {
-            controlsBar.style.setProperty('--s1-card-w', width + 'px');
-          }
-        } else {
-          controlsBar.style.setProperty('--s1-card-w', '0px');
-        }
-      };
-      syncControlsOffset();
-      window.addEventListener('resize', syncControlsOffset);
-      setTimeout(syncControlsOffset, 150);
-      setTimeout(syncControlsOffset, 600);
-    }
 
     // Mobile vs Desktop video source switch
     if (window.innerWidth < 768 && video.dataset.portraitSrc) {

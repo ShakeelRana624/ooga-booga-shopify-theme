@@ -1014,14 +1014,13 @@ body.template-index {
   transform: translateY(-2px);
 }
 
-/* Cinema Overlay UI: Controls Bar on Bottom Beam of Screen Frame */
+/* Cinema Overlay UI: Controls Bar on Bottom of Playing Video / Screen Frame */
 .s1-controls-bar {
   position: absolute;
-  top: 67.5%;
+  top: 67.8%;
   left: 50%;
-  --s1-card-w: 220px;
-  transform: translateX(-50%);
-  margin-top: calc(-1 * var(--s1-card-w, 220px));
+  transform: translate(-50%, -100%);
+  margin-top: -6px;
   z-index: 25;
   display: flex;
   align-items: center;
