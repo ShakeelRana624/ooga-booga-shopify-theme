@@ -135,7 +135,7 @@ body.template-index {
 
 .brand-logo-text {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: 2.15rem;
   line-height: 1;
   letter-spacing: 1.5px;
   transform: rotate(-2deg);
@@ -145,27 +145,30 @@ body.template-index {
   align-items: center;
   gap: 8px;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
-/* Ooga Booga exact colors from book cover reference */
+/* OOGA BOOGA exact colors from book cover reference */
 .brand-word-ooga {
-  color: #e4e7cd; /* Book cover exact pale watercolor lime-green */
-  -webkit-text-stroke: 1.5px #140e2f;
+  color: #c2cf9c; /* Book cover exact vintage cartoon chartreuse lime */
+  -webkit-text-stroke: 1.8px #100b24;
   text-shadow: 
-    2px 2px 0 #140e2f,
-    4px 4px 0 #140e2f,
-    5px 5px 8px rgba(0, 0, 0, 0.55);
+    2px 2px 0 #100b24,
+    4px 4px 0 #100b24,
+    5px 5px 0 #100b24;
   display: inline-block;
+  letter-spacing: 2px;
 }
 
 .brand-word-booga {
-  color: #cfe2e4; /* Book cover exact pale watercolor sky-blue */
-  -webkit-text-stroke: 1.5px #140e2f;
+  color: #adcdcc; /* Book cover exact vintage cartoon sky cyan */
+  -webkit-text-stroke: 1.8px #100b24;
   text-shadow: 
-    2px 2px 0 #140e2f,
-    4px 4px 0 #140e2f,
-    5px 5px 8px rgba(0, 0, 0, 0.55);
+    2px 2px 0 #100b24,
+    4px 4px 0 #100b24,
+    5px 5px 0 #100b24;
   display: inline-block;
+  letter-spacing: 2px;
 }
 
 .brand-logo-text:hover {
@@ -206,11 +209,11 @@ body.template-index {
 }
 
 .nav-link-product {
-  color: #7dd3fc; /* Cool sky blue to balance green/teals */
+  color: #a7f3d0; /* Matches exactly with other nav links */
 }
 
 .nav-link.active {
-  color: #5eead4;
+  color: #a7f3d0;
   border-bottom: 2px solid #5eead4;
   text-shadow: 0 0 12px rgba(94, 234, 212, 0.65);
 }
