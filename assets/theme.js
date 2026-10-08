@@ -54,10 +54,10 @@
     const s3 = document.getElementById('village-shopfront');
 
     const s1Layers = [
-      { el: document.getElementById('l-bg'),         speed: 0.24, isFrame: false },
-      { el: document.getElementById('l-frame'),      speed: 0.14, isFrame: true  },
-      { el: document.getElementById('l-palms'),      speed: 0.06, isFrame: false },
-      { el: document.getElementById('l-stones'),     speed: 0,    isFrame: false },
+      { el: document.getElementById('l-bg'),         speed: 0.38, isFrame: false },
+      { el: document.getElementById('l-frame'),      speed: 0.20, isFrame: true  },
+      { el: document.getElementById('l-palms'),      speed: 0.10, isFrame: false },
+      { el: document.getElementById('l-stones'),     speed: 0.04, isFrame: false },
       { el: document.getElementById('l-projector'),  speed: 0,    isFrame: false },
       { el: document.getElementById('l-character'),  speed: 0,    isFrame: false },
     ];
@@ -77,28 +77,32 @@
       const mx = el._mouseX || 0;
       const my = el._mouseY || 0;
       const sy = el._scrollY || 0;
+      const rot = el._rotate || 0;
       const sc = el._scale !== undefined ? el._scale : 1;
       const isCentered = s1Centered.includes(el.id);
 
+      const rotStr = rot ? ` rotate(${rot}deg)` : '';
+
       if (isCentered) {
-        if (mx === 0 && my === 0 && sy === 0 && sc === 1) {
+        if (mx === 0 && my === 0 && sy === 0 && sc === 1 && !rot) {
           el.style.transform = 'translateX(-50%)';
         } else {
-          el.style.transform = `translateX(calc(-50% + ${mx}px)) translateY(${my + sy}px) scale(${sc})`;
+          el.style.transform = `translateX(calc(-50% + ${mx}px)) translateY(${my + sy}px) scale(${sc})${rotStr}`;
         }
       } else {
-        if (mx === 0 && my === 0 && sy === 0 && sc === 1) {
+        if (mx === 0 && my === 0 && sy === 0 && sc === 1 && !rot) {
           el.style.transform = 'none';
         } else {
-          el.style.transform = `translate3d(${mx}px, ${my + sy}px, 0) scale(${sc})`;
+          el.style.transform = `translate3d(${mx}px, ${my + sy}px, 0) scale(${sc})${rotStr}`;
         }
       }
     }
 
-    function applyLayer(el, sy, scale = 1) {
+    function applyLayer(el, sy, scale = 1, rotate = 0) {
       if (!el) return;
       el._scrollY = sy;
       el._scale = scale;
+      el._rotate = rotate;
       updateLayerTransform(el);
     }
 
@@ -115,7 +119,7 @@
     function updateParallax() {
       const vh = window.innerHeight;
 
-      // Section 1 Parallax (Outdoor Jungle Cinema - 2x Immersive 3D Depth & Walk-In Dolly)
+      // Section 1 Parallax (Outdoor Jungle Cinema - Strong 3D Multi-Plane Depth & Walk-In Dolly)
       if (s1) {
         s1.style.marginBottom = '0px';
         const rect1 = s1.getBoundingClientRect();
@@ -124,25 +128,30 @@
           s1Layers.forEach(({ el, speed, isFrame }) => {
             if (!el) return;
             const ty = sy * speed;
-            const sc = isFrame ? (1 + Math.min(0.04, sy * 0.000075)) : 1;
+            const sc = isFrame ? (1 + Math.min(0.065, sy * 0.00010)) : 1;
             applyLayer(el, ty, sc);
           });
         }
       }
 
-      // Section 2 Parallax (Enchanted Pink Forest - Multi-Plane Parallax System on all 4 Layers)
+      // Section 2 Parallax (Enchanted Pink Forest - Strong Multi-Plane Parallax System)
       if (s2) {
         const rect2 = s2.getBoundingClientRect();
         if (rect2.bottom > 0 && rect2.top < vh) {
           const s2Center = (rect2.top + rect2.height / 2) - (vh / 2);
           const normalized = s2Center / (vh / 2);
-          // Layers animate smoothly on scroll with progressive depth:
-          applyLayer(s2LBg, normalized * -10);    // Layer 1: Sky & deep forest backdrop (slowest)
-          applyLayer(s2LTrees, normalized * -6);   // Layer 2: Main pink trees (midground)
+          // Layers animate smoothly on scroll with strong progressive depth:
+          applyLayer(s2LBg, normalized * -48);    // Layer 1: Sky & deep forest backdrop (slowest, deep ~50px travel)
+          applyLayer(s2LTrees, normalized * -26);   // Layer 2: Main pink trees (midground, ~26px travel)
           // Layer 3: Characters dynamically move UPWARDS from exact position when scrolling
-          const charsScrollY = normalized > 0 ? (normalized * 12) : (normalized * 42);
+          const charsScrollY = normalized > 0 ? (normalized * 28) : (normalized * 75);
           applyLayer(s2LChars, charsScrollY);
-          // Layer 4 (s2LCat): Locked in exact position, does not move
+          
+          // Layer 4 (s2LCat): Falling ladder animation - slips downwards into river as you scroll down!
+          const fallProgress = Math.max(0, 1 - normalized); // 0 at top entrance, increases as you scroll down
+          const ladderScrollY = fallProgress * 50;           // slides down up to ~100px!
+          const ladderRotate = fallProgress * 1.5;          // slight cartoon tilt as it slips off tree
+          applyLayer(s2LCat, ladderScrollY, 1, ladderRotate);
         }
       }
     }
@@ -179,22 +188,22 @@
         });
       }
 
-      // Section 1: Dynamic 3D Cinema Experience (Audience, palms, screen & deep sky)
+      // Section 1: Strong 3D Cinema Experience (Audience, palms, screen & deep sky)
       attachMouseParallax(s1, [
-        { el: document.getElementById('l-bg'),        xFactor: -14, yFactor: -8 },
-        { el: document.getElementById('l-frame'),     xFactor: -8,  yFactor: -5 },
-        { el: document.getElementById('l-palms'),     xFactor: -18, yFactor: -10 },
-        { el: document.getElementById('l-stones'),    xFactor: -8,  yFactor: -5 },
-        { el: document.getElementById('l-character'), xFactor: 12,  yFactor: 8  }
+        { el: document.getElementById('l-bg'),        xFactor: -26, yFactor: -15 },
+        { el: document.getElementById('l-frame'),     xFactor: -14, yFactor: -8  },
+        { el: document.getElementById('l-palms'),     xFactor: -32, yFactor: -18 },
+        { el: document.getElementById('l-stones'),    xFactor: -14, yFactor: -8  },
+        { el: document.getElementById('l-character'), xFactor: 22,  yFactor: 14  }
         // l-projector stays locked at seam
       ]);
 
-      // Section 2: Enchanted Forest Multi-Plane Depth
+      // Section 2: Strong Enchanted Forest Multi-Plane Depth
       attachMouseParallax(s2, [
-        { el: s2LBg,    xFactor: -10, yFactor: -6 },
-        { el: s2LTrees, xFactor: -10, yFactor: -6 },
-        { el: s2LChars, xFactor: -6,  yFactor: -4 }
-        // Layer 4 (s2LCat): Locked in place, no mouse movement
+        { el: s2LBg,    xFactor: -24, yFactor: -14 },
+        { el: s2LTrees, xFactor: -16, yFactor: -10 },
+        { el: s2LChars, xFactor: -12, yFactor: -8  },
+        { el: s2LCat,   xFactor: 16,  yFactor: 10  }
       ]);
     }
   }
@@ -215,15 +224,6 @@
     const winContainer = s3.querySelector('.s3-windows-container');
 
     // Depth configuration according to Master Prompt specifications:
-    // 1. Background Walls: 0.05x speed
-    // 2. Scalloped Trim / Awning Edge: 0.10x speed
-    // 3. Storefront Arches & Windows: 0.25x speed
-    // 4. Columns & Pillars: 0.35x speed
-    // 5. Fixtures & Side Posts: 0.40x speed
-    // 6. Hanging Golden Lanterns: 0.45x speed
-    // 7. Sidewalk & Lawn Ground: 0.70x speed
-    // 8. Characters (Girl, Boy, Mascot): 0.85x speed
-    // Windows Container: 0.25x speed (locked to Layer 3 arches for 3D T-shirts)
     const layers = [
       { el: l1, speed: 0.05, mouseX: -8  },
       { el: l2, speed: 0.10, mouseX: -12 },
@@ -236,8 +236,8 @@
       { el: l8, speed: 0.85, mouseX: 44  },
     ];
 
-    // Responsive travel displacement: scales down on mobile/tablet to eliminate overflow
-    const getMaxDelta = () => Math.min(window.innerWidth * 0.08, 90);
+    // Responsive travel displacement: strong cinematic travel
+    const getMaxDelta = () => Math.min(window.innerWidth * 0.12, 130);
 
     // 1. GSAP ScrollTrigger Integration
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {

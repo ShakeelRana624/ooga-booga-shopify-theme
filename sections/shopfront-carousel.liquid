@@ -1,6 +1,43 @@
 <section class="psd-section psd-section-storefront" id="village-shopfront" aria-label="Village Storefront Merchandise">
-  <!-- Storefront Architectural Facade -->
-  <div class="s3-layer-storefront"></div>
+  <!-- LAYER 1: Background Walls (Textured pink, teal, yellow architectural panels) -->
+  <div class="layer s3-layer" id="s3-l1-walls">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 01.png' | asset_url }}" alt="Storefront Background Walls">
+  </div>
+
+  <!-- LAYER 2: Scalloped Trim / Awning Edge (Decorative wavy top awning borders) -->
+  <div class="layer s3-layer" id="s3-l2-trim">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 02.png' | asset_url }}" alt="Storefront Scalloped Roof Trim">
+  </div>
+
+  <!-- LAYER 3: Storefront Arches & Windows (Striped awnings, curtains, and display areas) -->
+  <div class="layer s3-layer" id="s3-l3-windows">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 03.png' | asset_url }}" alt="Shop Windows & Striped Awnings">
+  </div>
+
+  <!-- LAYER 4: Architectural Columns / Pillars (Vertical structural pillars) -->
+  <div class="layer s3-layer" id="s3-l4-pillars">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 04.png' | asset_url }}" alt="Architectural Columns and Pillars">
+  </div>
+
+  <!-- LAYER 5: Fixtures & Bollards (Shadows, ground fixtures & side posts) -->
+  <div class="layer s3-layer" id="s3-l5-fixtures">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 05.png' | asset_url }}" alt="Storefront Shadow and Fixtures">
+  </div>
+
+  <!-- LAYER 6: Hanging Golden Lanterns (Decorative hanging lanterns with idle sway) -->
+  <div class="layer s3-layer s3-swaying-lanterns" id="s3-l6-lanterns">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 06.png' | asset_url }}" alt="Hanging Golden Lanterns">
+  </div>
+
+  <!-- LAYER 7: Sidewalk & Grass Ground (Pavement tiles and lower grassy lawn strip) -->
+  <div class="layer s3-layer" id="s3-l7-ground">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 07.png' | asset_url }}" alt="Sidewalk Pavement and Lawn Ground">
+  </div>
+
+  <!-- LAYER 8: Illustrated Characters (Girl with pet, Boy, Green mascot waving) -->
+  <div class="layer s3-layer s3-living-chars" id="s3-l8-characters">
+    <img src="{{ 'images/parallax/section 3/Ooga.Booga.Website.Homepag 08.png' | asset_url }}" alt="Suburban Adventure Characters">
+  </div>
 
   <!-- Interactive Window Displays (Windows 1, 2, 3) -->
   <div class="s3-windows-container">
@@ -44,8 +81,6 @@
     </div>
   </div>
 
-  <!-- Foreground Layer: Girl walking dog, Boy with toy, Giant Green Monster waving, Sidewalk, Lawn -->
-  <div class="s3-layer-fg" id="s3LayerFg"></div>
 </section>
 
 {% schema %}
