@@ -378,7 +378,7 @@
 
     // Camera pointed straight at (0, 0, 0) so model is vertically and horizontally centered
     const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-    camera.position.set(0, 0, 2.7);
+    camera.position.set(0, 0, 2.5);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -387,32 +387,32 @@
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
+    renderer.toneMappingExposure = 0.98; // Natural, accurate exposure (eliminates oversaturation/blowout)
     container.appendChild(renderer.domElement);
 
-    // Warm Vintage Cartoon Lighting
-    const ambientLight = new THREE.AmbientLight(0xfff7ea, 1.25);
+    // Balanced Natural Lighting (soft, rich, authentic colors without harsh oversaturation)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
-    const mainKeyLight = new THREE.DirectionalLight(0xffeedd, 2.4);
+    const mainKeyLight = new THREE.DirectionalLight(0xfffbf2, 1.25);
     mainKeyLight.position.set(3, 4, 3);
     mainKeyLight.castShadow = true;
     scene.add(mainKeyLight);
 
-    const rimLight = new THREE.DirectionalLight(0x00d8c1, 1.6); // Whimsical teal rim
+    const rimLight = new THREE.DirectionalLight(0xe0f2fe, 0.45); // Subtle soft cool rim
     rimLight.position.set(-3, -2, -2);
     scene.add(rimLight);
 
-    const pinkFillLight = new THREE.PointLight(0xf25287, 1.4, 10);
-    pinkFillLight.position.set(0, -2, 2);
-    scene.add(pinkFillLight);
+    const softFillLight = new THREE.DirectionalLight(0xfff4ed, 0.40); // Soft warm bounce fill
+    softFillLight.position.set(0, -2, 2);
+    scene.add(softFillLight);
 
     // Soft Shadow Plane Underneath (placed right at base of standing book)
-    const shadowGeo = new THREE.PlaneGeometry(3, 3);
-    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.35 });
+    const shadowGeo = new THREE.PlaneGeometry(3.5, 3.5);
+    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.32 });
     const shadowPlane = new THREE.Mesh(shadowGeo, shadowMat);
     shadowPlane.rotation.x = -Math.PI / 2;
-    shadowPlane.position.y = -0.72;
+    shadowPlane.position.y = -0.84;
     shadowPlane.receiveShadow = true;
     scene.add(shadowPlane);
 
@@ -445,7 +445,8 @@
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 1.34 / maxDim;
+        // Scaled up to make the book bigger within the space (as requested)
+        const scale = 1.62 / maxDim;
 
         bookModel.scale.set(scale, scale, scale);
         // Shift bookModel so its geometric bounding center is at (0, 0, 0)
@@ -468,8 +469,8 @@
             child.castShadow = true;
             child.receiveShadow = true;
             if (child.material) {
-              child.material.roughness = 0.45;
-              child.material.metalness = 0.15;
+              child.material.roughness = 0.65; // Matte storybook paper/cloth texture
+              child.material.metalness = 0.05; // Eliminates harsh metallic specular sheen
             }
           }
         });
