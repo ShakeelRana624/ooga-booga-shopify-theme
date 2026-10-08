@@ -1,44 +1,46 @@
 <footer class="site-footer">
   <div class="footer-container">
     <div>
-      <div class="footer-brand-title">{{ section.settings.title | default: 'Ooga Booga!' }}</div>
+      <div class="footer-brand-title">
+        <span class="brand-word-ooga">OOGA</span> <span class="brand-word-booga">BOOGA!</span>
+      </div>
       <p class="footer-copy">
         An eccentric, joyous, and untamed vintage cartoon world created by author Gianni Dolce Vita and brought to life with classic mid-century animation art and modern interactive web craft.
       </p>
-      <div style="margin-top: 18px; display: flex; gap: 12px;">
-        <span class="trust-badge-pill" style="color: var(--color-purple-deep);">📖 First Edition 2026</span>
-        <span class="trust-badge-pill" style="color: var(--color-purple-deep);">🇦🇺 Created in Australia</span>
+      <div class="footer-badges-wrap">
+        <span class="trust-badge-pill">📖 First Edition 2026</span>
+        <span class="trust-badge-pill">🇦🇺 Created in Australia</span>
       </div>
     </div>
 
     <div>
-      <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-yellow-accent); margin-bottom: 16px;">
+      <h4 class="footer-col-title">
         Explore The World
       </h4>
-      <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-family: var(--font-fun); font-weight: 600;">
-        <li><a href="#story" style="color: #d8cde9; text-decoration: none;">★ The Story & Legend</a></li>
-        <li><a href="#book-3d" style="color: #d8cde9; text-decoration: none;">★ Interactive 3D Book</a></li>
-        <li><a href="#cinema" style="color: #d8cde9; text-decoration: none;">★ Jungle Cartoon Cinema</a></li>
-        <li><a href="#village-shops" style="color: #d8cde9; text-decoration: none;">★ Village Merch Shops</a></li>
-        <li><a href="#reviews" style="color: #d8cde9; text-decoration: none;">★ Reader Testimonials</a></li>
+      <ul class="footer-nav-list">
+        <li><a href="#story" class="footer-nav-link">★ The Story & Legend</a></li>
+        <li><a href="#enchanted-forest" class="footer-nav-link">★ Interactive 3D Book</a></li>
+        <li><a href="#cinema-hero" class="footer-nav-link">★ Jungle Cartoon Cinema</a></li>
+        <li><a href="#village-shopfront" class="footer-nav-link">★ Village Merch Shops</a></li>
+        <li><a href="#reviews" class="footer-nav-link">★ Reader Testimonials</a></li>
       </ul>
     </div>
 
     <div>
-      <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--color-yellow-accent); margin-bottom: 16px;">
+      <h4 class="footer-col-title">
         Suburban Monster Club
       </h4>
-      <p style="font-family: var(--font-body); font-size: 0.95rem; color: #d8cde9; margin-bottom: 14px;">
+      <p class="footer-sub-text">
         Sign up to receive secret character sketches, release announcements, and exclusive first access to upcoming plushies and apparel!
       </p>
-      <form onsubmit="event.preventDefault(); alert('🎉 Welcome to the Suburban Monster Club!');" style="display: flex; gap: 8px;">
+      <form onsubmit="event.preventDefault(); alert('🎉 Welcome to the Suburban Monster Club!');" class="footer-form">
         <input 
           type="email" 
           placeholder="Your email address..." 
           required
-          style="padding: 10px 14px; border-radius: var(--border-radius-pill); border: 2px solid var(--color-yellow-accent); font-family: var(--font-body); outline: none; flex: 1;"
+          class="footer-email-input"
         >
-        <button type="submit" class="btn-cartoon btn-cartoon-yellow" style="padding: 10px 18px; font-size: 0.85rem; background-color: var(--color-yellow-accent); color: var(--color-purple-deep);">
+        <button type="submit" class="footer-submit-btn">
           Join
         </button>
       </form>

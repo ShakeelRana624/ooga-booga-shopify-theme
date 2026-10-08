@@ -1093,32 +1093,6 @@ body.template-index {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.s1-scroll-cue {
-  position: absolute;
-  bottom: 12px;
-  right: 28px;
-  z-index: 25;
-  font-family: var(--font-fun);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #ffc4e1;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  background: rgba(18, 9, 36, 0.75);
-  padding: 5px 16px;
-  border-radius: var(--border-radius-pill);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  transition: all var(--transition-bounce);
-}
-
-.s1-scroll-cue:hover {
-  background: var(--color-pink-primary);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
 /* ==========================================================================
    SECTION 2: ENCHANTED PINK FOREST — CINEMATIC 4-LAYER PARALLAX & 3D BOOK
    PSD Base: 3000 × 1868px canvas (PSD Y: 1879 to 3747). Exact PSD layout.
@@ -3031,12 +3005,38 @@ body.template-index {
   transform: scale(1.1);
 }
 
-/* Footer */
+/* ==========================================================================
+   FOOTER (Enchanted Woodland Portal BG matching Product Page + Header Style Elements)
+   ========================================================================== */
 .site-footer {
-  background: var(--color-purple-deep);
-  color: #fff;
-  border-top: var(--border-width-cartoon) solid var(--color-border-cartoon);
+  position: relative;
+  background-color: #0c0618;
+  background-image: url('images/product/tree_scene.png');
+  background-size: cover;
+  background-position: center bottom;
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 -12px 40px rgba(0, 0, 0, 0.55);
   padding: 80px 24px 40px 24px;
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(20, 10, 36, 0.55) 0%, rgba(12, 6, 24, 0.85) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.site-footer > * {
+  position: relative;
+  z-index: 2;
 }
 
 .footer-container {
@@ -3050,23 +3050,135 @@ body.template-index {
 
 .footer-brand-title {
   font-family: var(--font-display);
-  font-size: 2.5rem;
-  color: var(--color-yellow-accent);
-  text-shadow: 2px 2px 0 var(--color-pink-primary);
-  margin-bottom: 12px;
+  font-size: 2.2rem;
+  line-height: 1;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
 }
 
 .footer-copy {
   font-family: var(--font-fun);
   font-size: 1rem;
-  color: #d1c8e2;
+  color: #ccfbf1; /* Soft glowing mint/teal like header */
+  line-height: 1.65;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.footer-badges-wrap {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-col-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: #5eead4; /* Bright seafoam teal matching header */
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-shadow: 0 0 12px rgba(94, 234, 212, 0.4);
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-nav-link {
+  font-family: var(--font-fun);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #a7f3d0; /* Mint teal like header nav links */
+  text-decoration: none;
+  display: inline-block;
+  transition: all var(--transition-bounce);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.footer-nav-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #f25287, 0 0 18px #f25287;
+  transform: translateX(4px);
+}
+
+.footer-sub-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #ccfbf1;
   line-height: 1.6;
+  margin-bottom: 16px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.footer-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Input Field: Diffused Glass matching header style */
+.footer-email-input {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--border-radius-pill);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 11px 20px;
+  outline: none;
+  flex: 1;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-smooth);
+}
+
+.footer-email-input::placeholder {
+  color: rgba(167, 243, 208, 0.55);
+}
+
+.footer-email-input:focus {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #5eead4;
+  box-shadow: 0 0 16px rgba(94, 234, 212, 0.45), inset 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Submit Button: Header emerald/teal glass button with pink hover glow */
+.footer-submit-btn {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.8px;
+  padding: 11px 24px;
+  border-radius: var(--border-radius-pill);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.45), 0 2px 0 #064e3b;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-bounce);
+}
+
+.footer-submit-btn:hover {
+  background: linear-gradient(135deg, #059669 0%, #0f766e 100%);
+  border-color: #f25287;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 0 22px rgba(242, 82, 135, 0.65), 0 6px 20px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 10px #f25287;
 }
 
 .footer-bottom-bar {
   max-width: 1280px;
   margin: 0 auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding-top: 24px;
   display: flex;
   align-items: center;
@@ -3075,7 +3187,8 @@ body.template-index {
   gap: 16px;
   font-family: var(--font-fun);
   font-size: 0.9rem;
-  color: #a499be;
+  color: #a7f3d0; /* Header mint/teal */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 /* ==========================================================================
