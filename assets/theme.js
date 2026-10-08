@@ -859,13 +859,13 @@
         const card = document.createElement('div');
         card.className = 'cart-item-card';
         card.innerHTML = `
-          <img src="${item.image}" alt="${item.title}" style="width: 60px; height: 75px; object-fit: cover; border-radius: 8px; border: 2px solid var(--color-border-cartoon);">
-          <div style="flex: 1;">
-            <div style="font-family: var(--font-display); font-size: 0.95rem; color: var(--color-purple-deep);">${item.title}</div>
-            <div style="font-family: var(--font-fun); font-weight: 700; color: var(--color-pink-primary);">$${item.price.toFixed(2)}</div>
-            <div style="font-size: 0.8rem; color: var(--color-text-muted);">Qty: ${item.quantity}</div>
+          <img src="${item.image}" alt="${item.title}" class="cart-item-img">
+          <div class="cart-item-details">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+            <div class="cart-item-qty">Qty: ${item.quantity}</div>
           </div>
-          <button class="cart-item-remove" data-index="${idx}" style="background:none; border:none; color: #ff3b30; font-size: 1.2rem; cursor: pointer;">✕</button>
+          <button type="button" class="cart-item-remove" data-index="${idx}" aria-label="Remove item">✕</button>
         `;
         itemsContainer.appendChild(card);
       });
@@ -930,6 +930,180 @@
         notifyModal.classList.remove('active');
       });
     }
+  }
+
+  // 9. SECTION 3 SHOPFRONT CAROUSEL (4 PRODUCTS WITH IN-PLACE FADE/POP)
+  function initShopfrontCarousel() {
+    const window1 = document.getElementById('s3Window1');
+    const window2 = document.getElementById('s3Window2');
+    const prevBtn = document.getElementById('s3ShopPrev');
+    const nextBtn = document.getElementById('s3ShopNext');
+    const notifyModal = document.getElementById('notifyModal');
+
+    if (!window1 || !window2) return;
+
+    const flipper1 = document.getElementById('s3Flipper1');
+    const flipper2 = document.getElementById('s3Flipper2');
+    const badge1 = document.getElementById('s3Badge1');
+    const badge2 = document.getElementById('s3Badge2');
+    const imgFront1 = document.getElementById('s3ImgFront1');
+    const imgBack1 = document.getElementById('s3ImgBack1');
+    const imgFront2 = document.getElementById('s3ImgFront2');
+    const imgBack2 = document.getElementById('s3ImgBack2');
+
+    // 4 Products data
+    const products = [
+      {
+        id: 1,
+        title: "Wild Ooga Classic Vintage Tee",
+        price: "$28.00",
+        badge: "COMING SOON",
+        tag: "★ COMING SOON TO SUBURBIA ★",
+        desc: "Our 3D tailored vintage t-shirts are currently in pre-production. Enter your email to get notified the second they go live!",
+        frontImg: "assets/images/shop/tshirt_mockup_ooga.png",
+        backImg: "assets/images/shop/tshirt_mockup_ooga_back.png"
+      },
+      {
+        id: 2,
+        title: "Suburbia Run Adventure Tee",
+        price: "$28.00",
+        badge: "COMING SOON",
+        tag: "★ COMING SOON TO SUBURBIA ★",
+        desc: "Join the neighborhood run with Gianna & friends in our premium heavyweight ring-spun cotton tee.",
+        frontImg: "assets/images/shop/tshirt_mockup_boy.png",
+        backImg: "assets/images/shop/tshirt_mockup_boy_back.png"
+      },
+      {
+        id: 3,
+        title: "Gianni's Creature Club Tee",
+        price: "$32.00",
+        badge: "LIMITED EDITION",
+        tag: "★ EXCLUSIVE DROP ★",
+        desc: "Official collector shirt featuring the secret magical club emblem from chapter 4 of Ooga Booga.",
+        frontImg: "assets/images/shop/tshirt_mockup_ooga.png",
+        backImg: "assets/images/shop/tshirt_mockup_ooga_back.png"
+      },
+      {
+        id: 4,
+        title: "Enchanted Suburbia Retro Tee",
+        price: "$30.00",
+        badge: "EXCLUSIVE DROP",
+        tag: "★ SPECIAL PRE-ORDER ★",
+        desc: "Ultra-soft retro washed tee celebrating the magical twilight woods and neighborhood adventures.",
+        frontImg: "assets/images/shop/tshirt_mockup_boy.png",
+        backImg: "assets/images/shop/tshirt_mockup_boy_back.png"
+      }
+    ];
+
+    let currentIndex = 0;
+    let isTransitioning = false;
+
+    function openProductModal(prod) {
+      if (!notifyModal || !prod) return;
+      playCartoonPop(520);
+      const modalTag = document.getElementById('notifyModalTag');
+      const modalTitle = document.getElementById('notifyModalTitle');
+      const modalPrice = document.getElementById('notifyModalPrice');
+      const modalDesc = document.getElementById('notifyModalDesc');
+
+      if (modalTag) modalTag.textContent = prod.tag;
+      if (modalTitle) modalTitle.textContent = prod.title;
+      if (modalPrice) modalPrice.textContent = prod.price;
+      if (modalDesc) modalDesc.textContent = prod.desc;
+
+      notifyModal.classList.add('active');
+    }
+
+    function updateWindow(windowNum, prod) {
+      const badge = windowNum === 1 ? badge1 : badge2;
+      const imgFront = windowNum === 1 ? imgFront1 : imgFront2;
+      const imgBack = windowNum === 1 ? imgBack1 : imgBack2;
+
+      if (badge) badge.textContent = prod.badge;
+      if (imgFront) {
+        imgFront.src = prod.frontImg;
+        imgFront.alt = prod.title;
+      }
+      if (imgBack) {
+        imgBack.src = prod.backImg;
+        imgBack.alt = prod.title + ' Back';
+      }
+    }
+
+    function changeProducts(direction) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      playCartoonPop(460);
+
+      if (direction === 'next') {
+        currentIndex = (currentIndex + 1) % products.length;
+      } else {
+        currentIndex = (currentIndex - 1 + products.length) % products.length;
+      }
+
+      const prod1 = products[currentIndex];
+      const prod2 = products[(currentIndex + 1) % products.length];
+
+      // In-place crossfade pop (NOT sliding)
+      if (flipper1) flipper1.classList.add('s3-tshirt-swapping');
+      if (flipper2) flipper2.classList.add('s3-tshirt-swapping');
+
+      setTimeout(() => {
+        updateWindow(1, prod1);
+        updateWindow(2, prod2);
+
+        setTimeout(() => {
+          if (flipper1) flipper1.classList.remove('s3-tshirt-swapping');
+          if (flipper2) flipper2.classList.remove('s3-tshirt-swapping');
+          isTransitioning = false;
+        }, 50);
+      }, 200);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        changeProducts('prev');
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        changeProducts('next');
+      });
+    }
+
+    // Clicking on window opens modal with currently displayed product
+    window1.addEventListener('click', (e) => {
+      if (e.target.closest('#s3ShopPrev') || e.target.closest('#s3ShopNext')) return;
+      const activeProd = products[currentIndex];
+      openProductModal(activeProd);
+    });
+
+    window2.addEventListener('click', (e) => {
+      if (e.target.closest('#s3ShopPrev') || e.target.closest('#s3ShopNext')) return;
+      const activeProd = products[(currentIndex + 1) % products.length];
+      openProductModal(activeProd);
+    });
+
+    window1.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const activeProd = products[currentIndex];
+        openProductModal(activeProd);
+      }
+    });
+
+    window2.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const activeProd = products[(currentIndex + 1) % products.length];
+        openProductModal(activeProd);
+      }
+    });
   }
 
   // DOM READY INITIALIZATION
