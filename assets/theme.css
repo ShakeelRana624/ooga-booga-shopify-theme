@@ -892,9 +892,9 @@ body {
 }
 
 /* ── LAYER 2: Pink Trees & Canopy (Ooga.Booga.Website.Homepag (2).png) ──
-   Positioned downwards matching user layout so full canopy is visible below Section 1 */
+   Positioned slightly upwards (-0.90vw) to fully cover background gap at top */
 #s2-l-trees {
-  top: 0;
+  top: -0.90vw;
   left: 0;
   width: 100vw;
   height: 57.70vw;              /* 1731 / 3000 × 100 natural aspect ratio */
@@ -921,9 +921,9 @@ body {
 }
 
 /* ── LAYER 3: Characters — Boy, Green Mascot, Flying Apple (right-center, 0.45x) ──
-   Moved down by same amount (+4.50vw) so characters sit precisely on tree branches */
+   Moved up with trees (-0.90vw) so characters remain precisely on tree branches */
 #s2-l-chars {
-  top: 5.60vw;
+  top: 4.70vw;
   left: 49.50vw;
   width: 44.93vw;               /* 1348 / 3000 × 100 */
   height: 19.17vw;              /* 575  / 3000 × 100 */
