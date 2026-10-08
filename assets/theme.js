@@ -80,6 +80,22 @@
       const sc = el._scale !== undefined ? el._scale : 1;
       const isCentered = s1Centered.includes(el.id);
 
+      // Dedicated 3D pivot physics for Section 2 Ladder:
+      // Bottom foot (28% 90%) stays 100% pinned in river water, top monkey side falls backwards & down
+      if (el === s2LCat) {
+        const baseRotX = el._rotX || 0;
+        const baseRotZ = el._rotZ || 0;
+        const rotX = baseRotX - (my * 0.3);
+        const rotY = mx * 0.4;
+        const rotZ = baseRotZ;
+        if (rotX === 0 && rotY === 0 && rotZ === 0) {
+          el.style.transform = 'none';
+        } else {
+          el.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) rotateZ(${rotZ.toFixed(2)}deg)`;
+        }
+        return;
+      }
+
       if (isCentered) {
         if (mx === 0 && my === 0 && sy === 0 && sc === 1) {
           el.style.transform = 'translateX(-50%)';
@@ -142,7 +158,13 @@
           // Layer 3: Characters dynamically move UPWARDS from exact position when scrolling
           const charsScrollY = normalized > 0 ? (normalized * 12) : (normalized * 42);
           applyLayer(s2LChars, charsScrollY);
-          // Layer 4 (s2LCat): Locked in exact position, does not move
+
+          // Layer 4 (s2LCat): Ladder bottom stays fixed in river, top monkey side falls backwards & down!
+          // Normalized decreases as user scrolls down: 1 (entering) -> 0 (center) -> -1 (exiting)
+          const fallProgress = Math.max(0, Math.min(1.4, (1.0 - normalized) / 1.5));
+          s2LCat._rotX = fallProgress * -15; // Tilts backwards into depth by up to -21deg
+          s2LCat._rotZ = fallProgress * 5;   // Top tilts downwards and to the side by up to 7deg
+          updateLayerTransform(s2LCat);
         }
       }
     }
@@ -193,8 +215,8 @@
       attachMouseParallax(s2, [
         { el: s2LBg,    xFactor: -10, yFactor: -6 },
         { el: s2LTrees, xFactor: -10, yFactor: -6 },
-        { el: s2LChars, xFactor: -6,  yFactor: -4 }
-        // Layer 4 (s2LCat): Locked in place, no mouse movement
+        { el: s2LChars, xFactor: -6,  yFactor: -4 },
+        { el: s2LCat,   xFactor: 12,  yFactor: 8  }
       ]);
     }
   }
