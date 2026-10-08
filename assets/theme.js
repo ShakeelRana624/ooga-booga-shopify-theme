@@ -54,12 +54,12 @@
     const s3 = document.getElementById('village-shopfront');
 
     const s1Layers = [
-      { el: document.getElementById('l-bg'),         speed: 0.06  },
-      { el: document.getElementById('l-frame'),      speed: 0.14  },
-      { el: document.getElementById('l-palms'),      speed: 0.22  },
-      { el: document.getElementById('l-stones'),     speed: 0.32  },
-      { el: document.getElementById('l-projector'),  speed: 0.40  },
-      { el: document.getElementById('l-character'),  speed: 0.50  },
+      { el: document.getElementById('l-bg'),         speed: 0.12  },
+      { el: document.getElementById('l-frame'),      speed: 0.07  },
+      { el: document.getElementById('l-palms'),      speed: 0.03  },
+      { el: document.getElementById('l-stones'),     speed: 0     },
+      { el: document.getElementById('l-projector'),  speed: 0     },
+      { el: document.getElementById('l-character'),  speed: 0     },
     ];
     const s1Centered = ['l-stones', 'l-character'];
 
@@ -95,20 +95,18 @@
 
       // Section 1 Parallax (Outdoor Jungle Cinema - Frame-by-Frame System)
       if (s1) {
+        s1.style.marginBottom = '0px';
         const rect1 = s1.getBoundingClientRect();
-        const s1Height = s1.offsetHeight;
-        const sy = Math.max(0, -rect1.top);
-
-        // Connect Section 2 top to Section 1 bottom where parallax ends
-        const layerSy = Math.min(sy, s1Height);
-        const s1BottomShift = layerSy * 0.40;
-        s1.style.marginBottom = `${s1BottomShift}px`;
-
-        if (rect1.top < vh) {
+        if (rect1.bottom > 0 && rect1.top < vh) {
+          const sy = Math.max(0, -rect1.top);
           s1Layers.forEach(({ el, speed }) => {
             if (!el) return;
             const isCentered = s1Centered.includes(el.id);
-            const ty = layerSy * speed;
+            if (speed === 0) {
+              el.style.transform = isCentered ? 'translateX(-50%)' : 'none';
+              return;
+            }
+            const ty = sy * speed;
             if (isCentered) {
               el.style.transform = `translateX(-50%) translateY(${ty}px)`;
             } else {
