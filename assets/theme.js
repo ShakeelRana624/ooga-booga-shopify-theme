@@ -378,7 +378,7 @@
 
     // Camera pointed straight at (0, 0, 0) so model is vertically and horizontally centered
     const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-    camera.position.set(0, 0, 2.59);
+    camera.position.set(0, 0, 2.74);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -408,11 +408,11 @@
     scene.add(softFillLight);
 
     // Soft Shadow Plane Underneath (placed right at base of standing book)
-    const shadowGeo = new THREE.PlaneGeometry(3.2, 3.2);
+    const shadowGeo = new THREE.PlaneGeometry(2.9, 2.9);
     const shadowMat = new THREE.ShadowMaterial({ opacity: 0.30 });
     const shadowPlane = new THREE.Mesh(shadowGeo, shadowMat);
     shadowPlane.rotation.x = -Math.PI / 2;
-    shadowPlane.position.y = -0.79;
+    shadowPlane.position.y = -0.70;
     shadowPlane.receiveShadow = true;
     scene.add(shadowPlane);
 
@@ -445,8 +445,8 @@
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
         const maxDim = Math.max(size.x, size.y, size.z);
-        // Adjusted scale (+0.12): 1.50 / maxDim
-        const scale = 1.50 / maxDim;
+        // Adjusted scale (-0.20): 1.30 / maxDim
+        const scale = 1.30 / maxDim;
 
         bookModel.scale.set(scale, scale, scale);
         // Shift bookModel so its geometric bounding center is at (0, 0, 0)
