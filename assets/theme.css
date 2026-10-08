@@ -507,17 +507,16 @@ body.template-index {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(circle at 35% 30%, rgba(38, 18, 60, 0.95) 0%, rgba(12, 6, 22, 0.98) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 2.5px solid #ffd700;
-  outline: 1.5px dashed rgba(255, 215, 0, 0.5);
+  /* Authentic Solid Metallic Gold Stamp Fill */
+  background: radial-gradient(circle at 35% 26%, #fff59d 0%, #ffd700 25%, #ffb300 58%, #f59e0b 82%, #b45309 100%);
+  border: 3px solid #78350f;
+  outline: 1.5px dashed rgba(120, 53, 15, 0.65);
   outline-offset: -6px;
   box-shadow: 
-    0 14px 35px rgba(0, 0, 0, 0.8),
-    0 0 25px rgba(255, 215, 0, 0.45),
-    inset 0 0 18px rgba(255, 215, 0, 0.22),
-    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+    0 16px 36px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(255, 215, 0, 0.65),
+    inset 0 2px 4px rgba(255, 255, 255, 0.85),
+    inset 0 -3px 6px rgba(120, 53, 15, 0.5);
   pointer-events: auto;
   transition: transform var(--transition-bounce), box-shadow 0.3s ease;
   animation: s1LaurelFloat 4s ease-in-out infinite alternate;
@@ -526,12 +525,11 @@ body.template-index {
 }
 
 .s1-movie-laurel:hover {
-  transform: translateY(-5px) scale(1.06);
-  border-color: #ffe57f;
+  transform: translateY(-5px) scale(1.07);
   box-shadow: 
-    0 20px 45px rgba(0, 0, 0, 0.85),
-    0 0 35px rgba(255, 215, 0, 0.7),
-    inset 0 0 24px rgba(255, 215, 0, 0.35);
+    0 22px 48px rgba(0, 0, 0, 0.85),
+    0 0 42px rgba(255, 215, 0, 0.9),
+    inset 0 2px 6px rgba(255, 255, 255, 0.95);
 }
 
 .s1-movie-laurel.laurel-right {
@@ -544,36 +542,35 @@ body.template-index {
 }
 
 .laurel-stars {
-  color: #ffd700;
-  font-size: 0.75rem;
+  color: #451a03 !important;
+  font-size: 0.78rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.9);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
   line-height: 1;
   margin-bottom: 3px;
 }
 
 .laurel-title {
   font-family: var(--font-display);
-  font-size: 0.86rem;
+  font-size: 0.90rem;
   font-weight: 900;
-  color: #ffffff;
+  color: #3b1a04;
   letter-spacing: 0.8px;
   text-transform: uppercase;
   line-height: 1.05;
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.9),
-    0 0 12px rgba(255, 215, 0, 0.4);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .laurel-sub {
   font-family: var(--font-fun);
-  font-size: 0.62rem;
+  font-size: 0.63rem;
   font-weight: 800;
-  color: #fef08a;
-  letter-spacing: 0.5px;
+  color: #5a2305;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
   line-height: 1;
   margin-top: 4px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 900px) {
@@ -588,12 +585,12 @@ body.template-index {
     outline-offset: -4px;
   }
   .laurel-stars {
-    font-size: 0.62rem;
+    font-size: 0.64rem;
     letter-spacing: 1px;
     margin-bottom: 2px;
   }
   .laurel-title {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
   }
   .laurel-sub {
     font-size: 0.52rem;
