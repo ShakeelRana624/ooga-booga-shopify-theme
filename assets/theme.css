@@ -1019,78 +1019,101 @@ body.template-index {
   position: absolute;
   top: 67.5%;
   left: 50%;
+  --s1-card-w: 220px;
   transform: translateX(-50%);
+  margin-top: calc(-1 * var(--s1-card-w, 220px));
   z-index: 25;
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(14, 8, 28, 0.78);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  padding: 4px 10px;
+  gap: 10px;
+  padding: 6px 12px;
   border-radius: var(--border-radius-pill);
-  border: 1.5px solid rgba(255, 255, 255, 0.22);
+
+  /* Exact Diffused Header Glass Effect */
+  background: linear-gradient(
+    180deg,
+    rgba(168, 32, 108, 0.38) 0%,
+    rgba(100, 18, 80, 0.30) 55%,
+    rgba(48, 12, 60, 0.24) 100%
+  );
+  background-image: 
+    radial-gradient(ellipse at 50% -20%, rgba(242, 82, 135, 0.45) 0%, transparent 75%),
+    linear-gradient(180deg, rgba(142, 28, 98, 0.36) 0%, rgba(46, 12, 58, 0.26) 100%);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1.5px solid rgba(255, 255, 255, 0.26);
   box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.65),
-    0 0 16px rgba(13, 148, 136, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -1px 0 rgba(242, 82, 135, 0.24),
+    0 12px 32px rgba(12, 5, 24, 0.55),
+    0 0 24px rgba(242, 82, 135, 0.22);
   pointer-events: auto;
   transition: all var(--transition-smooth);
 }
 
-/* Glass Buttons with White Text */
+/* Base Cinema Control Button (Pill shape) */
 .s1-control-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   font-family: var(--font-fun);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.82rem;
+  font-weight: 800;
   letter-spacing: 0.6px;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 5px 13px;
+  padding: 6px 14px;
   border-radius: var(--border-radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 2px 6px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   user-select: none;
   transition: all var(--transition-bounce);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
 }
 
-/* Play/Pause Button Hover (Luminous Teal / Cyan Glass Glow) */
+/* Play/Pause Button — Hot Pink Solid Fill (Matching "ADD TO CART" screenshot) */
+.s1-btn-play {
+  background: linear-gradient(135deg, #ff3b81 0%, #e8175d 100%);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 
+    0 4px 14px rgba(232, 23, 93, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
 .s1-btn-play:hover {
-  background: rgba(45, 212, 191, 0.25);
+  background: linear-gradient(135deg, #ff5494 0%, #f0246c 100%);
   color: #ffffff;
-  border-color: #5eead4;
+  border-color: #ffffff;
   box-shadow: 
-    0 0 16px rgba(94, 234, 212, 0.6),
-    0 4px 12px rgba(0, 0, 0, 0.4);
-  text-shadow: 0 0 8px #5eead4, 0 1px 2px rgba(0, 0, 0, 0.8);
-  transform: translateY(-2px);
+    0 0 22px rgba(255, 59, 129, 0.75),
+    0 6px 18px rgba(232, 23, 93, 0.55);
+  transform: translateY(-2px) scale(1.03);
 }
 
-/* Mute/Unmute Button Hover (Luminous Fuchsia / Pink Glass Glow) */
-.s1-btn-mute:hover {
-  background: rgba(242, 82, 135, 0.25);
-  color: #ffffff;
-  border-color: #f25287;
+/* Mute/Unmute Button — Vibrant Cyan/Aqua Solid Fill (Matching "LOOK INSIDE" screenshot) */
+.s1-btn-mute {
+  background: linear-gradient(135deg, #00e5cf 0%, #00bfa5 100%);
+  color: #082032;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
   box-shadow: 
-    0 0 16px rgba(242, 82, 135, 0.6),
-    0 4px 12px rgba(0, 0, 0, 0.4);
-  text-shadow: 0 0 8px #f25287, 0 1px 2px rgba(0, 0, 0, 0.8);
-  transform: translateY(-2px);
+    0 4px 14px rgba(0, 229, 207, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.s1-btn-mute:hover {
+  background: linear-gradient(135deg, #26ecdb 0%, #10cfb7 100%);
+  color: #04141e;
+  border-color: #ffffff;
+  box-shadow: 
+    0 0 22px rgba(0, 229, 207, 0.75),
+    0 6px 18px rgba(0, 191, 165, 0.55);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .s1-control-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* ==========================================================================
@@ -2098,9 +2121,11 @@ body.template-index {
 
 @media (max-width: 600px) {
   .s1-controls-bar {
+    top: auto;
     bottom: 12px;
-    padding: 6px 14px;
-    gap: 8px;
+    margin-top: 0;
+    padding: 5px 10px;
+    gap: 6px;
   }
   
   .s1-scroll-cue {
@@ -3015,9 +3040,10 @@ body.template-index {
   background-size: cover;
   background-position: center bottom;
   color: #ffffff;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 2px solid #f25287;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 -4px 20px rgba(242, 82, 135, 0.45),
+    inset 0 1px 0 rgba(242, 82, 135, 0.35),
     0 -12px 40px rgba(0, 0, 0, 0.55);
   padding: 80px 24px 40px 24px;
   overflow: hidden;
@@ -3062,7 +3088,7 @@ body.template-index {
 .footer-copy {
   font-family: var(--font-fun);
   font-size: 1rem;
-  color: #ccfbf1; /* Soft glowing mint/teal like header */
+  color: #ffffff; /* Crisp white content under heading */
   line-height: 1.65;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
@@ -3072,6 +3098,68 @@ body.template-index {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+/* Footer Badges / Pill Buttons: Book Section Card Style */
+.footer-badges-wrap .trust-badge-pill,
+.footer-pill-pink,
+.footer-pill-green {
+  cursor: pointer;
+  padding: 7px 16px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  user-select: none;
+}
+
+/* Button 1: Pink Fill (White Text) */
+.footer-badges-wrap .trust-badge-pill:first-child,
+.footer-pill-pink {
+  background: linear-gradient(135deg, #ff4081 0%, #ee4d94 50%, #b32579 100%);
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 
+    0 8px 24px rgba(238, 77, 148, 0.5),
+    0 0 18px rgba(238, 77, 148, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.footer-badges-wrap .trust-badge-pill:first-child:hover,
+.footer-pill-pink:hover {
+  background: linear-gradient(135deg, #ff5494 0%, #f0246c 100%);
+  color: #ffffff !important;
+  border-color: #ffffff;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 
+    0 14px 32px rgba(238, 77, 148, 0.75),
+    0 0 28px rgba(238, 77, 148, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+/* Button 2: Green Fill (Black Text) */
+.footer-badges-wrap .trust-badge-pill:last-child,
+.footer-pill-green {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  color: #000000 !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 
+    0 8px 24px rgba(34, 197, 94, 0.45),
+    0 0 18px rgba(34, 197, 94, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.footer-badges-wrap .trust-badge-pill:last-child:hover,
+.footer-pill-green:hover {
+  background: linear-gradient(135deg, #86efac 0%, #4ade80 100%);
+  color: #000000 !important;
+  border-color: #ffffff;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 
+    0 14px 32px rgba(34, 197, 94, 0.7),
+    0 0 28px rgba(74, 222, 128, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .footer-col-title {
@@ -3095,7 +3183,7 @@ body.template-index {
   font-family: var(--font-fun);
   font-size: 0.98rem;
   font-weight: 600;
-  color: #a7f3d0; /* Mint teal like header nav links */
+  color: #ffffff; /* Crisp white content under heading */
   text-decoration: none;
   display: inline-block;
   transition: all var(--transition-bounce);
@@ -3103,7 +3191,7 @@ body.template-index {
 }
 
 .footer-nav-link:hover {
-  color: #ffffff;
+  color: #f25287;
   text-shadow: 0 0 10px #f25287, 0 0 18px #f25287;
   transform: translateX(4px);
 }
@@ -3111,7 +3199,7 @@ body.template-index {
 .footer-sub-text {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: #ccfbf1;
+  color: #ffffff; /* Crisp white content under heading */
   line-height: 1.6;
   margin-bottom: 16px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
@@ -3141,7 +3229,7 @@ body.template-index {
 }
 
 .footer-email-input::placeholder {
-  color: rgba(167, 243, 208, 0.55);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .footer-email-input:focus {
@@ -3187,7 +3275,7 @@ body.template-index {
   gap: 16px;
   font-family: var(--font-fun);
   font-size: 0.9rem;
-  color: #a7f3d0; /* Header mint/teal */
+  color: rgba(255, 255, 255, 0.85); /* Clean white */
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
