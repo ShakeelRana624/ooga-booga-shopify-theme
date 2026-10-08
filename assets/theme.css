@@ -1187,16 +1187,19 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--color-yellow-accent);
-  color: var(--color-purple-deep);
-  font-family: var(--font-heading);
-  font-size: clamp(0.68rem, 0.85vw, 0.80rem);
-  padding: 3px 12px;
+  background: rgba(255, 223, 109, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 223, 109, 0.4);
+  color: #ffdf6d;
+  font-family: var(--font-fun);
+  font-size: clamp(0.70rem, 0.85vw, 0.82rem);
+  font-weight: 700;
+  padding: 5px 14px;
   border-radius: var(--border-radius-pill);
-  border: 2px solid var(--color-border-cartoon);
-  box-shadow: var(--shadow-cartoon-sm);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), 0 0 16px rgba(255, 223, 109, 0.2);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   pointer-events: none;
 }
 
@@ -1227,53 +1230,70 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   z-index: 22;
 }
 
 .btn-3d-ctrl {
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--color-purple-deep);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 5px 14px;
   font-family: var(--font-fun);
   font-size: clamp(0.70rem, 0.82vw, 0.78rem);
-  font-weight: 800;
-  padding: 3px 9px;
-  border-radius: var(--border-radius-pill);
-  border: 2px solid var(--color-border-cartoon);
-  box-shadow: 2px 2px 0 var(--color-border-cartoon);
+  font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: all var(--transition-bounce);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
 .btn-3d-ctrl:hover {
-  background: var(--color-yellow-accent);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.55);
   transform: translateY(-2px);
-  box-shadow: 3px 3px 0 var(--color-border-cartoon);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 0 0 15px rgba(255, 255, 255, 0.25);
+  color: #ffffff;
 }
 
 .btn-3d-ctrl:active {
   transform: translateY(1px);
-  box-shadow: 1px 1px 0 var(--color-border-cartoon);
 }
 
-/* Floating Glassmorphic Buy Card on bottom of 3D Book Stage */
+/* Floating Glassmorphic Buy Card on bottom of 3D Book Stage (Nike World Atmosphere) */
 .s2-book-buy-card {
   width: 100%;
   max-width: 440px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 3px solid var(--color-border-cartoon);
-  border-radius: var(--border-radius-md);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3), var(--shadow-cartoon-sm);
-  padding: 8px 12px;
-  color: var(--color-purple-deep);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 10, 36, 0.52) 100%);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.20);
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(238, 77, 148, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   z-index: 22;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.s2-book-buy-card:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.65),
+    0 0 45px rgba(238, 77, 148, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45);
 }
 
 .s2-card-title-row {
@@ -1285,103 +1305,201 @@ body {
 
 .s2-card-title {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  color: var(--color-purple-deep);
+  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+  color: #ffffff;
   line-height: 1.1;
   margin: 0;
-}
-
-.s2-card-price {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-  color: var(--color-pink-primary);
-  margin: 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
 }
 
 .s2-card-subtitle {
   font-family: var(--font-fun);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: 2px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Compact Variant selector pills */
+.s2-card-price {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+  color: #ff4081;
+  margin: 0;
+  text-shadow: 0 0 16px rgba(255, 64, 129, 0.6);
+}
+
+/* Compact Variant selector pills (Frosted Glass) */
 .s2-variant-selector {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 8px;
 }
 
 .s2-variant-btn {
-  background: #f8f6fc;
-  border: 2px solid var(--color-border-cartoon);
-  border-radius: var(--border-radius-sm);
-  padding: 4px 6px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 6px 10px;
   text-align: center;
   cursor: pointer;
-  transition: all var(--transition-bounce);
-  font-family: var(--font-fun);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-purple-deep);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.s2-variant-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .s2-variant-btn.selected {
-  background: var(--color-yellow-accent);
-  box-shadow: 2px 2px 0 var(--color-border-cartoon);
+  background: linear-gradient(135deg, rgba(238, 77, 148, 0.30) 0%, rgba(156, 39, 176, 0.30) 100%);
+  border-color: #ee4d94;
+  box-shadow: 0 0 20px rgba(238, 77, 148, 0.45), inset 0 0 10px rgba(238, 77, 148, 0.2);
   transform: translateY(-1px);
+}
+
+.s2-variant-name {
+  font-family: var(--font-fun);
+  font-size: 0.80rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.s2-variant-subtext {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 500;
+}
+
+.s2-variant-btn.selected .s2-variant-subtext {
+  color: #ffdf6d;
+  font-weight: 700;
 }
 
 .s2-card-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  margin-top: 2px;
 }
 
-.quantity-stepper {
+.s2-card-actions .quantity-stepper {
   display: flex;
   align-items: center;
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  border-radius: var(--border-radius-pill);
-  background: #fff;
-  overflow: hidden;
-  box-shadow: var(--shadow-cartoon-sm);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 2px 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.stepper-btn {
-  background: none;
+.s2-card-actions .stepper-btn {
+  background: rgba(255, 255, 255, 0.12);
   border: none;
+  color: #ffffff;
   font-family: var(--font-fun);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
-  width: 30px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease;
+  transition: all 0.2s ease;
 }
 
-.stepper-btn:hover {
-  background: #f2eef8;
+.s2-card-actions .stepper-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.08);
 }
 
-.stepper-value {
-  width: 30px;
+.s2-card-actions .stepper-value {
+  width: 26px;
   text-align: center;
   border: none;
-  font-family: var(--font-fun);
-  font-size: 0.9rem;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
   font-weight: 800;
-  color: var(--color-purple-deep);
+  color: #ffffff;
   pointer-events: none;
 }
 
+/* Add to Cart CTA (Luminous Glass Pink) */
 .s2-buy-btn {
   flex: 1;
-  padding: 6px 12px;
-  font-size: clamp(0.80rem, 1vw, 0.92rem);
+  background: linear-gradient(135deg, #ff4081 0%, #ee4d94 50%, #b32579 100%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  padding: 8px 14px !important;
+  color: #ffffff !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(0.78rem, 0.9vw, 0.86rem) !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 
+    0 8px 24px rgba(238, 77, 148, 0.5),
+    0 0 18px rgba(238, 77, 148, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  white-space: nowrap;
+}
+
+.s2-buy-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 
+    0 14px 32px rgba(238, 77, 148, 0.75),
+    0 0 28px rgba(238, 77, 148, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+.s2-buy-btn:active {
+  transform: translateY(1px) scale(0.99) !important;
+}
+
+/* Look Inside CTA (Luminous Glass Teal) */
+.s2-look-inside-btn {
+  background: linear-gradient(135deg, #00f2d5 0%, #00b4d8 100%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  padding: 8px 14px !important;
+  color: #0b1a24 !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(0.76rem, 0.88vw, 0.84rem) !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 
+    0 8px 24px rgba(0, 242, 213, 0.4),
+    0 0 18px rgba(0, 242, 213, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  white-space: nowrap;
+}
+
+.s2-look-inside-btn:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 
+    0 14px 32px rgba(0, 242, 213, 0.65),
+    0 0 28px rgba(0, 242, 213, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+  color: #000000 !important;
+}
+
+.s2-look-inside-btn:active {
+  transform: translateY(1px) scale(0.99) !important;
 }
 
 .psd-section-storefront {
@@ -1813,86 +1931,163 @@ body {
 }
 
 /* ==========================================================================
-   SECTION 5: CUSTOMER REVIEWS & COMMUNITY PRAISE
+   SECTION 5: CUSTOMER REVIEWS & COMMUNITY PRAISE (Nike-Inspired World Atmosphere)
+   No cream background: Seamlessly integrated with animated illustrated world.
+   White text boxes with glowing depth.
    ========================================================================== */
 .reviews-section {
-  padding: 100px 24px;
-  background: var(--color-cream-bg);
+  position: relative;
+  padding: 120px 24px 140px 24px;
+  background-image: url('images/product/shops_scene.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.reviews-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 25%, rgba(20, 10, 36, 0.48) 0%, rgba(12, 6, 24, 0.88) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 1;
 }
 
 .reviews-header {
+  position: relative;
+  z-index: 10;
   text-align: center;
-  max-width: 800px;
-  margin: 0 auto 50px auto;
+  max-width: 840px;
+  margin: 0 auto 56px auto;
+}
+
+.reviews-header .vintage-comic-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 242, 213, 0.14) !important;
+  border: 1px solid rgba(0, 242, 213, 0.45) !important;
+  color: #00f2d5 !important;
+  font-family: var(--font-fun);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 242, 213, 0.25);
 }
 
 .reviews-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-  color: var(--color-purple-deep);
-  text-shadow: 2px 2px 0 var(--color-yellow-accent);
-  margin-bottom: 12px;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  color: #ffffff;
+  line-height: 1.05;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 255, 255, 0.3);
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+}
+
+.reviews-header .shopfront-subtitle {
+  color: rgba(255, 255, 255, 0.90);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .reviews-grid {
+  position: relative;
+  z-index: 10;
   max-width: 1280px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 28px;
+  gap: 32px;
 }
 
+/* White text boxes with luminous depth as requested */
 .review-card {
-  background: #ffffff;
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-cartoon-md);
-  padding: 32px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  box-shadow: 
+    0 20px 45px rgba(0, 0, 0, 0.35),
+    0 0 30px rgba(255, 255, 255, 0.15),
+    var(--shadow-cartoon-md);
+  padding: 36px 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all var(--transition-bounce);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
+  overflow: hidden;
+}
+
+.review-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #ff4081, #00f2d5, #ffb800);
+  opacity: 0.85;
 }
 
 .review-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-cartoon-lg);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(238, 77, 148, 0.35),
+    var(--shadow-cartoon-lg);
+  border-color: #ffffff;
 }
 
 .review-stars {
-  font-size: 1.25rem;
-  color: #ff9800;
-  margin-bottom: 14px;
+  font-size: 1.35rem;
+  color: #ffb800;
+  filter: drop-shadow(0 0 8px rgba(255, 184, 0, 0.5));
+  margin-bottom: 16px;
 }
 
 .review-quote {
   font-family: var(--font-fun);
   font-size: 1.15rem;
-  font-weight: 600;
-  line-height: 1.5;
+  font-weight: 700;
+  line-height: 1.6;
   color: var(--color-purple-deep);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .reviewer-footer {
   display: flex;
   align-items: center;
-  gap: 12px;
-  border-top: 2px dashed #eee8f5;
-  padding-top: 14px;
+  gap: 14px;
+  border-top: 1.5px dashed rgba(60, 20, 90, 0.15);
+  padding-top: 16px;
 }
 
 .reviewer-avatar {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: var(--color-yellow-light);
+  background: linear-gradient(135deg, #ffdf6d 0%, #ffc107 100%);
   border: 2px solid var(--color-border-cartoon);
+  box-shadow: 2px 2px 0 var(--color-border-cartoon);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
+  font-size: 1.1rem;
   color: var(--color-purple-deep);
 }
 
@@ -1904,18 +2099,22 @@ body {
 .reviewer-name {
   font-family: var(--font-fun);
   font-weight: 800;
-  font-size: 0.95rem;
-  color: var(--color-ink-black);
+  font-size: 1rem;
+  color: var(--color-purple-deep);
 }
 
 .reviewer-verified {
-  font-size: 0.8rem;
-  color: var(--color-teal-dark);
-  font-weight: 700;
+  font-size: 0.82rem;
+  color: #00a896;
+  font-weight: 800;
+  letter-spacing: 0.3px;
 }
 
 /* ==========================================================================
    PRODUCT PAGE TEMPLATE (Blur Background as specified)
+   ========================================================================== */
+/* ==========================================================================
+   PRODUCT PAGE TEMPLATE (Nike-Inspired Immersive World Portal)
    ========================================================================== */
 .product-page-main {
   position: relative;
@@ -1925,6 +2124,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  overflow: hidden;
 }
 
 .product-page-main::before {
@@ -1934,9 +2134,10 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(30, 19, 56, 0.45);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: radial-gradient(circle at 50% 30%, rgba(20, 10, 36, 0.40) 0%, rgba(12, 6, 24, 0.75) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 1;
 }
 
 .product-page-inner {
@@ -1946,37 +2147,446 @@ body {
   margin: 0 auto;
 }
 
+/* Back Navigation Glass Pill */
+.btn-product-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffdf6d;
+  font-family: var(--font-fun);
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-product-back:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffdf6d;
+  color: #ffffff;
+  transform: translateX(-4px);
+  box-shadow: 0 6px 25px rgba(255, 223, 109, 0.3);
+}
+
+/* ── PRODUCT HERO BOX: Ultra-Frosted World Portal (No White Background) ── */
 .product-hero-box {
-  background: rgba(255, 255, 255, 0.96);
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-cartoon-lg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 10, 36, 0.48) 100%);
+  backdrop-filter: blur(36px) saturate(190%);
+  -webkit-backdrop-filter: blur(36px) saturate(190%);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 36px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 50px rgba(238, 77, 148, 0.14),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 48px;
+  padding: 52px;
+  margin-bottom: 60px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle ambient corner glow inside hero box */
+.product-hero-box::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(238, 77, 148, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── 3D BOOK STAGE (Left Column) ── */
+.book-3d-stage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.interaction-hint-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  font-family: var(--font-fun);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.canvas-3d-container {
+  width: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvas-3d-container:active {
+  cursor: grabbing;
+}
+
+/* 3D Preset Angle Glass Buttons */
+.book-3d-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.book-3d-controls .btn-3d-ctrl {
+  background: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-family: var(--font-fun);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.book-3d-controls .btn-3d-ctrl:hover {
+  background: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35), 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.book-3d-controls .btn-3d-ctrl:active {
+  transform: translateY(1px);
+}
+
+/* ── BUY BOX TYPOGRAPHY (Right Column) ── */
+.book-author-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-fun);
+  font-size: 0.80rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #00f2d5;
+  background: rgba(0, 242, 213, 0.12);
+  border: 1px solid rgba(0, 242, 213, 0.35);
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 242, 213, 0.18);
+}
+
+.book-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4.2vw, 3.8rem);
+  color: #ffffff;
+  line-height: 1.05;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 255, 255, 0.25);
+}
+
+.book-subtitle {
+  font-family: var(--font-fun);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffdf6d;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 12px rgba(255, 223, 109, 0.35);
+}
+
+.stars-rating {
+  color: #ffb800;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.5));
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stars-rating .rating-meta,
+.stars-rating span {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-family: var(--font-fun);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.book-description {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 28px;
+  font-weight: 400;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ── NIKE-STYLE EDITION SELECTOR ── */
+.variant-selector-group {
+  margin-bottom: 26px;
+}
+
+.variant-label {
+  display: block;
+  font-family: var(--font-fun);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 12px;
+}
+
+.variant-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.variant-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  padding: 18px 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.variant-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.variant-card.selected {
+  background: linear-gradient(135deg, rgba(238, 77, 148, 0.25) 0%, rgba(156, 39, 176, 0.25) 100%);
+  border-color: #ee4d94;
+  box-shadow: 0 0 28px rgba(238, 77, 148, 0.45), inset 0 0 16px rgba(238, 77, 148, 0.2);
+  transform: translateY(-2px);
+}
+
+.variant-card .variant-title {
+  font-family: var(--font-fun);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #ffffff;
+}
+
+.variant-card .variant-price {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: #00f2d5;
+  text-shadow: 0 0 12px rgba(0, 242, 213, 0.4);
+}
+
+.variant-card .variant-subtext {
+  font-size: 0.80rem;
+  color: rgba(255, 255, 255, 0.70);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ── PURCHASE ACTION ROW: Nike Glass Add-to-Cart ── */
+.purchase-action-box {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.quantity-stepper {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 5px 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stepper-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stepper-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.08);
+}
+
+.stepper-value {
+  width: 48px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-align: center;
+  outline: none;
+}
+
+/* Modern Nike Glass-Luminous CTA Button */
+#btnAddToCart,
+.product-hero-box .btn-cartoon-pink {
+  background: linear-gradient(135deg, #ff4081 0%, #ee4d94 50%, #b32579 100%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  padding: 16px 36px !important;
+  color: #ffffff !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.25rem !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: 
+    0 14px 40px rgba(238, 77, 148, 0.55),
+    0 0 30px rgba(238, 77, 148, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+}
+
+#btnAddToCart:hover,
+.product-hero-box .btn-cartoon-pink:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 
+    0 20px 50px rgba(238, 77, 148, 0.75),
+    0 0 40px rgba(238, 77, 148, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+}
+
+#btnAddToCart:active,
+.product-hero-box .btn-cartoon-pink:active {
+  transform: translateY(1px) scale(0.99) !important;
+}
+
+/* Features List: Glass Badges */
+.features-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.feature-bullet {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-family: var(--font-fun);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ── PRODUCT PAGE GLASS CARDS (Artwork Spreads & Reviews) ── */
+.product-glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 10, 36, 0.55) 100%);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 36px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(238, 77, 148, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
   padding: 48px;
   margin-bottom: 60px;
+}
+
+.product-glass-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
 .spread-gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-top: 40px;
+  margin-top: 32px;
 }
 
 .gallery-thumbnail-card {
-  background: #ffffff;
-  border: var(--border-width-cartoon) solid var(--color-border-cartoon);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-cartoon-md);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
   overflow: hidden;
   transition: all var(--transition-bounce);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .gallery-thumbnail-card:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: var(--shadow-cartoon-lg);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.45), 0 0 20px rgba(238, 77, 148, 0.3);
 }
 
 .gallery-thumbnail-card img {
@@ -1984,6 +2594,36 @@ body {
   height: 220px;
   object-fit: cover;
   display: block;
+}
+
+.gallery-card-label {
+  padding: 14px;
+  font-family: var(--font-fun);
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+/* Reviews Grid on Product Glass Card */
+.product-reviews-section .review-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  color: #ffffff;
+}
+
+.product-reviews-section .review-quote {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.product-reviews-section .reviewer-name {
+  color: #ffffff;
+}
+
+.product-reviews-section .reviewer-verified {
+  color: #00f2d5;
 }
 
 /* ==========================================================================
