@@ -734,10 +734,10 @@
         playCartoonPop(500);
         if (video.paused) {
           video.play();
-          playBtn.innerHTML = '⏸ PAUSE FILM';
+          playBtn.innerHTML = '⏸ PAUSE';
         } else {
           video.pause();
-          playBtn.innerHTML = '▶ PLAY FILM';
+          playBtn.innerHTML = '▶ PLAY';
         }
       });
     }

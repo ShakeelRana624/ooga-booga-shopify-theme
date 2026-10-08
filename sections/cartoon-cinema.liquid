@@ -30,6 +30,16 @@
       </video>
     </div>
     <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag.png' | asset_url }}" alt="Wooden Screen Frame" class="s1-frame-img">
+
+    <!-- Interactive Cinema Controls on Bottom Beam of Screen Frame -->
+    <div class="s1-controls-bar">
+      <button type="button" class="s1-control-btn s1-btn-play" id="btnPlayVideo">
+        ⏸ PAUSE
+      </button>
+      <button type="button" class="s1-control-btn s1-btn-mute" id="btnMuteVideo">
+        🔇 UNMUTE
+      </button>
+    </div>
   </div>
 
   <!-- Layer 3: Palm trees -->
@@ -47,19 +57,9 @@
     <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag (2).png' | asset_url }}" alt="Film Projector Platform">
   </div>
 
-  <!-- Layer 6: Pineapple Character -->
+  <!-- Layer 6: Pineapple Character (Fully visible with no overlay) -->
   <div class="layer" id="l-character">
     <img src="{{ 'images/parallax/section 1/Ooga.Booga.Website.Homepag (5).png' | asset_url }}" alt="Pineapple Projectionist">
-  </div>
-
-  <!-- Interactive Cinema Controls -->
-  <div class="s1-controls-bar">
-    <button type="button" class="btn-cartoon btn-cartoon-yellow" id="btnPlayVideo" style="background-color: var(--color-yellow-accent); color: var(--color-purple-deep); padding: 7px 18px; font-size: 0.92rem;">
-      ⏸ PAUSE FILM
-    </button>
-    <button type="button" class="btn-cartoon btn-cartoon-teal" id="btnMuteVideo" style="padding: 7px 18px; font-size: 0.92rem;">
-      🔇 UNMUTE
-    </button>
   </div>
 
   <div class="s1-scroll-cue" onclick="document.getElementById('enchanted-forest').scrollIntoView({behavior: 'smooth'})">

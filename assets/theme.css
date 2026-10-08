@@ -1014,22 +1014,83 @@ body.template-index {
   transform: translateY(-2px);
 }
 
+/* Cinema Overlay UI: Controls Bar on Bottom Beam of Screen Frame */
 .s1-controls-bar {
   position: absolute;
-  bottom: 22px;
+  top: 67.5%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 25;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: rgba(18, 9, 36, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 8px 20px;
+  gap: 8px;
+  background: rgba(14, 8, 28, 0.78);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  padding: 4px 10px;
   border-radius: var(--border-radius-pill);
-  border: 3px solid var(--color-border-cartoon);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), var(--shadow-cartoon-sm);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.65),
+    0 0 16px rgba(13, 148, 136, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
+  transition: all var(--transition-smooth);
+}
+
+/* Glass Buttons with White Text */
+.s1-control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-fun);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 5px 13px;
+  border-radius: var(--border-radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-bounce);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Play/Pause Button Hover (Luminous Teal / Cyan Glass Glow) */
+.s1-btn-play:hover {
+  background: rgba(45, 212, 191, 0.25);
+  color: #ffffff;
+  border-color: #5eead4;
+  box-shadow: 
+    0 0 16px rgba(94, 234, 212, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 8px #5eead4, 0 1px 2px rgba(0, 0, 0, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Mute/Unmute Button Hover (Luminous Fuchsia / Pink Glass Glow) */
+.s1-btn-mute:hover {
+  background: rgba(242, 82, 135, 0.25);
+  color: #ffffff;
+  border-color: #f25287;
+  box-shadow: 
+    0 0 16px rgba(242, 82, 135, 0.6),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 8px #f25287, 0 1px 2px rgba(0, 0, 0, 0.8);
+  transform: translateY(-2px);
+}
+
+.s1-control-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .s1-scroll-cue {
