@@ -54,12 +54,12 @@
     const s3 = document.getElementById('village-shopfront');
 
     const s1Layers = [
-      { el: document.getElementById('l-bg'),         speed: 0.12  },
-      { el: document.getElementById('l-frame'),      speed: 0.07  },
-      { el: document.getElementById('l-palms'),      speed: 0.03  },
-      { el: document.getElementById('l-stones'),     speed: 0     },
-      { el: document.getElementById('l-projector'),  speed: 0     },
-      { el: document.getElementById('l-character'),  speed: 0     },
+      { el: document.getElementById('l-bg'),         speed: 0.24, isFrame: false },
+      { el: document.getElementById('l-frame'),      speed: 0.14, isFrame: true  },
+      { el: document.getElementById('l-palms'),      speed: 0.06, isFrame: false },
+      { el: document.getElementById('l-stones'),     speed: 0,    isFrame: false },
+      { el: document.getElementById('l-projector'),  speed: 0,    isFrame: false },
+      { el: document.getElementById('l-character'),  speed: 0,    isFrame: false },
     ];
     const s1Centered = ['l-stones', 'l-character'];
 
@@ -72,12 +72,34 @@
 
     let ticking = false;
 
-    function applyScroll(el, sy) {
+    function updateLayerTransform(el) {
       if (!el) return;
-      el._scrollY = sy;
       const mx = el._mouseX || 0;
       const my = el._mouseY || 0;
-      el.style.transform = `translate3d(${mx}px, ${my + sy}px, 0)`;
+      const sy = el._scrollY || 0;
+      const sc = el._scale !== undefined ? el._scale : 1;
+      const isCentered = s1Centered.includes(el.id);
+
+      if (isCentered) {
+        if (mx === 0 && my === 0 && sy === 0 && sc === 1) {
+          el.style.transform = 'translateX(-50%)';
+        } else {
+          el.style.transform = `translateX(calc(-50% + ${mx}px)) translateY(${my + sy}px) scale(${sc})`;
+        }
+      } else {
+        if (mx === 0 && my === 0 && sy === 0 && sc === 1) {
+          el.style.transform = 'none';
+        } else {
+          el.style.transform = `translate3d(${mx}px, ${my + sy}px, 0) scale(${sc})`;
+        }
+      }
+    }
+
+    function applyLayer(el, sy, scale = 1) {
+      if (!el) return;
+      el._scrollY = sy;
+      el._scale = scale;
+      updateLayerTransform(el);
     }
 
     function onScroll() {
@@ -93,25 +115,17 @@
     function updateParallax() {
       const vh = window.innerHeight;
 
-      // Section 1 Parallax (Outdoor Jungle Cinema - Frame-by-Frame System)
+      // Section 1 Parallax (Outdoor Jungle Cinema - 2x Immersive 3D Depth & Walk-In Dolly)
       if (s1) {
         s1.style.marginBottom = '0px';
         const rect1 = s1.getBoundingClientRect();
         if (rect1.bottom > 0 && rect1.top < vh) {
           const sy = Math.max(0, -rect1.top);
-          s1Layers.forEach(({ el, speed }) => {
+          s1Layers.forEach(({ el, speed, isFrame }) => {
             if (!el) return;
-            const isCentered = s1Centered.includes(el.id);
-            if (speed === 0) {
-              el.style.transform = isCentered ? 'translateX(-50%)' : 'none';
-              return;
-            }
             const ty = sy * speed;
-            if (isCentered) {
-              el.style.transform = `translateX(-50%) translateY(${ty}px)`;
-            } else {
-              el.style.transform = `translateY(${ty}px)`;
-            }
+            const sc = isFrame ? (1 + Math.min(0.04, sy * 0.000075)) : 1;
+            applyLayer(el, ty, sc);
           });
         }
       }
@@ -123,11 +137,11 @@
           const s2Center = (rect2.top + rect2.height / 2) - (vh / 2);
           const normalized = s2Center / (vh / 2);
           // Layers animate smoothly on scroll with progressive depth:
-          applyScroll(s2LBg, normalized * -10);    // Layer 1: Sky & deep forest backdrop (slowest)
-          applyScroll(s2LTrees, normalized * -6);   // Layer 2: Main pink trees (midground)
+          applyLayer(s2LBg, normalized * -10);    // Layer 1: Sky & deep forest backdrop (slowest)
+          applyLayer(s2LTrees, normalized * -6);   // Layer 2: Main pink trees (midground)
           // Layer 3: Characters dynamically move UPWARDS from exact position when scrolling
           const charsScrollY = normalized > 0 ? (normalized * 12) : (normalized * 42);
-          applyScroll(s2LChars, charsScrollY);
+          applyLayer(s2LChars, charsScrollY);
           // Layer 4 (s2LCat): Locked in exact position, does not move
         }
       }
@@ -136,7 +150,7 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     updateParallax();
 
-    // Desktop Mouse Move Dynamic 3D Depth for Section 2
+    // Desktop Mouse Move Dynamic 3D Depth (Cinema & Forest)
     if (window.innerWidth > 992) {
       function attachMouseParallax(section, layers) {
         if (!section) return;
@@ -149,8 +163,7 @@
             if (layer.el) {
               layer.el._mouseX = relX * layer.xFactor;
               layer.el._mouseY = relY * layer.yFactor;
-              const sy = layer.el._scrollY || 0;
-              layer.el.style.transform = `translate3d(${layer.el._mouseX}px, ${layer.el._mouseY + sy}px, 0)`;
+              updateLayerTransform(layer.el);
             }
           });
         });
@@ -160,17 +173,27 @@
             if (layer.el) {
               layer.el._mouseX = 0;
               layer.el._mouseY = 0;
-              const sy = layer.el._scrollY || 0;
-              layer.el.style.transform = `translate3d(0, ${sy}px, 0)`;
+              updateLayerTransform(layer.el);
             }
           });
         });
       }
 
+      // Section 1: Dynamic 3D Cinema Experience (Audience, palms, screen & deep sky)
+      attachMouseParallax(s1, [
+        { el: document.getElementById('l-bg'),        xFactor: -14, yFactor: -8 },
+        { el: document.getElementById('l-frame'),     xFactor: -8,  yFactor: -5 },
+        { el: document.getElementById('l-palms'),     xFactor: -18, yFactor: -10 },
+        { el: document.getElementById('l-stones'),    xFactor: -8,  yFactor: -5 },
+        { el: document.getElementById('l-character'), xFactor: 12,  yFactor: 8  }
+        // l-projector stays locked at seam
+      ]);
+
+      // Section 2: Enchanted Forest Multi-Plane Depth
       attachMouseParallax(s2, [
-        { el: s2LBg, xFactor: -10, yFactor: -6 },
+        { el: s2LBg,    xFactor: -10, yFactor: -6 },
         { el: s2LTrees, xFactor: -10, yFactor: -6 },
-        { el: s2LChars, xFactor: -6, yFactor: -4 }
+        { el: s2LChars, xFactor: -6,  yFactor: -4 }
         // Layer 4 (s2LCat): Locked in place, no mouse movement
       ]);
     }
