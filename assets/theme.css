@@ -892,9 +892,9 @@ body {
 }
 
 /* ── LAYER 2: Pink Trees & Canopy (Ooga.Booga.Website.Homepag (2).png) ──
-   Positioned upwards so canopy frames top and roots sit on the bank above the river */
+   Positioned downwards matching user layout so full canopy is visible below Section 1 */
 #s2-l-trees {
-  top: -4.50vw;
+  top: 0;
   left: 0;
   width: 100vw;
   height: 57.70vw;              /* 1731 / 3000 × 100 natural aspect ratio */
@@ -921,11 +921,10 @@ body {
 }
 
 /* ── LAYER 3: Characters — Boy, Green Mascot, Flying Apple (right-center, 0.45x) ──
-   PSD bbox: (1453, 2084, 2819, 2576). S2 start y=1879.
-   File padding: top pad 38px, left pad 0px. */
+   Moved down by same amount (+4.50vw) so characters sit precisely on tree branches */
 #s2-l-chars {
-  top: 1.10vw;
-  left: 49.60vw;
+  top: 5.60vw;
+  left: 49.50vw;
   width: 44.93vw;               /* 1348 / 3000 × 100 */
   height: 19.17vw;              /* 575  / 3000 × 100 */
   z-index: 4;
