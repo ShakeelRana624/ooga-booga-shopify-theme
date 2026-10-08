@@ -649,8 +649,8 @@
     });
   }
 
-  // 4. VILLAGE SHOPFRONT CAROUSEL (COMING SOON T-SHIRTS)
-  function initShopfrontCarousel() {
+  // 4. LEGACY VILLAGE TRACK CAROUSEL (IF PRESENT)
+  function initLegacyTrackCarousel() {
     const track = document.getElementById('tshirtCarouselTrack');
     const prevBtn = document.getElementById('carouselPrevBtn');
     const nextBtn = document.getElementById('carouselNextBtn');

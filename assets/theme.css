@@ -2003,15 +2003,15 @@ body.template-index {
   transition: transform var(--transition-bounce), filter 0.3s ease;
 }
 
-/* Hover Glow on Window 3 (Plushie Toy) */
+/* Soft Pink Hover Glow on Window 3 (Plushie Toy) matching Header/Button Pink */
 .s3-window-3:hover {
-  transform: translate(-50%, -50%) scale(1.08);
-  filter: drop-shadow(0 0 25px rgba(255, 222, 89, 0.95)) drop-shadow(0 0 45px rgba(255, 64, 129, 0.7));
+  transform: translate(-50%, -50%) scale(1.05);
+  filter: drop-shadow(0 0 16px rgba(242, 82, 135, 0.45)) drop-shadow(0 0 28px rgba(255, 64, 129, 0.3));
 }
 
 .s3-window-3:hover .s3-toy-hotspot {
-  background: radial-gradient(circle at 50% 65%, rgba(255, 230, 80, 0.45) 0%, rgba(255, 64, 129, 0.25) 50%, transparent 75%) !important;
-  filter: drop-shadow(0 0 30px rgba(255, 222, 89, 1));
+  background: radial-gradient(circle at 50% 65%, rgba(242, 82, 135, 0.16) 0%, rgba(255, 64, 129, 0.08) 50%, transparent 75%) !important;
+  filter: drop-shadow(0 0 12px rgba(242, 82, 135, 0.45));
 }
 
 .s3-toy-hotspot {
